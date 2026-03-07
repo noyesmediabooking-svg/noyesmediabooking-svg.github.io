@@ -1,0 +1,1251 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+<meta charset="UTF-8"/>
+<meta name="viewport" content="width=device-width, initial-scale=1.0"/>
+<title>Noyes-Media | Real Estate Photography — Niagara Region</title>
+<link rel="preconnect" href="https://fonts.googleapis.com"/>
+<link href="https://fonts.googleapis.com/css2?family=Cormorant+Garamond:ital,wght@0,300;0,400;0,600;1,300;1,400&family=Barlow:wght@300;400;500;600&family=Barlow+Condensed:wght@300;400;500;700&display=swap" rel="stylesheet"/>
+<style>
+  :root {
+    --black: #0a0a0a;
+    --charcoal: #141414;
+    --dark: #1c1c1c;
+    --mid: #2e2e2e;
+    --gold: #c9a84c;
+    --gold-light: #e8c97a;
+    --gold-pale: #f5e9c8;
+    --white: #f8f5f0;
+    --grey: #888;
+    --light-grey: #bbb;
+    --red-deal: #c0392b;
+  }
+
+  *, *::before, *::after { margin: 0; padding: 0; box-sizing: border-box; }
+
+  html { scroll-behavior: smooth; }
+
+  body {
+    background: var(--black);
+    color: var(--white);
+    font-family: 'Barlow', sans-serif;
+    font-weight: 300;
+    overflow-x: hidden;
+  }
+
+  /* ─── CURSOR ─── */
+  * { cursor: none; }
+  #cursor {
+    position: fixed; width: 8px; height: 8px;
+    background: var(--gold); border-radius: 50%;
+    pointer-events: none; z-index: 9999;
+    transition: transform 0.15s ease;
+    transform: translate(-50%, -50%);
+  }
+  #cursor-ring {
+    position: fixed; width: 36px; height: 36px;
+    border: 1px solid rgba(201,168,76,0.5); border-radius: 50%;
+    pointer-events: none; z-index: 9998;
+    transition: transform 0.4s ease, width 0.3s, height 0.3s, opacity 0.3s;
+    transform: translate(-50%, -50%);
+  }
+  a:hover ~ #cursor, button:hover ~ #cursor { transform: translate(-50%, -50%) scale(2.5); }
+
+  /* ─── SCROLLBAR ─── */
+  ::-webkit-scrollbar { width: 3px; }
+  ::-webkit-scrollbar-track { background: var(--black); }
+  ::-webkit-scrollbar-thumb { background: var(--gold); }
+
+  /* ─── NAV ─── */
+  nav {
+    position: fixed; top: 0; left: 0; right: 0; z-index: 100;
+    display: flex; align-items: center; justify-content: space-between;
+    padding: 1.5rem 4rem;
+    transition: background 0.4s, padding 0.4s;
+  }
+  nav.scrolled {
+    background: rgba(10,10,10,0.95);
+    backdrop-filter: blur(12px);
+    border-bottom: 1px solid rgba(201,168,76,0.15);
+    padding: 1rem 4rem;
+  }
+  .nav-logo {
+    font-family: 'Cormorant Garamond', serif;
+    font-size: 1.6rem; font-weight: 300; letter-spacing: 0.15em;
+    color: var(--white); text-decoration: none;
+  }
+  .nav-logo span { color: var(--gold); }
+  .nav-links { display: flex; gap: 2.5rem; list-style: none; }
+  .nav-links a {
+    font-family: 'Barlow Condensed', sans-serif;
+    font-size: 0.8rem; font-weight: 500; letter-spacing: 0.2em;
+    text-transform: uppercase; color: var(--light-grey);
+    text-decoration: none; transition: color 0.3s;
+  }
+  .nav-links a:hover { color: var(--gold); }
+  .nav-cta {
+    font-family: 'Barlow Condensed', sans-serif;
+    font-size: 0.75rem; font-weight: 600; letter-spacing: 0.2em;
+    text-transform: uppercase; color: var(--black);
+    background: var(--gold); border: none;
+    padding: 0.6rem 1.6rem; cursor: none;
+    transition: background 0.3s, transform 0.2s;
+  }
+  .nav-cta:hover { background: var(--gold-light); transform: translateY(-1px); }
+
+  /* ─── HERO ─── */
+  #hero {
+    position: relative; min-height: 100vh;
+    display: flex; flex-direction: column; justify-content: flex-end;
+    overflow: hidden;
+  }
+  .hero-bg {
+    position: absolute; inset: 0;
+    background: linear-gradient(135deg, #0d1117 0%, #1a1208 50%, #0d0d0d 100%);
+  }
+  /* Architectural grid overlay */
+  .hero-grid {
+    position: absolute; inset: 0;
+    background-image:
+      linear-gradient(rgba(201,168,76,0.04) 1px, transparent 1px),
+      linear-gradient(90deg, rgba(201,168,76,0.04) 1px, transparent 1px);
+    background-size: 80px 80px;
+  }
+  .hero-accent {
+    position: absolute; top: 0; right: 0;
+    width: 45vw; height: 100vh;
+    background: linear-gradient(to bottom left, rgba(201,168,76,0.08), transparent 60%);
+  }
+  .hero-accent2 {
+    position: absolute; bottom: 0; left: 0;
+    width: 30vw; height: 40vh;
+    background: radial-gradient(ellipse at bottom left, rgba(201,168,76,0.06), transparent 70%);
+  }
+  /* Faux property photo blocks */
+  .hero-photo-collage {
+    position: absolute; right: 5vw; top: 50%;
+    transform: translateY(-50%);
+    width: 38vw; height: 60vh;
+    display: grid;
+    grid-template-columns: 1fr 1fr;
+    grid-template-rows: 1fr 1fr;
+    gap: 6px;
+    opacity: 0;
+    animation: fadeSlideIn 1.2s 0.6s forwards;
+  }
+  .photo-block {
+    border: 1px solid rgba(201,168,76,0.2);
+    overflow: hidden; position: relative;
+  }
+  .photo-block::before {
+    content: ''; position: absolute; inset: 0;
+    background-size: cover; background-position: center;
+  }
+  .photo-block:nth-child(1) { grid-row: span 2; }
+  .photo-block:nth-child(1)::before {
+    background: linear-gradient(135deg, #1a2a1a 0%, #0d1a0d 100%);
+    background-image: url("data:image/svg+xml,%3Csvg xmlns='http://www.w3.org/2000/svg' width='100%25' height='100%25'%3E%3Crect fill='%23162216' width='100%25' height='100%25'/%3E%3Crect fill='%230a150a' x='10%25' y='30%25' width='80%25' height='50%25'/%3E%3Crect fill='%23c9a84c22' x='20%25' y='60%25' width='60%25' height='5%25'/%3E%3C/svg%3E");
+  }
+  .photo-block:nth-child(2)::before {
+    background: linear-gradient(135deg, #1a1a2a 0%, #0d0d1a 100%);
+  }
+  .photo-block:nth-child(3)::before {
+    background: linear-gradient(135deg, #2a1a1a 0%, #1a0d0d 100%);
+  }
+  /* House silhouette */
+  .photo-block:nth-child(1) svg { position: absolute; bottom: 10%; left: 50%; transform: translateX(-50%); opacity: 0.25; }
+
+  .photo-label {
+    position: absolute; bottom: 8px; left: 8px;
+    font-family: 'Barlow Condensed', sans-serif;
+    font-size: 0.6rem; letter-spacing: 0.2em; text-transform: uppercase;
+    color: var(--gold); opacity: 0.7;
+  }
+  .drone-icon { position: absolute; top: 12px; right: 12px; opacity: 0.5; }
+
+  .hero-content {
+    position: relative; z-index: 2;
+    padding: 0 5rem 8rem 5rem;
+    max-width: 52%;
+    opacity: 0;
+    animation: fadeSlideUp 1s 0.3s forwards;
+  }
+  .hero-eyebrow {
+    font-family: 'Barlow Condensed', sans-serif;
+    font-size: 0.75rem; font-weight: 500; letter-spacing: 0.35em;
+    text-transform: uppercase; color: var(--gold);
+    margin-bottom: 1.5rem;
+    display: flex; align-items: center; gap: 1rem;
+  }
+  .hero-eyebrow::before {
+    content: ''; display: block; width: 40px; height: 1px; background: var(--gold);
+  }
+  .hero-title {
+    font-family: 'Cormorant Garamond', serif;
+    font-size: clamp(3rem, 6vw, 5.5rem);
+    font-weight: 300; line-height: 1.05;
+    margin-bottom: 2rem;
+  }
+  .hero-title em { font-style: italic; color: var(--gold); }
+  .hero-sub {
+    font-size: 1rem; font-weight: 300; color: var(--light-grey);
+    line-height: 1.8; max-width: 460px;
+    margin-bottom: 3rem;
+  }
+  .hero-btns { display: flex; gap: 1.5rem; align-items: center; }
+  .btn-primary {
+    font-family: 'Barlow Condensed', sans-serif;
+    font-size: 0.8rem; font-weight: 600; letter-spacing: 0.2em;
+    text-transform: uppercase; text-decoration: none;
+    color: var(--black); background: var(--gold);
+    padding: 1rem 2.5rem; transition: all 0.3s;
+    display: inline-block;
+  }
+  .btn-primary:hover { background: var(--gold-light); transform: translateY(-2px); }
+  .btn-secondary {
+    font-family: 'Barlow Condensed', sans-serif;
+    font-size: 0.8rem; font-weight: 500; letter-spacing: 0.2em;
+    text-transform: uppercase; text-decoration: none;
+    color: var(--white); border-bottom: 1px solid rgba(255,255,255,0.3);
+    padding-bottom: 2px; transition: all 0.3s;
+  }
+  .btn-secondary:hover { color: var(--gold); border-color: var(--gold); }
+  .hero-scroll {
+    position: absolute; bottom: 3rem; left: 50%;
+    transform: translateX(-50%);
+    font-family: 'Barlow Condensed', sans-serif;
+    font-size: 0.65rem; letter-spacing: 0.3em; text-transform: uppercase;
+    color: var(--grey); display: flex; flex-direction: column; align-items: center; gap: 0.8rem;
+    animation: fadeIn 1.5s 1.5s forwards; opacity: 0;
+  }
+  .scroll-line {
+    width: 1px; height: 40px; background: linear-gradient(to bottom, var(--gold), transparent);
+    animation: scrollPulse 2s infinite;
+  }
+
+  /* ─── LAUNCH BANNER ─── */
+  .launch-banner {
+    background: linear-gradient(90deg, var(--red-deal), #a93226);
+    padding: 1.2rem 4rem;
+    display: flex; align-items: center; justify-content: center; gap: 2rem;
+    position: relative; overflow: hidden;
+  }
+  .launch-banner::before {
+    content: ''; position: absolute; inset: 0;
+    background: repeating-linear-gradient(45deg, transparent, transparent 10px, rgba(255,255,255,0.03) 10px, rgba(255,255,255,0.03) 20px);
+  }
+  .launch-tag {
+    font-family: 'Barlow Condensed', sans-serif;
+    font-size: 0.7rem; font-weight: 700; letter-spacing: 0.25em;
+    text-transform: uppercase; background: var(--gold);
+    color: var(--black); padding: 0.3rem 0.8rem;
+  }
+  .launch-text {
+    font-family: 'Cormorant Garamond', serif;
+    font-size: 1.3rem; font-style: italic;
+  }
+  .launch-text strong { font-style: normal; font-weight: 600; font-size: 1.5rem; }
+  .launch-sub {
+    font-family: 'Barlow Condensed', sans-serif;
+    font-size: 0.75rem; letter-spacing: 0.15em; color: rgba(255,255,255,0.7);
+    text-transform: uppercase;
+  }
+
+  /* ─── SECTIONS ─── */
+  section { padding: 8rem 5rem; }
+  .section-label {
+    font-family: 'Barlow Condensed', sans-serif;
+    font-size: 0.7rem; font-weight: 500; letter-spacing: 0.4em;
+    text-transform: uppercase; color: var(--gold);
+    margin-bottom: 1.5rem; display: flex; align-items: center; gap: 1rem;
+  }
+  .section-label::after {
+    content: ''; flex: 1; height: 1px;
+    background: linear-gradient(to right, rgba(201,168,76,0.4), transparent);
+    max-width: 80px;
+  }
+  .section-title {
+    font-family: 'Cormorant Garamond', serif;
+    font-size: clamp(2rem, 4vw, 3.5rem);
+    font-weight: 300; line-height: 1.2;
+  }
+  .section-title em { font-style: italic; color: var(--gold); }
+
+  /* ─── SERVICES ─── */
+  #services { background: var(--charcoal); }
+  .services-grid {
+    display: grid;
+    grid-template-columns: repeat(3, 1fr);
+    gap: 1px;
+    margin-top: 5rem;
+    border: 1px solid rgba(201,168,76,0.1);
+  }
+  .service-card {
+    background: var(--dark); padding: 3rem 2.5rem;
+    position: relative; overflow: hidden;
+    transition: background 0.4s;
+  }
+  .service-card::before {
+    content: ''; position: absolute; top: 0; left: 0;
+    width: 0; height: 2px; background: var(--gold);
+    transition: width 0.5s ease;
+  }
+  .service-card:hover::before { width: 100%; }
+  .service-card:hover { background: #1f1f1f; }
+  .service-icon {
+    width: 48px; height: 48px; margin-bottom: 2rem;
+    opacity: 0.6;
+  }
+  .service-number {
+    font-family: 'Cormorant Garamond', serif;
+    font-size: 3.5rem; font-weight: 300;
+    color: rgba(201,168,76,0.08);
+    position: absolute; top: 1.5rem; right: 2rem;
+  }
+  .service-name {
+    font-family: 'Cormorant Garamond', serif;
+    font-size: 1.5rem; font-weight: 400;
+    margin-bottom: 1rem;
+  }
+  .service-desc {
+    font-size: 0.9rem; color: var(--grey);
+    line-height: 1.8; margin-bottom: 1.5rem;
+  }
+  .service-tag {
+    font-family: 'Barlow Condensed', sans-serif;
+    font-size: 0.65rem; letter-spacing: 0.2em; text-transform: uppercase;
+    color: var(--gold); border: 1px solid rgba(201,168,76,0.3);
+    padding: 0.25rem 0.7rem; display: inline-block;
+  }
+
+  /* ─── PROCESS ─── */
+  #process { background: var(--black); }
+  .process-steps {
+    display: grid; grid-template-columns: repeat(4, 1fr);
+    gap: 3rem; margin-top: 5rem;
+    position: relative;
+  }
+  .process-steps::before {
+    content: ''; position: absolute;
+    top: 2rem; left: 12.5%; right: 12.5%;
+    height: 1px; background: linear-gradient(to right, transparent, var(--gold), var(--gold), transparent);
+    opacity: 0.3;
+  }
+  .process-step { text-align: center; }
+  .step-dot {
+    width: 4rem; height: 4rem; border-radius: 50%;
+    border: 1px solid rgba(201,168,76,0.4);
+    display: flex; align-items: center; justify-content: center;
+    margin: 0 auto 2rem;
+    font-family: 'Cormorant Garamond', serif;
+    font-size: 1.3rem; color: var(--gold);
+    position: relative; background: var(--black);
+  }
+  .step-dot::after {
+    content: ''; position: absolute; inset: -4px;
+    border-radius: 50%; border: 1px solid rgba(201,168,76,0.15);
+  }
+  .step-name {
+    font-family: 'Cormorant Garamond', serif;
+    font-size: 1.2rem; margin-bottom: 0.8rem;
+  }
+  .step-desc { font-size: 0.85rem; color: var(--grey); line-height: 1.7; }
+
+  /* ─── PRICING ─── */
+  #pricing { background: var(--charcoal); }
+  .pricing-note {
+    font-size: 0.9rem; color: var(--light-grey); margin-top: 1.5rem;
+    line-height: 1.8; max-width: 600px;
+  }
+
+  .deal-callout {
+    background: linear-gradient(135deg, rgba(192,57,43,0.15), rgba(192,57,43,0.05));
+    border: 1px solid rgba(192,57,43,0.4);
+    padding: 2rem 3rem; margin: 3rem 0;
+    display: flex; align-items: center; gap: 3rem;
+    position: relative; overflow: hidden;
+  }
+  .deal-callout::before {
+    content: ''; position: absolute; top: 0; left: 0;
+    width: 4px; height: 100%; background: var(--red-deal);
+  }
+  .deal-percent {
+    font-family: 'Cormorant Garamond', serif;
+    font-size: 4rem; font-weight: 300; color: var(--red-deal);
+    line-height: 1;
+  }
+  .deal-percent span { font-size: 2rem; }
+  .deal-info h3 {
+    font-family: 'Cormorant Garamond', serif;
+    font-size: 1.5rem; font-weight: 400; margin-bottom: 0.5rem;
+  }
+  .deal-info p { font-size: 0.9rem; color: var(--light-grey); line-height: 1.7; }
+  .deal-badge {
+    font-family: 'Barlow Condensed', sans-serif;
+    font-size: 0.65rem; font-weight: 700; letter-spacing: 0.2em;
+    text-transform: uppercase; background: var(--red-deal);
+    color: white; padding: 0.3rem 0.8rem;
+    position: absolute; top: 1rem; right: 1rem;
+  }
+
+  .pricing-grid {
+    display: grid;
+    grid-template-columns: repeat(3, 1fr);
+    gap: 1.5rem; margin-top: 3rem;
+  }
+  .price-card {
+    background: var(--dark); border: 1px solid rgba(255,255,255,0.05);
+    padding: 2.5rem; position: relative; overflow: hidden;
+    transition: border-color 0.3s, transform 0.3s;
+  }
+  .price-card:hover {
+    border-color: rgba(201,168,76,0.3);
+    transform: translateY(-4px);
+  }
+  .price-card.featured {
+    border-color: rgba(201,168,76,0.4);
+    background: linear-gradient(145deg, #1f1c14, #1a1a14);
+  }
+  .price-card.featured::before {
+    content: 'MOST POPULAR';
+    font-family: 'Barlow Condensed', sans-serif;
+    font-size: 0.6rem; font-weight: 700; letter-spacing: 0.2em;
+    background: var(--gold); color: var(--black);
+    padding: 0.25rem 0.8rem;
+    position: absolute; top: 1.5rem; right: -0.5rem;
+  }
+  .price-tier {
+    font-family: 'Barlow Condensed', sans-serif;
+    font-size: 0.7rem; font-weight: 600; letter-spacing: 0.3em;
+    text-transform: uppercase; color: var(--gold);
+    margin-bottom: 0.8rem;
+  }
+  .price-name {
+    font-family: 'Cormorant Garamond', serif;
+    font-size: 1.6rem; font-weight: 400; margin-bottom: 1.5rem;
+  }
+  .price-amount {
+    display: flex; align-items: baseline; gap: 0.3rem;
+    margin-bottom: 0.5rem;
+  }
+  .price-currency {
+    font-family: 'Barlow Condensed', sans-serif;
+    font-size: 1rem; color: var(--gold);
+  }
+  .price-num {
+    font-family: 'Cormorant Garamond', serif;
+    font-size: 3rem; font-weight: 300; line-height: 1;
+  }
+  .price-period {
+    font-size: 0.8rem; color: var(--grey);
+  }
+  .price-original {
+    font-size: 0.85rem; color: var(--grey);
+    text-decoration: line-through; margin-bottom: 0.3rem;
+  }
+  .price-saving {
+    font-family: 'Barlow Condensed', sans-serif;
+    font-size: 0.7rem; font-weight: 600; letter-spacing: 0.15em;
+    text-transform: uppercase; color: var(--red-deal);
+    margin-bottom: 2rem;
+  }
+  .price-divider { height: 1px; background: rgba(255,255,255,0.07); margin: 1.5rem 0; }
+  .price-features { list-style: none; margin-bottom: 2rem; }
+  .price-features li {
+    font-size: 0.85rem; color: var(--light-grey);
+    padding: 0.45rem 0; display: flex; align-items: center; gap: 0.8rem;
+  }
+  .price-features li::before {
+    content: ''; display: block; width: 16px; height: 1px;
+    background: var(--gold); flex-shrink: 0;
+  }
+  .price-features li.dim { color: var(--grey); }
+  .price-features li.dim::before { background: #444; }
+  .btn-book {
+    display: block; width: 100%; padding: 0.9rem;
+    font-family: 'Barlow Condensed', sans-serif;
+    font-size: 0.75rem; font-weight: 600; letter-spacing: 0.2em;
+    text-transform: uppercase; text-align: center;
+    text-decoration: none; cursor: none; border: none;
+    transition: all 0.3s;
+  }
+  .btn-book-gold { background: var(--gold); color: var(--black); }
+  .btn-book-gold:hover { background: var(--gold-light); }
+  .btn-book-outline { background: transparent; color: var(--white); border: 1px solid rgba(255,255,255,0.2); }
+  .btn-book-outline:hover { border-color: var(--gold); color: var(--gold); }
+
+  /* Add-ons */
+  .addons-title {
+    font-family: 'Cormorant Garamond', serif;
+    font-size: 1.8rem; font-weight: 300; margin: 4rem 0 2rem;
+  }
+  .addons-grid {
+    display: grid; grid-template-columns: repeat(4, 1fr); gap: 1rem;
+  }
+  .addon {
+    background: var(--dark); border: 1px solid rgba(255,255,255,0.05);
+    padding: 1.5rem; transition: border-color 0.3s;
+  }
+  .addon:hover { border-color: rgba(201,168,76,0.3); }
+  .addon-name {
+    font-family: 'Barlow Condensed', sans-serif;
+    font-size: 0.8rem; font-weight: 500; letter-spacing: 0.15em;
+    text-transform: uppercase; margin-bottom: 0.5rem;
+  }
+  .addon-price {
+    font-family: 'Cormorant Garamond', serif;
+    font-size: 1.3rem; color: var(--gold); margin-bottom: 0.3rem;
+  }
+  .addon-orig { font-size: 0.75rem; color: var(--grey); text-decoration: line-through; }
+  .addon-sale { font-size: 0.7rem; color: var(--red-deal); }
+
+  /* ─── COVERAGE ─── */
+  #coverage { background: var(--black); }
+  .coverage-content {
+    display: grid; grid-template-columns: 1fr 1fr;
+    gap: 6rem; align-items: center; margin-top: 5rem;
+  }
+  .coverage-map {
+    aspect-ratio: 1;
+    border: 1px solid rgba(201,168,76,0.2);
+    position: relative; overflow: hidden;
+    background: var(--dark);
+  }
+  .map-label {
+    position: absolute; top: 50%; left: 50%;
+    transform: translate(-50%, -50%);
+    text-align: center;
+  }
+  .map-label h3 {
+    font-family: 'Cormorant Garamond', serif;
+    font-size: 1.4rem; color: var(--gold); margin-bottom: 0.5rem;
+  }
+  /* Decorative map-like lines */
+  .map-svg { position: absolute; inset: 0; width: 100%; height: 100%; opacity: 0.12; }
+  .coverage-list { list-style: none; }
+  .coverage-list li {
+    padding: 1rem 0; border-bottom: 1px solid rgba(255,255,255,0.06);
+    display: flex; align-items: center; gap: 1rem;
+    font-size: 0.95rem; color: var(--light-grey);
+  }
+  .coverage-list li::before {
+    content: ''; width: 6px; height: 6px;
+    border-radius: 50%; background: var(--gold);
+    flex-shrink: 0;
+  }
+  .coverage-note {
+    margin-top: 2rem; font-size: 0.85rem; color: var(--grey);
+    font-style: italic;
+  }
+
+  /* ─── WHY US ─── */
+  #why { background: var(--charcoal); }
+  .why-grid {
+    display: grid; grid-template-columns: repeat(2, 1fr);
+    gap: 4rem; margin-top: 5rem;
+  }
+  .why-item {
+    display: flex; gap: 2rem; align-items: flex-start;
+    padding: 2.5rem; background: var(--dark);
+    border-left: 2px solid rgba(201,168,76,0.2);
+    transition: border-color 0.3s;
+  }
+  .why-item:hover { border-color: var(--gold); }
+  .why-icon { flex-shrink: 0; opacity: 0.7; }
+  .why-name {
+    font-family: 'Cormorant Garamond', serif;
+    font-size: 1.3rem; margin-bottom: 0.8rem;
+  }
+  .why-desc { font-size: 0.9rem; color: var(--grey); line-height: 1.8; }
+
+  /* ─── CONTACT ─── */
+  #contact { background: var(--black); }
+  .contact-grid {
+    display: grid; grid-template-columns: 1fr 1fr;
+    gap: 6rem; align-items: start; margin-top: 5rem;
+  }
+  .contact-info h3 {
+    font-family: 'Cormorant Garamond', serif;
+    font-size: 1.8rem; font-weight: 300; margin-bottom: 2rem;
+  }
+  .contact-detail {
+    display: flex; gap: 1rem; margin-bottom: 1.5rem;
+    align-items: flex-start;
+  }
+  .contact-detail-label {
+    font-family: 'Barlow Condensed', sans-serif;
+    font-size: 0.65rem; font-weight: 600; letter-spacing: 0.25em;
+    text-transform: uppercase; color: var(--gold);
+    min-width: 60px; padding-top: 2px;
+  }
+  .contact-detail-value { font-size: 0.95rem; color: var(--light-grey); line-height: 1.6; }
+  .contact-form { display: flex; flex-direction: column; gap: 1.2rem; }
+  .form-row { display: grid; grid-template-columns: 1fr 1fr; gap: 1rem; }
+  .form-field { display: flex; flex-direction: column; gap: 0.4rem; }
+  .form-field label {
+    font-family: 'Barlow Condensed', sans-serif;
+    font-size: 0.65rem; font-weight: 600; letter-spacing: 0.2em;
+    text-transform: uppercase; color: var(--grey);
+  }
+  .form-field input, .form-field select, .form-field textarea {
+    background: var(--dark); border: 1px solid rgba(255,255,255,0.08);
+    color: var(--white); padding: 0.85rem 1rem;
+    font-family: 'Barlow', sans-serif; font-size: 0.9rem; font-weight: 300;
+    outline: none; transition: border-color 0.3s; cursor: none;
+    -webkit-appearance: none;
+  }
+  .form-field input:focus, .form-field select:focus, .form-field textarea:focus {
+    border-color: rgba(201,168,76,0.5);
+  }
+  .form-field select option { background: var(--dark); }
+  .form-field textarea { resize: vertical; min-height: 120px; }
+  .submit-btn {
+    font-family: 'Barlow Condensed', sans-serif;
+    font-size: 0.8rem; font-weight: 600; letter-spacing: 0.2em;
+    text-transform: uppercase; color: var(--black);
+    background: var(--gold); border: none;
+    padding: 1rem 2.5rem; cursor: none;
+    transition: all 0.3s; align-self: flex-start;
+    margin-top: 0.5rem;
+  }
+  .submit-btn:hover { background: var(--gold-light); transform: translateY(-2px); }
+
+  /* ─── FOOTER ─── */
+  footer {
+    background: var(--charcoal);
+    border-top: 1px solid rgba(201,168,76,0.1);
+    padding: 4rem 5rem 2rem;
+  }
+  .footer-grid {
+    display: grid; grid-template-columns: 2fr 1fr 1fr 1fr;
+    gap: 4rem; margin-bottom: 4rem;
+  }
+  .footer-brand .brand-name {
+    font-family: 'Cormorant Garamond', serif;
+    font-size: 1.8rem; font-weight: 300; letter-spacing: 0.1em;
+    margin-bottom: 1rem;
+  }
+  .footer-brand .brand-name span { color: var(--gold); }
+  .footer-brand p { font-size: 0.85rem; color: var(--grey); line-height: 1.8; max-width: 280px; }
+  .footer-col h4 {
+    font-family: 'Barlow Condensed', sans-serif;
+    font-size: 0.65rem; font-weight: 700; letter-spacing: 0.3em;
+    text-transform: uppercase; color: var(--gold);
+    margin-bottom: 1.5rem;
+  }
+  .footer-col ul { list-style: none; }
+  .footer-col li { margin-bottom: 0.8rem; }
+  .footer-col a {
+    font-size: 0.85rem; color: var(--grey); text-decoration: none;
+    transition: color 0.3s;
+  }
+  .footer-col a:hover { color: var(--white); }
+  .footer-bottom {
+    border-top: 1px solid rgba(255,255,255,0.05);
+    padding-top: 2rem; display: flex;
+    justify-content: space-between; align-items: center;
+  }
+  .footer-copy { font-size: 0.8rem; color: var(--grey); }
+  .footer-copy span { color: var(--gold); }
+  .footer-legal { display: flex; gap: 2rem; }
+  .footer-legal a { font-size: 0.75rem; color: var(--grey); text-decoration: none; }
+  .footer-legal a:hover { color: var(--white); }
+
+  /* ─── ANIMATIONS ─── */
+  @keyframes fadeSlideUp {
+    from { opacity: 0; transform: translateY(30px); }
+    to { opacity: 1; transform: translateY(0); }
+  }
+  @keyframes fadeSlideIn {
+    from { opacity: 0; transform: translateY(-20px) translateX(20px); }
+    to { opacity: 1; transform: translateY(-50%) translateX(0); }
+  }
+  @keyframes fadeIn {
+    to { opacity: 1; }
+  }
+  @keyframes scrollPulse {
+    0%, 100% { opacity: 0.3; transform: scaleY(1); }
+    50% { opacity: 1; transform: scaleY(1.3); }
+  }
+  .fade-in-up {
+    opacity: 0; transform: translateY(24px);
+    transition: opacity 0.7s ease, transform 0.7s ease;
+  }
+  .fade-in-up.visible { opacity: 1; transform: translateY(0); }
+
+  /* ─── RESPONSIVE ─── */
+  @media (max-width: 1100px) {
+    .services-grid { grid-template-columns: repeat(2, 1fr); }
+    .pricing-grid { grid-template-columns: 1fr; max-width: 460px; }
+    .addons-grid { grid-template-columns: repeat(2, 1fr); }
+    .why-grid { grid-template-columns: 1fr; }
+    .coverage-content { grid-template-columns: 1fr; }
+    .footer-grid { grid-template-columns: 1fr 1fr; }
+  }
+  @media (max-width: 768px) {
+    nav { padding: 1.2rem 1.5rem; }
+    nav.scrolled { padding: 0.8rem 1.5rem; }
+    .nav-links { display: none; }
+    section { padding: 5rem 1.5rem; }
+    .hero-content { padding: 0 1.5rem 7rem; max-width: 100%; }
+    .hero-photo-collage { display: none; }
+    .services-grid { grid-template-columns: 1fr; }
+    .process-steps { grid-template-columns: repeat(2, 1fr); }
+    .contact-grid { grid-template-columns: 1fr; gap: 3rem; }
+    .form-row { grid-template-columns: 1fr; }
+    .launch-banner { flex-direction: column; text-align: center; padding: 1.5rem; }
+    .footer-grid { grid-template-columns: 1fr; }
+    .footer-bottom { flex-direction: column; gap: 1rem; text-align: center; }
+  }
+</style>
+</head>
+<body>
+
+<!-- Custom cursor -->
+<div id="cursor"></div>
+<div id="cursor-ring"></div>
+
+<!-- ─── NAV ─── -->
+<nav id="navbar">
+  <a href="index" class="nav-logo">Noyes<span>—</span>Media</a>
+  <ul class="nav-links">
+    <li><a href="/index">Home</a></li>
+    <li><a href="/services">Services</a></li>
+    <li><a href="/process">Process</a></li>
+    <li><a href="/pricing">Pricing</a></li>
+    <li><a href="/coverage">Coverage</a></li>
+    <li><a href="/contact">Contact</a></li>
+  </ul>
+  <button class="nav-cta" onclick="document.getElementById('contact').scrollIntoView({behavior:'smooth'})">Book a Shoot</button>
+</nav>
+
+<!-- ─── HERO ─── -->
+<section id="hero">
+  <div class="hero-bg"></div>
+  <div class="hero-grid"></div>
+  <div class="hero-accent"></div>
+  <div class="hero-accent2"></div>
+
+  <!-- Decorative photo collage -->
+  <div class="hero-photo-collage">
+    <div class="photo-block">
+      <svg width="120" height="80" viewBox="0 0 120 80" fill="none">
+        <path d="M10 70 L10 40 L60 10 L110 40 L110 70 Z" stroke="#c9a84c" stroke-width="1" fill="none"/>
+        <rect x="45" y="50" width="30" height="20" stroke="#c9a84c" stroke-width="0.8" fill="none"/>
+        <rect x="20" y="45" width="18" height="14" stroke="#c9a84c" stroke-width="0.5" fill="none"/>
+        <rect x="82" y="45" width="18" height="14" stroke="#c9a84c" stroke-width="0.5" fill="none"/>
+      </svg>
+      <span class="photo-label">Exterior</span>
+    </div>
+    <div class="photo-block">
+      <!-- Drone icon -->
+      <svg class="drone-icon" width="24" height="16" viewBox="0 0 24 16" fill="none">
+        <circle cx="4" cy="4" r="2.5" stroke="#c9a84c" stroke-width="0.8"/>
+        <circle cx="20" cy="4" r="2.5" stroke="#c9a84c" stroke-width="0.8"/>
+        <circle cx="4" cy="12" r="2.5" stroke="#c9a84c" stroke-width="0.8"/>
+        <circle cx="20" cy="12" r="2.5" stroke="#c9a84c" stroke-width="0.8"/>
+        <rect x="9" y="6" width="6" height="4" rx="1" stroke="#c9a84c" stroke-width="0.8"/>
+        <line x1="6" y1="4" x2="9" y2="7" stroke="#c9a84c" stroke-width="0.6"/>
+        <line x1="18" y1="4" x2="15" y2="7" stroke="#c9a84c" stroke-width="0.6"/>
+        <line x1="6" y1="12" x2="9" y2="9" stroke="#c9a84c" stroke-width="0.6"/>
+        <line x1="18" y1="12" x2="15" y2="9" stroke="#c9a84c" stroke-width="0.6"/>
+      </svg>
+      <span class="photo-label">Aerial</span>
+    </div>
+    <div class="photo-block">
+      <!-- Floor plan sketch -->
+      <svg style="position:absolute;inset:0;width:100%;height:100%;opacity:0.2" viewBox="0 0 100 80" fill="none">
+        <rect x="5" y="5" width="90" height="70" stroke="#c9a84c" stroke-width="1"/>
+        <line x1="5" y1="35" x2="55" y2="35" stroke="#c9a84c" stroke-width="0.8"/>
+        <line x1="55" y1="5" x2="55" y2="75" stroke="#c9a84c" stroke-width="0.8"/>
+        <line x1="55" y1="50" x2="95" y2="50" stroke="#c9a84c" stroke-width="0.8"/>
+        <rect x="8" y="8" width="20" height="12" stroke="#c9a84c" stroke-width="0.5"/>
+      </svg>
+      <span class="photo-label">Floor Plan</span>
+    </div>
+  </div>
+
+  <div class="hero-content">
+    <p class="hero-eyebrow">Niagara Region's Premier Property Imagery</p>
+    <h1 class="hero-title">
+      Where Properties<br>
+      Find Their <em>True</em><br>
+      Audience
+    </h1>
+    <p class="hero-sub">
+      Professional real estate photography, drone aerials, floor plans, and virtual tours — crafted to make listings sell faster and command higher prices across the Niagara Region.
+    </p>
+    <div class="hero-btns">
+      <a href="#pricing" class="btn-primary">View Packages</a>
+      <a href="#services" class="btn-secondary">Explore Services</a>
+    </div>
+  </div>
+
+  <div class="hero-scroll">
+    <div class="scroll-line"></div>
+    <span>Scroll</span>
+  </div>
+</section>
+
+<!-- ─── LAUNCH BANNER ─── -->
+<div class="launch-banner">
+  <div class="launch-tag">Limited Time</div>
+  <div class="launch-text">
+    <strong>50% OFF</strong> — Founding Client Rate
+  </div>
+  <div class="launch-sub">Available through our first year of operation · Niagara Region only</div>
+  <div class="deal-badge">Founding Offer</div>
+</div>
+
+<!-- ─── SERVICES ─── -->
+<section id="services">
+  <p class="section-label">What We Offer</p>
+  <h2 class="section-title">Complete Visual<br><em>Marketing</em> Solutions</h2>
+
+  <div class="services-grid">
+    <div class="service-card fade-in-up">
+      <span class="service-number">01</span>
+      <svg class="service-icon" viewBox="0 0 48 48" fill="none" stroke="#c9a84c" stroke-width="1.2">
+        <rect x="6" y="10" width="36" height="28" rx="1"/>
+        <circle cx="24" cy="24" r="7"/>
+        <circle cx="24" cy="24" r="3"/>
+        <circle cx="36" cy="14" r="2"/>
+      </svg>
+      <h3 class="service-name">Interior Photography</h3>
+      <p class="service-desc">HDR-processed, wide-angle interior shots that showcase each room's best features. Includes professional staging guidance and twilight options.</p>
+      <span class="service-tag">HDR Processed</span>
+    </div>
+
+    <div class="service-card fade-in-up">
+      <span class="service-number">02</span>
+      <svg class="service-icon" viewBox="0 0 48 48" fill="none" stroke="#c9a84c" stroke-width="1.2">
+        <path d="M6 38 L6 22 L24 8 L42 22 L42 38 Z"/>
+        <rect x="18" y="28" width="12" height="10"/>
+        <rect x="8" y="26" width="8" height="7"/>
+        <rect x="32" y="26" width="8" height="7"/>
+        <path d="M14 8 L14 4 L18 4"/>
+      </svg>
+      <h3 class="service-name">Exterior Photography</h3>
+      <p class="service-desc">Curb appeal captured in its best light — golden hour scheduling, sky replacement, and seasonal flexibility to maximize visual impact.</p>
+      <span class="service-tag">Sky Replacement</span>
+    </div>
+
+    <div class="service-card fade-in-up">
+      <span class="service-number">03</span>
+      <svg class="service-icon" viewBox="0 0 48 48" fill="none" stroke="#c9a84c" stroke-width="1.2">
+        <circle cx="24" cy="18" r="3"/>
+        <path d="M16 12 L24 15 L32 12"/>
+        <path d="M12 26 L24 21 L36 26"/>
+        <path d="M8 34 L24 27 L40 34"/>
+        <path d="M16 12 L12 26 L8 34"/>
+        <path d="M32 12 L36 26 L40 34"/>
+      </svg>
+      <h3 class="service-name">Drone Aerial Photography</h3>
+      <p class="service-desc">Licensed Transport Canada drone operators delivering stunning aerial perspectives — neighbourhood context, lot lines, waterfront properties, and bird's-eye compositions.</p>
+      <span class="service-tag">Transport Canada Certified</span>
+    </div>
+
+    <div class="service-card fade-in-up">
+      <span class="service-number">04</span>
+      <svg class="service-icon" viewBox="0 0 48 48" fill="none" stroke="#c9a84c" stroke-width="1.2">
+        <rect x="6" y="6" width="36" height="36" rx="1"/>
+        <rect x="10" y="10" width="12" height="12"/>
+        <rect x="26" y="10" width="12" height="12"/>
+        <rect x="10" y="26" width="12" height="12"/>
+        <rect x="26" y="26" width="7" height="7"/>
+        <line x1="36" y1="35" x2="42" y2="42"/>
+      </svg>
+      <h3 class="service-name">Floor Plans</h3>
+      <p class="service-desc">Accurate 2D and 3D floor plans with precise measurements. Buyers can visualize spatial flow and furniture placement before stepping through the door.</p>
+      <span class="service-tag">2D &amp; 3D Available</span>
+    </div>
+
+    <div class="service-card fade-in-up">
+      <span class="service-number">05</span>
+      <svg class="service-icon" viewBox="0 0 48 48" fill="none" stroke="#c9a84c" stroke-width="1.2">
+        <circle cx="24" cy="24" r="16"/>
+        <path d="M14 24 C14 18, 24 14, 24 14 C24 14 34 18 34 24 C34 30 24 34 24 34 C24 34 14 30 14 24Z"/>
+        <line x1="24" y1="8" x2="24" y2="40"/>
+        <line x1="8" y1="24" x2="40" y2="24"/>
+      </svg>
+      <h3 class="service-name">Virtual Tours</h3>
+      <p class="service-desc">Interactive 360° virtual tours embedded directly in your MLS listing. Let out-of-town buyers explore every corner from anywhere in the world.</p>
+      <span class="service-tag">MLS Compatible</span>
+    </div>
+
+    <div class="service-card fade-in-up">
+      <span class="service-number">06</span>
+      <svg class="service-icon" viewBox="0 0 48 48" fill="none" stroke="#c9a84c" stroke-width="1.2">
+        <rect x="8" y="14" width="32" height="22" rx="1"/>
+        <path d="M16 14 L16 8 L32 8 L32 14"/>
+        <line x1="24" y1="36" x2="24" y2="42"/>
+        <line x1="16" y1="42" x2="32" y2="42"/>
+        <path d="M18 22 L22 26 L30 19"/>
+      </svg>
+      <h3 class="service-name">Video Walkthroughs</h3>
+      <p class="service-desc">Cinematic property walkthrough videos with licensed background music, smooth gimbal movement, and social-ready cuts for Instagram and YouTube.</p>
+      <span class="service-tag">Social-Ready Edits</span>
+    </div>
+  </div>
+</section>
+
+<!-- ─── PROCESS ─── -->
+<section id="process">
+  <p class="section-label">How It Works</p>
+  <h2 class="section-title">From Booking to<br><em>Delivered</em> in 24 Hours</h2>
+
+  <div class="process-steps">
+    <div class="process-step fade-in-up">
+      <div class="step-dot">1</div>
+      <h3 class="step-name">Book Online</h3>
+      <p class="step-desc">Choose your package, pick a date, and fill out your property details. We'll confirm within 2 hours.</p>
+    </div>
+    <div class="process-step fade-in-up">
+      <div class="step-dot">2</div>
+      <h3 class="step-name">We Show Up</h3>
+      <p class="step-desc">Our photographer arrives on time with professional gear. We handle all staging guidance and lighting setup.</p>
+    </div>
+    <div class="process-step fade-in-up">
+      <div class="step-dot">3</div>
+      <h3 class="step-name">We Edit</h3>
+      <p class="step-desc">Your photos are professionally retouched — HDR blending, colour correction, sky replacement if needed.</p>
+    </div>
+    <div class="process-step fade-in-up">
+      <div class="step-dot">4</div>
+      <h3 class="step-name">You List</h3>
+      <p class="step-desc">Final assets delivered to your inbox within 24 hours, print-ready and MLS-optimized. List with confidence.</p>
+    </div>
+  </div>
+</section>
+
+
+
+<!-- ─── COVERAGE ─── -->
+<section id="coverage">
+  <p class="section-label">Service Area</p>
+  <h2 class="section-title">Proudly Serving<br><em>Niagara</em> Region</h2>
+
+  <div class="coverage-content">
+    <div class="coverage-map">
+      <svg class="map-svg" viewBox="0 0 400 400" fill="none">
+        <!-- Niagara region abstract map-like shape -->
+        <path d="M50 200 C60 100 150 50 200 60 C280 40 350 100 370 200 C390 300 320 380 240 370 C160 390 60 360 50 280 Z" stroke="#c9a84c" stroke-width="0.8" fill="none"/>
+        <path d="M80 200 C90 120 170 80 220 90 C290 70 340 130 350 210" stroke="#c9a84c" stroke-width="0.5" fill="none"/>
+        <!-- Lake Ontario-ish shape -->
+        <path d="M20 180 C60 100 180 80 280 120 C340 140 380 170 380 180" stroke="#c9a84c" stroke-width="0.5" stroke-dasharray="4 4" fill="none"/>
+        <!-- City dots -->
+        <circle cx="140" cy="210" r="3" fill="#c9a84c"/>
+        <circle cx="200" cy="240" r="5" fill="#c9a84c"/>
+        <circle cx="260" cy="260" r="3" fill="#c9a84c"/>
+        <circle cx="300" cy="220" r="3" fill="#c9a84c"/>
+        <circle cx="170" cy="290" r="3" fill="#c9a84c"/>
+        <circle cx="220" cy="190" r="3" fill="#c9a84c"/>
+        <!-- Grid lines -->
+        <line x1="100" y1="0" x2="100" y2="400" stroke="#c9a84c" stroke-width="0.3"/>
+        <line x1="200" y1="0" x2="200" y2="400" stroke="#c9a84c" stroke-width="0.3"/>
+        <line x1="300" y1="0" x2="300" y2="400" stroke="#c9a84c" stroke-width="0.3"/>
+        <line x1="0" y1="100" x2="400" y2="100" stroke="#c9a84c" stroke-width="0.3"/>
+        <line x1="0" y1="200" x2="400" y2="200" stroke="#c9a84c" stroke-width="0.3"/>
+        <line x1="0" y1="300" x2="400" y2="300" stroke="#c9a84c" stroke-width="0.3"/>
+      </svg>
+      <div class="map-label">
+        <h3>Niagara Region, ON</h3>
+        <p style="font-size:0.75rem;color:var(--grey);letter-spacing:0.1em">Canada</p>
+      </div>
+    </div>
+
+    <div>
+      <ul class="coverage-list fade-in-up">
+        <li>St. Catharines</li>
+        <li>Niagara Falls</li>
+        <li>Welland</li>
+        <li>Grimsby</li>
+        <li>Lincoln (Beamsville / Vineland)</li>
+        <li>Thorold</li>
+        <li>Pelham (Fonthill / Fenwick)</li>
+        <li>Fort Erie</li>
+        <li>Port Colborne</li>
+        <li>Wainfleet</li>
+        <li>West Lincoln (Smithville)</li>
+        <li>Niagara-on-the-Lake</li>
+      </ul>
+      <p class="coverage-note">Outside our standard coverage area? Contact us — we travel for premium packages and can discuss a travel fee for extended locations.</p>
+    </div>
+  </div>
+</section>
+
+<!-- ─── WHY US ─── -->
+<section id="why">
+  <p class="section-label">Why Noyes-Media</p>
+  <h2 class="section-title">The Difference Is<br><em>In the Detail</em></h2>
+
+  <div class="why-grid">
+    <div class="why-item fade-in-up">
+      <svg class="why-icon" width="36" height="36" viewBox="0 0 36 36" fill="none" stroke="#c9a84c" stroke-width="1.2">
+        <circle cx="18" cy="18" r="14"/>
+        <path d="M11 18 L16 23 L25 13"/>
+      </svg>
+      <div>
+        <h3 class="why-name">24-Hour Turnaround</h3>
+        <p class="why-desc">Your fully edited, MLS-ready photos arrive in your inbox within 24 hours of the shoot. Rush 6-hour delivery available as an add-on when timing is critical.</p>
+      </div>
+    </div>
+
+    <div class="why-item fade-in-up">
+      <svg class="why-icon" width="36" height="36" viewBox="0 0 36 36" fill="none" stroke="#c9a84c" stroke-width="1.2">
+        <path d="M18 4 L22 14 L32 14 L24 21 L27 31 L18 25 L9 31 L12 21 L4 14 L14 14 Z"/>
+      </svg>
+      <div>
+        <h3 class="why-name">Professional Editing</h3>
+        <p class="why-desc">Every image goes through full HDR processing, colour grading, lens correction, sky replacement, and vertical alignment. We don't just deliver photos — we deliver assets.</p>
+      </div>
+    </div>
+
+    <div class="why-item fade-in-up">
+      <svg class="why-icon" width="36" height="36" viewBox="0 0 36 36" fill="none" stroke="#c9a84c" stroke-width="1.2">
+        <rect x="6" y="8" width="24" height="22" rx="1"/>
+        <path d="M12 8 L12 4 L24 4 L24 8"/>
+        <line x1="12" y1="16" x2="24" y2="16"/>
+        <line x1="12" y1="20" x2="20" y2="20"/>
+        <line x1="12" y1="24" x2="22" y2="24"/>
+      </svg>
+      <div>
+        <h3 class="why-name">Transport Canada Licensed</h3>
+        <p class="why-desc">Our drone pilots hold current Transport Canada Advanced or Basic RPAS certificates, fully insured and compliant with all airspace requirements in the Niagara Region.</p>
+      </div>
+    </div>
+
+    <div class="why-item fade-in-up">
+      <svg class="why-icon" width="36" height="36" viewBox="0 0 36 36" fill="none" stroke="#c9a84c" stroke-width="1.2">
+        <circle cx="18" cy="12" r="5"/>
+        <path d="M8 30 C8 24 13 20 18 20 C23 20 28 24 28 30"/>
+        <path d="M25 10 C27 11 29 14 29 17"/>
+        <path d="M11 10 C9 11 7 14 7 17"/>
+      </svg>
+      <div>
+        <h3 class="why-name">Local Niagara Knowledge</h3>
+        <p class="why-desc">We know the Niagara Region — the lighting conditions, the neighbourhoods, the seasonal quirks. That local knowledge translates into better-composed, more flattering property images.</p>
+      </div>
+    </div>
+
+    <div class="why-item fade-in-up">
+      <svg class="why-icon" width="36" height="36" viewBox="0 0 36 36" fill="none" stroke="#c9a84c" stroke-width="1.2">
+        <rect x="4" y="8" width="28" height="20" rx="1"/>
+        <path d="M10 22 L14 17 L18 20 L23 14 L28 18"/>
+        <line x1="4" y1="32" x2="32" y2="32"/>
+      </svg>
+      <div>
+        <h3 class="why-name">Listings That Perform</h3>
+        <p class="why-desc">Homes with professional photography sell faster and at higher prices. We're invested in your success — our reputation grows with every sold sign you put up.</p>
+      </div>
+    </div>
+
+    <div class="why-item fade-in-up">
+      <svg class="why-icon" width="36" height="36" viewBox="0 0 36 36" fill="none" stroke="#c9a84c" stroke-width="1.2">
+        <rect x="6" y="10" width="24" height="18" rx="1"/>
+        <line x1="18" y1="10" x2="18" y2="6"/>
+        <circle cx="18" cy="5" r="2"/>
+        <line x1="11" y1="10" x2="9" y2="6"/>
+        <line x1="25" y1="10" x2="27" y2="6"/>
+        <path d="M11 19 L15 23 L25 15"/>
+      </svg>
+      <div>
+        <h3 class="why-name">Agent-Friendly Workflow</h3>
+        <p class="why-desc">Easy online booking, clear communication, and a streamlined delivery system designed to fit the pace of real estate. No chasing emails — just results.</p>
+      </div>
+    </div>
+  </div>
+</section>
+
+<!-- ─── CONTACT ─── -->
+<section id="contact">
+  <p class="section-label">Get In Touch</p>
+  <h2 class="section-title">Book Your<br><em>Next Listing</em></h2>
+
+  <div class="contact-grid">
+    <div class="contact-info fade-in-up">
+      <h3>Ready to make your listing stand out? Let's talk.</h3>
+
+      <div class="contact-detail">
+        <span class="contact-detail-label">Email</span>
+        <span class="contact-detail-value">hello@noyes-media.ca</span>
+      </div>
+      <div class="contact-detail">
+        <span class="contact-detail-label">Phone</span>
+        <span class="contact-detail-value">Available upon booking confirmation</span>
+      </div>
+      <div class="contact-detail">
+        <span class="contact-detail-label">Area</span>
+        <span class="contact-detail-value">Niagara Region, Ontario, Canada</span>
+      </div>
+      <div class="contact-detail">
+        <span class="contact-detail-label">Hours</span>
+        <span class="contact-detail-value">Mon–Sat · 7:00 AM – 7:00 PM<br>Twilight shoots by appointment</span>
+      </div>
+      <div class="contact-detail">
+        <span class="contact-detail-label">Turnaround</span>
+        <span class="contact-detail-value">Standard 24 hrs · Rush 6 hrs (add-on)</span>
+      </div>
+
+      <div style="margin-top:2.5rem; padding:1.5rem 2rem; background:rgba(201,168,76,0.06); border-left:2px solid var(--gold);">
+        <p style="font-family:'Cormorant Garamond',serif; font-size:1.1rem; font-style:italic; margin-bottom:0.5rem;">
+          "Mention the Founding Rate when booking to lock in 50% off."
+        </p>
+        <p style="font-size:0.8rem; color:var(--grey);">Available throughout our first year · No minimum bookings required</p>
+      </div>
+    </div>
+
+    <div class="contact-form fade-in-up">
+      <div class="form-row">
+        <div class="form-field">
+          <label>First Name</label>
+          <input type="text" placeholder="Jane"/>
+        </div>
+        <div class="form-field">
+          <label>Last Name</label>
+          <input type="text" placeholder="Smith"/>
+        </div>
+      </div>
+      <div class="form-field">
+        <label>Email Address</label>
+        <input type="email" placeholder="jane@yourbroker.com"/>
+      </div>
+      <div class="form-field">
+        <label>Phone Number</label>
+        <input type="tel" placeholder="(289) 555-0100"/>
+      </div>
+      <div class="form-field">
+        <label>Service Package</label>
+        <select>
+          <option value="" disabled selected>Select a package...</option>
+          <option>Essential — $124</option>
+          <option>Signature — $249</option>
+          <option>Premium — $424</option>
+          <option>Custom / Add-ons only</option>
+        </select>
+      </div>
+      <div class="form-field">
+        <label>Property Address / City</label>
+        <input type="text" placeholder="123 Lakeview Dr, St. Catharines"/>
+      </div>
+      <div class="form-field">
+        <label>Preferred Shoot Date</label>
+        <input type="date"/>
+      </div>
+      <div class="form-field">
+        <label>Additional Notes</label>
+        <textarea placeholder="Tell us about the property, any add-ons you're interested in, or anything else we should know..."></textarea>
+      </div>
+      <button class="submit-btn" onclick="alert('Thank you! We\'ll be in touch within 2 hours to confirm your booking.')">Send Booking Request →</button>
+    </div>
+  </div>
+</section>
+
+<!-- ─── FOOTER ─── -->
+<footer>
+  <div class="footer-grid">
+    <div class="footer-brand">
+      <div class="brand-name">Noyes<span>—</span>Media</div>
+      <p>Professional real estate photography, aerial drone imaging, floor plans, and virtual tours serving the Niagara Region of Ontario, Canada.</p>
+    </div>
+    <div class="footer-col">
+      <h4>Services</h4>
+      <ul>
+        <li><a href="#services">Interior Photography</a></li>
+        <li><a href="#services">Exterior Photography</a></li>
+        <li><a href="#services">Drone Aerial</a></li>
+        <li><a href="#services">Floor Plans</a></li>
+        <li><a href="#services">Virtual Tours</a></li>
+        <li><a href="#services">Video Walkthroughs</a></li>
+      </ul>
+    </div>
+    <div class="footer-col">
+      <h4>Pricing</h4>
+      <ul>
+        <li><a href="#pricing">Essential Package</a></li>
+        <li><a href="#pricing">Signature Package</a></li>
+        <li><a href="#pricing">Premium Package</a></li>
+        <li><a href="#pricing">Add-On Services</a></li>
+        <li><a href="#pricing">Founding Rate Offer</a></li>
+      </ul>
+    </div>
+    <div class="footer-col">
+      <h4>Coverage</h4>
+      <ul>
+        <li><a href="#coverage">St. Catharines</a></li>
+        <li><a href="#coverage">Niagara Falls</a></li>
+        <li><a href="#coverage">Welland</a></li>
+        <li><a href="#coverage">Grimsby</a></li>
+        <li><a href="#coverage">Niagara-on-the-Lake</a></li>
+        <li><a href="#coverage">Full Coverage Area</a></li>
+      </ul>
+    </div>
+  </div>
+  <div class="footer-bottom">
+    <p class="footer-copy">© 2025 <span>Noyes-Media</span>. All rights reserved. Niagara Region, Ontario, Canada.</p>
+    <div class="footer-legal">
+      <a href="#">Privacy Policy</a>
+      <a href="#">Terms of Service</a>
+      <a href="#contact">Contact</a>
+    </div>
+  </div>
+</footer>
+
+<script>
+  // Custom cursor
+  const cursor = document.getElementById('cursor');
+  const ring = document.getElementById('cursor-ring');
+  let mx = 0, my = 0, rx = 0, ry = 0;
+
+  document.addEventListener('mousemove', e => {
+    mx = e.clientX; my = e.clientY;
+    cursor.style.left = mx + 'px';
+    cursor.style.top = my + 'px';
+  });
+
+  function animateRing() {
+    rx += (mx - rx) * 0.12;
+    ry += (my - ry) * 0.12;
+    ring.style.left = rx + 'px';
+    ring.style.top = ry + 'px';
+    requestAnimationFrame(animateRing);
+  }
+  animateRing();
+
+  document.querySelectorAll('a, button, input, select, textarea').forEach(el => {
+    el.addEventListener('mouseenter', () => {
+      ring.style.width = '56px';
+      ring.style.height = '56px';
+      ring.style.borderColor = 'rgba(201,168,76,0.😎';
+    });
+    el.addEventListener('mouseleave', () => {
+      ring.style.width = '36px';
+      ring.style.height = '36px';
+      ring.style.borderColor = 'rgba(201,168,76,0.5)';
+    });
+  });
+
+  // Sticky nav
+  const navbar = document.getElementById('navbar');
+  window.addEventListener('scroll', () => {
+    navbar.classList.toggle('scrolled', window.scrollY > 60);
+  });
+
+  // Scroll-triggered fade-in
+  const observer = new IntersectionObserver((entries) => {
+    entries.forEach((entry, i) => {
+      if (entry.isIntersecting) {
+        setTimeout(() => {
+          entry.target.classList.add('visible');
+        }, entry.target.dataset.delay || 0);
+      }
+    });
+  }, { threshold: 0.15 });
+
+  document.querySelectorAll('.fade-in-up').forEach((el, i) => {
+    el.dataset.delay = (i % 3) * 80;
+    observer.observe(el);
+  });
+</script>
+</body>
+</html>
