@@ -1000,25 +1000,63 @@ function clearCart() {
 }
 
 // ─── SUBMIT ───
-function submitForm() {
+async function submitForm() {
   const first = document.getElementById('firstName').value.trim();
   const email = document.getElementById('emailField').value.trim();
-  if (!first || !email) { alert('Please fill in your name and email address.'); return; }
+  if (!first || !email) {
+    alert('Please fill in your name and email address.');
+    return;
+  }
 
-  const pkgName    = selectedPackage ? selectedPackage.name : 'No package selected';
-  const addonNames = Object.values(selectedAddons).map(a => a.name);
-  const addonStr   = addonNames.length ? '\nAdd-ons: ' + addonNames.join(', ') : '';
-  const total      = (selectedPackage ? selectedPackage.price : 0) + Object.values(selectedAddons).reduce((s,a) => s + (a.custom ? 0 : a.price), 0);
-  const totalStr   = total > 0 ? '\nEstimated Total: $' + total + ' CAD (founding rate)' : '';
+  // Build submission data
+  const phone    = document.getElementById('phoneField')?.value.trim() || '';
+  const address  = document.getElementById('addressField')?.value.trim() || '';
+  const date     = document.getElementById('dateField')?.value.trim() || '';
+  const notes    = document.getElementById('notesField')?.value.trim() || '';
+  const pkgName  = selectedPackage ? selectedPackage.name : 'No package selected';
+  const addons   = Object.values(selectedAddons).map(a => a.name).join(', ') || 'None';
+  const total    = (selectedPackage ? selectedPackage.price : 0)
+                 + Object.values(selectedAddons).reduce((s,a) => s + (a.custom ? 0 : a.price), 0);
 
-  alert(
-    'Thank you, ' + first + '!\n\n' +
-    'We\'ve received your booking request:\n' +
-    'Package: ' + pkgName +
-    addonStr +
-    totalStr +
-    '\n\nWe\'ll be in touch within 2 hours to confirm your shoot.'
-  );
+  const btn = document.querySelector('.submit-btn');
+  btn.textContent = 'Sending…';
+  btn.disabled = true;
+
+  try {
+    const res = await fetch('https://formspree.io/f/mojkvdvg', {  // ← REPLACE with your endpoint
+      method: 'POST',
+      headers: { 'Content-Type': 'application/json', 'Accept': 'application/json' },
+      body: JSON.stringify({
+        name:     first,
+        email:    email,
+        phone:    phone,
+        address:  address,
+        date:     date,
+        package:  pkgName,
+        addons:   addons,
+        total:    total > 0 ? '$' + total + ' CAD (founding rate)' : 'TBD',
+        notes:    notes,
+      })
+    });
+
+    if (res.ok) {
+      btn.textContent = '✓ Request Sent!';
+      btn.style.background = '#2a5c2a';
+      // Clear the form
+      document.getElementById('firstName').value = '';
+      document.getElementById('emailField').value = '';
+      if (phone)   document.getElementById('phoneField').value   = '';
+      if (address) document.getElementById('addressField').value = '';
+      if (date)    document.getElementById('dateField').value    = '';
+      if (notes)   document.getElementById('notesField').value   = '';
+    } else {
+      throw new Error('Form error');
+    }
+  } catch(err) {
+    btn.textContent = 'Send Request';
+    btn.disabled = false;
+    alert('Something went wrong — please email us directly at hello@noyes-media.ca');
+  }
 }
 
 // ─── INIT ───
