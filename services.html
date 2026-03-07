@@ -1188,6 +1188,7 @@ function addToCart(id, name, price, origPrice, isCustom = false) {
   });
 
   updateCartUI();
+  persistCart();
   showToast(`${name} added to your selection`);
 
   // Bump cart count
@@ -1211,6 +1212,7 @@ function removeFromCart(id) {
   });
 
   updateCartUI();
+  persistCart();
 }
 
 function updateCartUI() {
@@ -1272,12 +1274,30 @@ function closeCart() {
 }
 
 function saveCartToStorage() {
-  // Save cart to sessionStorage so /contact can read it
-  const items = Object.values(cart);
+  // Save to sessionStorage with pricingId mapping so /contact can read it correctly
+  const servicesIdToPricingId = {
+    photography: null,      // contact page handles this via package auto-suggest
+    drone:       'drone',
+    video:       'video',
+    floorplans:  'floorplan3d',
+    virtualtour: 'virtualtour',
+    staging:     'staging',
+  };
+  const items = Object.values(cart).map(item => ({
+    id:       item.id,
+    pricingId: servicesIdToPricingId[item.id] || null,
+    name:     item.name,
+    price:    item.price,
+    orig:     item.origPrice,
+    type:     'addon',
+    isCustom: item.isCustom || false,
+  }));
   try {
     sessionStorage.setItem('noyesCart', JSON.stringify(items));
   } catch(e) {}
 }
+
+function persistCart() { saveCartToStorage(); }
 
 // Toast
 function showToast(msg) {
@@ -1287,14 +1307,17 @@ function showToast(msg) {
   setTimeout(() => t.classList.remove('show'), 2800);
 }
 
-// On load — restore cart if coming back from contact
+// On load — restore cart from sessionStorage
 try {
   const saved = sessionStorage.getItem('noyesCart');
   if (saved) {
     const items = JSON.parse(saved);
     items.forEach(item => {
-      cart[item.id] = item;
-      const btns = document.querySelectorAll(`[onclick*="addToCart('${item.id}'"]`);
+      // Services page items have item.id matching addToCart IDs
+      const id = item.id;
+      if (!id) return;
+      cart[id] = { id, name: item.name, price: item.price, origPrice: item.orig, isCustom: item.isCustom || false };
+      const btns = document.querySelectorAll(`[onclick*="addToCart('${id}'"]`);
       btns.forEach(btn => {
         btn.innerHTML = `<svg width="14" height="14" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><polyline points="20 6 9 17 4 12"/></svg> Added`;
         btn.classList.add('added');
