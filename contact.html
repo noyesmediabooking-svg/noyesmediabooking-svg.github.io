@@ -506,9 +506,10 @@
   <ul class="nav-links">
     <li><a href="/index">Home</a></li>
     <li><a href="/services">Services</a></li>
+    <li><a href="/process">Process</a></li>
     <li><a href="/pricing">Pricing</a></li>
-    <li><a href="/gallery">Gallery</a></li>
-    <li><a href="/contact">Contact</a></li>
+    <li><a href="/coverage">Coverage</a></li>
+    <li><a href="/contact" class="active">Contact</a></li>
   </ul>
   <a href="/contact" class="nav-cta">Book a Shoot</a>
 </nav>
@@ -546,7 +547,7 @@
 
       <div class="contact-detail">
         <span class="contact-detail-label">Email</span>
-        <span class="contact-detail-value">hello@noyes-media.ca</span>
+        <span class="contact-detail-value"><a href="/cdn-cgi/l/email-protection" class="__cf_email__" data-cfemail="9af2fff6f6f5daf4f5e3ffe9b7f7fffef3fbb4f9fb">[email&#160;protected]</a></span>
       </div>
       <div class="contact-detail">
         <span class="contact-detail-label">Phone</span>
@@ -897,7 +898,7 @@ function recalculate() {
   }
 }
 
-// ─── LOAD FROM SESSION STORAGE (from /services cart) ───
+// ─── LOAD FROM SESSION STORAGE (from /services or /pricing cart) ───
 function loadCartFromStorage() {
   let cartItems = [];
   try {
@@ -906,18 +907,26 @@ function loadCartFromStorage() {
   } catch(e) { return; }
   if (!cartItems.length) return;
 
-  // Map cart IDs to packages vs addons
-  const packageMap = { photography: null }; // photography = no specific package, prompt
-  // Check if a package was in the cart
-  // Services page cart IDs: photography, drone, video, floorplans, virtualtour, staging
-  // Map to package auto-select logic:
-  // If only photography → Essential
-  // If drone or floorplan added → suggest Signature
-  // If video or virtualtour added → suggest Premium
-  // But we'll just pre-select addons that match and leave package as manual choice
-  // unless they had a specific package in cart
+  // ── PRICING PAGE ITEMS: have a pricingId field ──
+  // pricingId can be: essential | signature | premium | drone | video | floorplan3d | virtualtour | twilight | rush | reel | extraphotos
+  const pricingPkgMap = {
+    essential: 'essential',
+    signature: 'signature',
+    premium:   'premium'
+  };
+  const pricingAddonMap = {
+    drone:        'drone',
+    video:        'video',
+    floorplan3d:  'floorplan3d',
+    virtualtour:  'virtualtour',
+    twilight:     'twilight',
+    rush:         'rush',
+    reel:         'reel',
+    extraphotos:  'extraphotos'
+  };
 
-  const addonMap = {
+  // ── SERVICES PAGE ITEMS: use id field directly ──
+  const servicesAddonMap = {
     drone:       'drone',
     video:       'video',
     floorplans:  'floorplan2d',
@@ -925,38 +934,51 @@ function loadCartFromStorage() {
     staging:     'staging'
   };
 
-  let hasPhotography = false;
-  let cartNames = [];
+  let pkgSelected = false;
 
   cartItems.forEach(item => {
-    cartNames.push(item.name);
-    if (item.id === 'photography') {
-      hasPhotography = true;
-      // Auto-select Essential as base
-      const essentialBtn = document.querySelector('[data-pkg="essential"]');
-      if (essentialBtn && !selectedPackage) selectPackage(essentialBtn);
+    const pid = item.pricingId || item.id;
+
+    // Check for explicit package from pricing page
+    if (pricingPkgMap[pid]) {
+      const pkgBtn = document.querySelector(`[data-pkg="${pricingPkgMap[pid]}"]`);
+      if (pkgBtn) { selectPackage(pkgBtn); pkgSelected = true; }
+      return;
     }
-    const addonId = addonMap[item.id];
-    if (addonId) {
-      const btn = document.querySelector(`[data-addon="${addonId}"]`);
-      if (btn && !btn.disabled && !btn.classList.contains('selected')) {
-        toggleAddon(btn);
-      }
+
+    // Pricing page add-ons
+    if (pricingAddonMap[pid]) {
+      const btn = document.querySelector(`[data-addon="${pricingAddonMap[pid]}"]`);
+      if (btn && !btn.disabled && !btn.classList.contains('selected')) toggleAddon(btn);
+      return;
+    }
+
+    // Services page items — photography triggers package auto-suggest
+    if (item.id === 'photography' && !pkgSelected) {
+      const essBtn = document.querySelector('[data-pkg="essential"]');
+      if (essBtn) { selectPackage(essBtn); pkgSelected = true; }
+    }
+    const sAddonId = servicesAddonMap[item.id];
+    if (sAddonId) {
+      const btn = document.querySelector(`[data-addon="${sAddonId}"]`);
+      if (btn && !btn.disabled && !btn.classList.contains('selected')) toggleAddon(btn);
     }
   });
 
-  // Auto-upgrade package suggestion based on what's in cart
-  const hasVideo = cartItems.some(i => i.id === 'video');
-  const hasVT    = cartItems.some(i => i.id === 'virtualtour');
-  const hasDrone = cartItems.some(i => i.id === 'drone');
-  const hasFP    = cartItems.some(i => i.id === 'floorplans');
+  // If no explicit package was set via pricingId, auto-upgrade based on services
+  if (!pkgSelected) {
+    const hasVideo = cartItems.some(i => (i.pricingId||i.id) === 'video');
+    const hasVT    = cartItems.some(i => (i.pricingId||i.id) === 'virtualtour');
+    const hasDrone = cartItems.some(i => (i.pricingId||i.id) === 'drone');
+    const hasFP    = cartItems.some(i => ['floorplans','floorplan2d','floorplan3d'].includes(i.pricingId||i.id));
 
-  if (hasVideo || hasVT) {
-    const premiumBtn = document.querySelector('[data-pkg="premium"]');
-    if (premiumBtn) selectPackage(premiumBtn);
-  } else if (hasDrone || hasFP) {
-    const sigBtn = document.querySelector('[data-pkg="signature"]');
-    if (sigBtn) selectPackage(sigBtn);
+    if (hasVideo || hasVT) {
+      const btn = document.querySelector('[data-pkg="premium"]');
+      if (btn) selectPackage(btn);
+    } else if (hasDrone || hasFP) {
+      const btn = document.querySelector('[data-pkg="signature"]');
+      if (btn) selectPackage(btn);
+    }
   }
 
   // Show banner
@@ -983,12 +1005,20 @@ function submitForm() {
   const email = document.getElementById('emailField').value.trim();
   if (!first || !email) { alert('Please fill in your name and email address.'); return; }
 
-  // Build summary for alert
-  let summary = selectedPackage ? selectedPackage.name + ' Package' : 'No package selected';
+  const pkgName    = selectedPackage ? selectedPackage.name : 'No package selected';
   const addonNames = Object.values(selectedAddons).map(a => a.name);
-  if (addonNames.length) summary += ' + ' + addonNames.join(', ');
+  const addonStr   = addonNames.length ? '\nAdd-ons: ' + addonNames.join(', ') : '';
+  const total      = (selectedPackage ? selectedPackage.price : 0) + Object.values(selectedAddons).reduce((s,a) => s + (a.custom ? 0 : a.price), 0);
+  const totalStr   = total > 0 ? '\nEstimated Total: $' + total + ' CAD (founding rate)' : '';
 
-  alert(`Thank you, ${first}! We've received your booking request for: ${summary}.\n\nWe'll be in touch within 2 hours to confirm your shoot.`);
+  alert(
+    'Thank you, ' + first + '!\n\n' +
+    'We\'ve received your booking request:\n' +
+    'Package: ' + pkgName +
+    addonStr +
+    totalStr +
+    '\n\nWe\'ll be in touch within 2 hours to confirm your shoot.'
+  );
 }
 
 // ─── INIT ───
