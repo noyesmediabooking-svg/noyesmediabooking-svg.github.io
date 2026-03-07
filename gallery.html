@@ -29,31 +29,7 @@
     overflow-x: hidden;
   }
 
-  /* ─── CURSOR ─── */
-  * { cursor: none; }
-  #cursor {
-    position: fixed; width: 8px; height: 8px;
-    background: var(--gold); border-radius: 50%;
-    pointer-events: none; z-index: 9999;
-    transition: transform 0.15s ease;
-    transform: translate(-50%, -50%);
-  }
-  #cursor-ring {
-    position: fixed; width: 36px; height: 36px;
-    border: 1px solid rgba(201,168,76,0.5); border-radius: 50%;
-    pointer-events: none; z-index: 9998;
-    transition: width 0.3s, height 0.3s, border-color 0.3s;
-    transform: translate(-50%, -50%);
-  }
-  #cursor-label {
-    position: fixed; z-index: 9997;
-    font-family: 'Barlow Condensed', sans-serif;
-    font-size: 0.6rem; font-weight: 600; letter-spacing: 0.2em;
-    text-transform: uppercase; color: var(--gold);
-    pointer-events: none; white-space: nowrap;
-    opacity: 0; transition: opacity 0.2s;
-    transform: translate(20px, -50%);
-  }
+
 
   /* ─── SCROLLBAR ─── */
   ::-webkit-scrollbar { width: 3px; }
@@ -1180,42 +1156,6 @@
 </footer>
 
 <script>
-// ─── CURSOR ───
-const cursor      = document.getElementById('cursor');
-const ring        = document.getElementById('cursor-ring');
-const cursorLabel = document.getElementById('cursor-label');
-let mx=0, my=0, rx=0, ry=0;
-document.addEventListener('mousemove', e => {
-  mx = e.clientX; my = e.clientY;
-  cursor.style.left = mx+'px'; cursor.style.top = my+'px';
-  cursorLabel.style.left = mx+'px'; cursorLabel.style.top = my+'px';
-});
-(function loop(){
-  rx += (mx-rx)*0.12; ry += (my-ry)*0.12;
-  ring.style.left = rx+'px'; ring.style.top = ry+'px';
-  requestAnimationFrame(loop);
-})();
-document.querySelectorAll('a, button, input, select, textarea').forEach(el => {
-  el.addEventListener('mouseenter', () => { ring.style.width='56px'; ring.style.height='56px'; ring.style.borderColor='rgba(201,168,76,0.8)'; });
-  el.addEventListener('mouseleave', () => { ring.style.width='36px'; ring.style.height='36px'; ring.style.borderColor='rgba(201,168,76,0.5)'; });
-});
-// Photo slot cursor label
-document.querySelectorAll('.photo-slot').forEach(slot => {
-  const label = slot.querySelector('.photo-overlay-text');
-  const txt   = label ? label.textContent : 'View';
-  slot.addEventListener('mouseenter', () => {
-    cursorLabel.textContent = txt;
-    cursorLabel.style.opacity = '1';
-    ring.style.width='60px'; ring.style.height='60px';
-    ring.style.borderColor='rgba(201,168,76,0.6)';
-  });
-  slot.addEventListener('mouseleave', () => {
-    cursorLabel.style.opacity = '0';
-    ring.style.width='36px'; ring.style.height='36px';
-    ring.style.borderColor='rgba(201,168,76,0.5)';
-  });
-});
-
 // ─── NAV SCROLL ───
 const navbar = document.getElementById('navbar');
 window.addEventListener('scroll', () => navbar.classList.toggle('scrolled', window.scrollY > 60));

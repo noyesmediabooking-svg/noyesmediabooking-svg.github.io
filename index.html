@@ -33,23 +33,6 @@
     overflow-x: hidden;
   }
 
-  /* ─── CURSOR ─── */
-  * { cursor: none; }
-  #cursor {
-    position: fixed; width: 8px; height: 8px;
-    background: var(--gold); border-radius: 50%;
-    pointer-events: none; z-index: 9999;
-    transition: transform 0.15s ease;
-    transform: translate(-50%, -50%);
-  }
-  #cursor-ring {
-    position: fixed; width: 36px; height: 36px;
-    border: 1px solid rgba(201,168,76,0.5); border-radius: 50%;
-    pointer-events: none; z-index: 9998;
-    transition: transform 0.4s ease, width 0.3s, height 0.3s, opacity 0.3s;
-    transform: translate(-50%, -50%);
-  }
-  a:hover ~ #cursor, button:hover ~ #cursor { transform: translate(-50%, -50%) scale(2.5); }
 
   /* ─── SCROLLBAR ─── */
   ::-webkit-scrollbar { width: 3px; }
@@ -1205,39 +1188,7 @@
 </footer>
 
 <script>
-  // Custom cursor
-  const cursor = document.getElementById('cursor');
-  const ring = document.getElementById('cursor-ring');
-  let mx = 0, my = 0, rx = 0, ry = 0;
-
-  document.addEventListener('mousemove', e => {
-    mx = e.clientX; my = e.clientY;
-    cursor.style.left = mx + 'px';
-    cursor.style.top = my + 'px';
-  });
-
-  function animateRing() {
-    rx += (mx - rx) * 0.12;
-    ry += (my - ry) * 0.12;
-    ring.style.left = rx + 'px';
-    ring.style.top = ry + 'px';
-    requestAnimationFrame(animateRing);
-  }
-  animateRing();
-
-  document.querySelectorAll('a, button, input, select, textarea').forEach(el => {
-    el.addEventListener('mouseenter', () => {
-      ring.style.width = '56px';
-      ring.style.height = '56px';
-      ring.style.borderColor = 'rgba(201,168,76,0.8)';
-    });
-    el.addEventListener('mouseleave', () => {
-      ring.style.width = '36px';
-      ring.style.height = '36px';
-      ring.style.borderColor = 'rgba(201,168,76,0.5)';
-    });
-  });
-
+ 
   // Sticky nav
   const navbar = document.getElementById('navbar');
   window.addEventListener('scroll', () => {
