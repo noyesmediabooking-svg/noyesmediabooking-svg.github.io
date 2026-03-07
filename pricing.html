@@ -988,8 +988,8 @@ try {
       const pid = item.pricingId || item.id;
       // Re-apply package selections
       if (['essential','signature','premium'].includes(pid)) {
-        const priceMap = {essential:124, signature:249, premium:424};
-        const origMap  = {essential:249, signature:499, premium:849};
+        const priceMap = {essential:249, signature:499, premium:849};
+        const origMap  = {essential:349, signature:699, premium:1249};
         const nameMap  = {essential:'Essential Package', signature:'Signature Package', premium:'Premium Package'};
         cart[pid] = { id:pid, name:nameMap[pid], price:priceMap[pid], orig:origMap[pid], type:'package' };
         const card = document.getElementById('card-'+pid);
