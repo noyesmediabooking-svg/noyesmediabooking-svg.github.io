@@ -29,8 +29,6 @@
     overflow-x: hidden;
   }
 
-
-  /* ─── SCROLLBAR ─── */
   ::-webkit-scrollbar { width: 3px; }
   ::-webkit-scrollbar-track { background: var(--black); }
   ::-webkit-scrollbar-thumb { background: var(--gold); }
@@ -48,11 +46,7 @@
     border-bottom: 1px solid rgba(201,168,76,0.15);
     padding: 1rem 4rem;
   }
-  .nav-logo {
-    font-family: 'Cormorant Garamond', serif;
-    font-size: 1.6rem; font-weight: 300; letter-spacing: 0.15em;
-    color: var(--white); text-decoration: none;
-  }
+  .nav-logo { font-family: 'Cormorant Garamond', serif; font-size: 1.6rem; font-weight: 300; letter-spacing: 0.15em; color: var(--white); text-decoration: none; }
   .nav-logo span { color: var(--gold); }
   .nav-links { display: flex; gap: 2.5rem; list-style: none; }
   .nav-links a {
@@ -67,7 +61,7 @@
     font-size: 0.75rem; font-weight: 600; letter-spacing: 0.2em;
     text-transform: uppercase; color: var(--black);
     background: var(--gold); border: none;
-    padding: 0.6rem 1.6rem; cursor: none;
+    padding: 0.6rem 1.6rem; cursor: pointer;
     transition: background 0.3s, transform 0.2s;
     text-decoration: none;
   }
@@ -89,8 +83,7 @@
     background-size: 80px 80px;
   }
   .page-hero-accent {
-    position: absolute; top: 0; right: 0;
-    width: 40vw; height: 100%;
+    position: absolute; top: 0; right: 0; width: 40vw; height: 100%;
     background: linear-gradient(to bottom left, rgba(201,168,76,0.07), transparent 60%);
   }
   .page-hero-content { position: relative; z-index: 2; }
@@ -98,25 +91,22 @@
     font-family: 'Barlow Condensed', sans-serif;
     font-size: 0.75rem; font-weight: 500; letter-spacing: 0.35em;
     text-transform: uppercase; color: var(--gold);
-    margin-bottom: 1.5rem;
-    display: flex; align-items: center; gap: 1rem;
+    margin-bottom: 1.5rem; display: flex; align-items: center; gap: 1rem;
     opacity: 0; animation: fadeSlideUp 0.8s 0.2s forwards;
   }
   .page-eyebrow::before { content: ''; display: block; width: 40px; height: 1px; background: var(--gold); }
   .page-title {
     font-family: 'Cormorant Garamond', serif;
-    font-size: clamp(3rem, 6vw, 5rem);
-    font-weight: 300; line-height: 1.05; margin-bottom: 1rem;
+    font-size: clamp(3rem, 6vw, 5rem); font-weight: 300; line-height: 1.05; margin-bottom: 1rem;
     opacity: 0; animation: fadeSlideUp 0.8s 0.35s forwards;
   }
   .page-title em { font-style: italic; color: var(--gold); }
   .page-sub {
-    font-size: 1rem; font-weight: 300; color: var(--light-grey);
-    line-height: 1.8; max-width: 520px;
+    font-size: 1rem; font-weight: 300; color: var(--light-grey); line-height: 1.8; max-width: 520px;
     opacity: 0; animation: fadeSlideUp 0.8s 0.5s forwards;
   }
 
-  /* ─── CART BANNER (shows when cart has items) ─── */
+  /* ─── CART BANNER ─── */
   .cart-banner {
     display: none;
     background: linear-gradient(90deg, rgba(201,168,76,0.1), rgba(201,168,76,0.05));
@@ -125,15 +115,12 @@
     align-items: center; justify-content: space-between; gap: 2rem;
   }
   .cart-banner.visible { display: flex; }
-  .cart-banner-left {
-    display: flex; align-items: center; gap: 1.5rem;
-  }
+  .cart-banner-left { display: flex; align-items: center; gap: 1.5rem; }
   .cart-banner-tag {
     font-family: 'Barlow Condensed', sans-serif;
     font-size: 0.65rem; font-weight: 700; letter-spacing: 0.25em;
     text-transform: uppercase; background: var(--gold);
-    color: var(--black); padding: 0.3rem 0.8rem;
-    white-space: nowrap;
+    color: var(--black); padding: 0.3rem 0.8rem; white-space: nowrap;
   }
   .cart-banner-text {
     font-family: 'Cormorant Garamond', serif;
@@ -143,58 +130,33 @@
   .cart-banner-clear {
     font-family: 'Barlow Condensed', sans-serif;
     font-size: 0.7rem; letter-spacing: 0.15em; text-transform: uppercase;
-    color: var(--grey); background: none; border: none; cursor: none;
+    color: var(--grey); background: none; border: none; cursor: pointer;
     transition: color 0.3s; white-space: nowrap;
   }
   .cart-banner-clear:hover { color: var(--red-deal); }
 
-  /* ─── MAIN CONTACT SECTION ─── */
-  #contact {
-    padding: 6rem 5rem;
-    background: var(--black);
-  }
+  /* ─── CONTACT SECTION ─── */
+  #contact { padding: 6rem 5rem; background: var(--black); }
   .contact-grid {
     display: grid; grid-template-columns: 1fr 1.4fr;
     gap: 6rem; align-items: start; margin-top: 4rem;
   }
 
-  /* ─── LEFT: INFO ─── */
-  .contact-info h3 {
-    font-family: 'Cormorant Garamond', serif;
-    font-size: 1.8rem; font-weight: 300; margin-bottom: 2rem;
-  }
-  .contact-detail {
-    display: flex; gap: 1rem; margin-bottom: 1.5rem; align-items: flex-start;
-  }
+  /* ─── LEFT INFO ─── */
+  .contact-info h3 { font-family: 'Cormorant Garamond', serif; font-size: 1.8rem; font-weight: 300; margin-bottom: 2rem; }
+  .contact-detail { display: flex; gap: 1rem; margin-bottom: 1.5rem; align-items: flex-start; }
   .contact-detail-label {
     font-family: 'Barlow Condensed', sans-serif;
     font-size: 0.65rem; font-weight: 600; letter-spacing: 0.25em;
-    text-transform: uppercase; color: var(--gold);
-    min-width: 70px; padding-top: 2px;
+    text-transform: uppercase; color: var(--gold); min-width: 70px; padding-top: 2px;
   }
   .contact-detail-value { font-size: 0.95rem; color: var(--light-grey); line-height: 1.6; }
 
-  .founding-note {
-    margin-top: 2.5rem; padding: 1.5rem 2rem;
-    background: rgba(201,168,76,0.06); border-left: 2px solid var(--gold);
-  }
-  .founding-note p:first-child {
-    font-family: 'Cormorant Garamond', serif;
-    font-size: 1.1rem; font-style: italic; margin-bottom: 0.5rem;
-  }
-  .founding-note p:last-child { font-size: 0.8rem; color: var(--grey); }
-
-  /* ─── SELECTED SERVICES SUMMARY (on left, below info) ─── */
-  .selected-summary {
-    margin-top: 2.5rem;
-    border: 1px solid rgba(201,168,76,0.2);
-    background: var(--charcoal);
-    display: none;
-  }
+  /* Selected summary panel */
+  .selected-summary { margin-top: 2.5rem; border: 1px solid rgba(201,168,76,0.2); background: var(--charcoal); display: none; }
   .selected-summary.visible { display: block; }
   .selected-summary-header {
-    padding: 1rem 1.5rem;
-    border-bottom: 1px solid rgba(201,168,76,0.1);
+    padding: 1rem 1.5rem; border-bottom: 1px solid rgba(201,168,76,0.1);
     display: flex; justify-content: space-between; align-items: center;
   }
   .selected-summary-header h4 {
@@ -208,28 +170,19 @@
     color: var(--grey); text-decoration: none; transition: color 0.3s;
   }
   .selected-summary-edit:hover { color: var(--gold); }
-  .selected-summary-items { padding: 0.5rem 0; }
   .summary-item {
     display: flex; justify-content: space-between; align-items: center;
-    padding: 0.7rem 1.5rem;
-    border-bottom: 1px solid rgba(255,255,255,0.04);
-    animation: fadeIn 0.3s ease;
+    padding: 0.7rem 1.5rem; border-bottom: 1px solid rgba(255,255,255,0.04);
   }
   .summary-item:last-child { border-bottom: none; }
   .summary-item-name {
     font-size: 0.85rem; color: var(--light-grey);
     display: flex; align-items: center; gap: 0.7rem;
   }
-  .summary-item-name::before {
-    content: ''; display: block; width: 12px; height: 1px; background: var(--gold);
-  }
-  .summary-item-price {
-    font-family: 'Cormorant Garamond', serif;
-    font-size: 1rem; color: var(--gold);
-  }
+  .summary-item-name::before { content: ''; display: block; width: 12px; height: 1px; background: var(--gold); }
+  .summary-item-price { font-family: 'Cormorant Garamond', serif; font-size: 1rem; color: var(--gold); }
   .selected-summary-footer {
-    padding: 1rem 1.5rem;
-    border-top: 1px solid rgba(201,168,76,0.15);
+    padding: 1rem 1.5rem; border-top: 1px solid rgba(201,168,76,0.15);
     background: rgba(201,168,76,0.04);
     display: flex; justify-content: space-between; align-items: baseline;
   }
@@ -237,26 +190,19 @@
     font-family: 'Barlow Condensed', sans-serif;
     font-size: 0.7rem; letter-spacing: 0.2em; text-transform: uppercase; color: var(--grey);
   }
-  .summary-total-amount {
-    font-family: 'Cormorant Garamond', serif;
-    font-size: 1.6rem; color: var(--gold);
-  }
-  .summary-saving {
-    font-family: 'Barlow Condensed', sans-serif;
-    font-size: 0.65rem; letter-spacing: 0.1em; text-transform: uppercase;
-    color: var(--red-deal); padding: 0.5rem 1.5rem;
+  .summary-total-amount { font-family: 'Cormorant Garamond', serif; font-size: 1.6rem; color: var(--gold); }
+  .summary-note {
+    font-size: 0.72rem; color: var(--grey); padding: 0.5rem 1.5rem;
     border-top: 1px solid rgba(255,255,255,0.04);
   }
 
   /* ─── FORM ─── */
   .contact-form { display: flex; flex-direction: column; gap: 1.2rem; }
 
-  /* ─── SERVICE SELECTOR (the new smart section) ─── */
+  /* Service selector */
   .service-selector-section {
-    background: var(--charcoal);
-    border: 1px solid rgba(255,255,255,0.06);
-    padding: 1.8rem;
-    margin-bottom: 0.3rem;
+    background: var(--charcoal); border: 1px solid rgba(255,255,255,0.06);
+    padding: 1.8rem; margin-bottom: 0.3rem;
   }
   .service-selector-label {
     font-family: 'Barlow Condensed', sans-serif;
@@ -264,106 +210,56 @@
     text-transform: uppercase; color: var(--grey);
     margin-bottom: 1.2rem; display: block;
   }
-
-  /* Package picker */
-  .package-picker {
-    display: grid; grid-template-columns: repeat(3, 1fr);
-    gap: 0.6rem; margin-bottom: 1.5rem;
-  }
+  .package-picker { display: grid; grid-template-columns: repeat(2, 1fr); gap: 0.6rem; margin-bottom: 1.5rem; }
   .pkg-option {
-    border: 1px solid rgba(255,255,255,0.08);
-    padding: 1rem 0.8rem; background: var(--dark);
-    cursor: none; transition: all 0.25s;
-    position: relative; text-align: center;
+    border: 1px solid rgba(255,255,255,0.08); padding: 1rem 0.8rem; background: var(--dark);
+    cursor: pointer; transition: all 0.25s; position: relative; text-align: center;
   }
   .pkg-option:hover { border-color: rgba(201,168,76,0.3); }
-  .pkg-option.selected {
-    border-color: var(--gold);
-    background: rgba(201,168,76,0.07);
-  }
-  .pkg-option.selected::after {
-    content: '✓';
-    position: absolute; top: 0.4rem; right: 0.6rem;
-    font-size: 0.7rem; color: var(--gold);
-  }
-  .pkg-option-tier {
-    font-family: 'Barlow Condensed', sans-serif;
-    font-size: 0.6rem; letter-spacing: 0.2em; text-transform: uppercase;
-    color: var(--grey); display: block; margin-bottom: 0.3rem;
-  }
-  .pkg-option-name {
-    font-family: 'Cormorant Garamond', serif;
-    font-size: 1.05rem; display: block; margin-bottom: 0.3rem;
-  }
-  .pkg-option-price {
-    font-family: 'Barlow Condensed', sans-serif;
-    font-size: 0.75rem; color: var(--gold); letter-spacing: 0.05em;
-  }
+  .pkg-option.selected { border-color: var(--gold); background: rgba(201,168,76,0.07); }
+  .pkg-option.selected::after { content: '✓'; position: absolute; top: 0.4rem; right: 0.6rem; font-size: 0.7rem; color: var(--gold); }
+  .pkg-option-tier { font-family: 'Barlow Condensed', sans-serif; font-size: 0.6rem; letter-spacing: 0.2em; text-transform: uppercase; color: var(--grey); display: block; margin-bottom: 0.3rem; }
+  .pkg-option-name { font-family: 'Cormorant Garamond', serif; font-size: 1.05rem; display: block; margin-bottom: 0.3rem; }
+  .pkg-option-price { font-family: 'Barlow Condensed', sans-serif; font-size: 0.75rem; color: var(--gold); letter-spacing: 0.05em; }
 
-  /* Add-on toggles */
+  /* Addon toggles */
   .addons-label {
     font-family: 'Barlow Condensed', sans-serif;
     font-size: 0.65rem; font-weight: 600; letter-spacing: 0.2em;
-    text-transform: uppercase; color: var(--grey);
-    margin-bottom: 0.8rem; display: block;
+    text-transform: uppercase; color: var(--grey); margin-bottom: 0.8rem; display: block;
   }
   .addon-toggles { display: flex; flex-wrap: wrap; gap: 0.5rem; }
   .addon-toggle {
-    border: 1px solid rgba(255,255,255,0.1);
-    background: var(--dark);
+    border: 1px solid rgba(255,255,255,0.1); background: var(--dark);
     padding: 0.5rem 1rem;
     font-family: 'Barlow Condensed', sans-serif;
     font-size: 0.72rem; font-weight: 500; letter-spacing: 0.12em;
     text-transform: uppercase; color: var(--light-grey);
-    cursor: none; transition: all 0.2s;
+    cursor: pointer; transition: all 0.2s;
     display: flex; align-items: center; gap: 0.5rem;
-    position: relative;
   }
   .addon-toggle:hover { border-color: rgba(201,168,76,0.4); color: var(--white); }
-  .addon-toggle.selected {
-    border-color: var(--gold); color: var(--gold);
-    background: rgba(201,168,76,0.08);
-  }
+  .addon-toggle.selected { border-color: var(--gold); color: var(--gold); background: rgba(201,168,76,0.08); }
   .addon-toggle .addon-price-tag {
     font-size: 0.65rem; color: var(--grey);
     border-left: 1px solid rgba(255,255,255,0.1);
     padding-left: 0.5rem; margin-left: 0.2rem;
   }
   .addon-toggle.selected .addon-price-tag { color: var(--gold-light); }
+  .addon-toggle.included { border-color: rgba(201,168,76,0.15); color: var(--grey); opacity: 0.6; }
+  .addon-toggle.included::after { content: 'INCLUDED'; font-size: 0.55rem; letter-spacing: 0.15em; color: var(--gold); margin-left: 0.3rem; }
 
-  /* Included-in-package note */
-  .addon-toggle.included {
-    border-color: rgba(201,168,76,0.15);
-    color: var(--grey); opacity: 0.6;
-  }
-  .addon-toggle.included::after {
-    content: 'INCLUDED'; font-size: 0.55rem; letter-spacing: 0.15em;
-    color: var(--gold); margin-left: 0.3rem;
-  }
-
-  /* Live total in form */
+  /* Live total bar */
   .form-total-bar {
-    display: none;
-    background: rgba(201,168,76,0.06);
-    border: 1px solid rgba(201,168,76,0.2);
-    padding: 1rem 1.5rem;
-    align-items: center; justify-content: space-between;
+    display: none; background: rgba(201,168,76,0.06); border: 1px solid rgba(201,168,76,0.2);
+    padding: 1rem 1.5rem; align-items: center; justify-content: space-between;
   }
   .form-total-bar.visible { display: flex; }
-  .form-total-bar-label {
-    font-family: 'Barlow Condensed', sans-serif;
-    font-size: 0.7rem; letter-spacing: 0.2em; text-transform: uppercase; color: var(--grey);
-  }
-  .form-total-bar-amount {
-    font-family: 'Cormorant Garamond', serif;
-    font-size: 1.5rem; color: var(--gold);
-  }
-  .form-total-bar-saving {
-    font-size: 0.72rem; color: var(--red-deal);
-    font-family: 'Barlow Condensed', sans-serif; letter-spacing: 0.08em;
-  }
+  .form-total-bar-label { font-family: 'Barlow Condensed', sans-serif; font-size: 0.7rem; letter-spacing: 0.2em; text-transform: uppercase; color: var(--grey); }
+  .form-total-bar-sub { font-size: 0.72rem; color: var(--grey); margin-top: 0.2rem; }
+  .form-total-bar-amount { font-family: 'Cormorant Garamond', serif; font-size: 1.5rem; color: var(--gold); }
 
-  /* Standard form fields */
+  /* Form fields */
   .form-row { display: grid; grid-template-columns: 1fr 1fr; gap: 1rem; }
   .form-field { display: flex; flex-direction: column; gap: 0.4rem; }
   .form-field label {
@@ -375,23 +271,17 @@
     background: var(--dark); border: 1px solid rgba(255,255,255,0.08);
     color: var(--white); padding: 0.85rem 1rem;
     font-family: 'Barlow', sans-serif; font-size: 0.9rem; font-weight: 300;
-    outline: none; transition: border-color 0.3s; cursor: none;
-    -webkit-appearance: none;
+    outline: none; transition: border-color 0.3s; -webkit-appearance: none;
   }
-  .form-field input:focus, .form-field select:focus, .form-field textarea:focus {
-    border-color: rgba(201,168,76,0.5);
-  }
+  .form-field input:focus, .form-field select:focus, .form-field textarea:focus { border-color: rgba(201,168,76,0.5); }
   .form-field select option { background: var(--dark); }
   .form-field textarea { resize: vertical; min-height: 110px; }
-
   .submit-btn {
     font-family: 'Barlow Condensed', sans-serif;
     font-size: 0.8rem; font-weight: 600; letter-spacing: 0.2em;
     text-transform: uppercase; color: var(--black);
-    background: var(--gold); border: none;
-    padding: 1rem 2.5rem; cursor: none;
-    transition: all 0.3s; align-self: flex-start;
-    margin-top: 0.5rem;
+    background: var(--gold); border: none; padding: 1rem 2.5rem; cursor: pointer;
+    transition: all 0.3s; align-self: flex-start; margin-top: 0.5rem;
   }
   .submit-btn:hover { background: var(--gold-light); transform: translateY(-2px); }
 
@@ -401,47 +291,22 @@
     text-transform: uppercase; color: var(--gold);
     margin-bottom: 1.5rem; display: flex; align-items: center; gap: 1rem;
   }
-  .section-label::after {
-    content: ''; flex: 1; height: 1px;
-    background: linear-gradient(to right, rgba(201,168,76,0.4), transparent);
-    max-width: 80px;
-  }
-  .section-title {
-    font-family: 'Cormorant Garamond', serif;
-    font-size: clamp(2rem, 4vw, 3.5rem); font-weight: 300; line-height: 1.2;
-  }
+  .section-label::after { content: ''; flex: 1; height: 1px; background: linear-gradient(to right, rgba(201,168,76,0.4), transparent); max-width: 80px; }
+  .section-title { font-family: 'Cormorant Garamond', serif; font-size: clamp(2rem, 4vw, 3.5rem); font-weight: 300; line-height: 1.2; }
   .section-title em { font-style: italic; color: var(--gold); }
 
   /* ─── FOOTER ─── */
-  footer {
-    background: var(--charcoal);
-    border-top: 1px solid rgba(201,168,76,0.1);
-    padding: 4rem 5rem 2rem;
-  }
-  .footer-grid {
-    display: grid; grid-template-columns: 2fr 1fr 1fr 1fr;
-    gap: 4rem; margin-bottom: 4rem;
-  }
-  .footer-brand .brand-name {
-    font-family: 'Cormorant Garamond', serif;
-    font-size: 1.8rem; font-weight: 300; letter-spacing: 0.1em; margin-bottom: 1rem;
-  }
+  footer { background: var(--charcoal); border-top: 1px solid rgba(201,168,76,0.1); padding: 4rem 5rem 2rem; }
+  .footer-grid { display: grid; grid-template-columns: 2fr 1fr 1fr 1fr; gap: 4rem; margin-bottom: 4rem; }
+  .footer-brand .brand-name { font-family: 'Cormorant Garamond', serif; font-size: 1.8rem; font-weight: 300; letter-spacing: 0.1em; margin-bottom: 1rem; }
   .footer-brand .brand-name span { color: var(--gold); }
   .footer-brand p { font-size: 0.85rem; color: var(--grey); line-height: 1.8; max-width: 280px; }
-  .footer-col h4 {
-    font-family: 'Barlow Condensed', sans-serif;
-    font-size: 0.65rem; font-weight: 700; letter-spacing: 0.3em;
-    text-transform: uppercase; color: var(--gold); margin-bottom: 1.5rem;
-  }
+  .footer-col h4 { font-family: 'Barlow Condensed', sans-serif; font-size: 0.65rem; font-weight: 700; letter-spacing: 0.3em; text-transform: uppercase; color: var(--gold); margin-bottom: 1.5rem; }
   .footer-col ul { list-style: none; }
   .footer-col li { margin-bottom: 0.8rem; }
   .footer-col a { font-size: 0.85rem; color: var(--grey); text-decoration: none; transition: color 0.3s; }
   .footer-col a:hover { color: var(--white); }
-  .footer-bottom {
-    border-top: 1px solid rgba(255,255,255,0.05);
-    padding-top: 2rem; display: flex;
-    justify-content: space-between; align-items: center;
-  }
+  .footer-bottom { border-top: 1px solid rgba(255,255,255,0.05); padding-top: 2rem; display: flex; justify-content: space-between; align-items: center; }
   .footer-copy { font-size: 0.8rem; color: var(--grey); }
   .footer-copy span { color: var(--gold); }
   .footer-legal { display: flex; gap: 2rem; }
@@ -449,44 +314,27 @@
   .footer-legal a:hover { color: var(--white); }
 
   /* ─── ANIMATIONS ─── */
-  @keyframes fadeSlideUp {
-    from { opacity: 0; transform: translateY(30px); }
-    to { opacity: 1; transform: translateY(0); }
-  }
+  @keyframes fadeSlideUp { from { opacity: 0; transform: translateY(30px); } to { opacity: 1; transform: translateY(0); } }
   @keyframes fadeIn { from { opacity: 0; } to { opacity: 1; } }
-  .fade-in-up {
-    opacity: 0; transform: translateY(24px);
-    transition: opacity 0.7s ease, transform 0.7s ease;
-  }
+  .fade-in-up { opacity: 0; transform: translateY(24px); transition: opacity 0.7s ease, transform 0.7s ease; }
   .fade-in-up.visible { opacity: 1; transform: translateY(0); }
 
   /* ─── RESPONSIVE ─── */
-  @media (max-width: 1100px) {
-    .contact-grid { grid-template-columns: 1fr; gap: 3rem; }
-    .footer-grid { grid-template-columns: 1fr 1fr; }
-  }
+  @media (max-width: 1100px) { .contact-grid { grid-template-columns: 1fr; gap: 3rem; } .footer-grid { grid-template-columns: 1fr 1fr; } }
   @media (max-width: 768px) {
-    nav { padding: 1.2rem 1.5rem; }
-    nav.scrolled { padding: 0.8rem 1.5rem; }
-    .nav-links { display: none; }
-    .page-hero { padding: 0 1.5rem 4rem; }
-    #contact { padding: 4rem 1.5rem; }
-    .form-row { grid-template-columns: 1fr; }
-    .package-picker { grid-template-columns: 1fr; }
+    nav { padding: 1.2rem 1.5rem; } nav.scrolled { padding: 0.8rem 1.5rem; } .nav-links { display: none; }
+    .page-hero { padding: 0 1.5rem 4rem; } #contact { padding: 4rem 1.5rem; }
+    .form-row { grid-template-columns: 1fr; } .package-picker { grid-template-columns: 1fr; }
     .cart-banner { padding: 1rem 1.5rem; flex-wrap: wrap; }
-    .footer-grid { grid-template-columns: 1fr; }
-    .footer-bottom { flex-direction: column; gap: 1rem; text-align: center; }
+    .footer-grid { grid-template-columns: 1fr; } .footer-bottom { flex-direction: column; gap: 1rem; text-align: center; }
   }
 </style>
 </head>
 <body>
 
-<div id="cursor"></div>
-<div id="cursor-ring"></div>
-
 <!-- ─── NAV ─── -->
 <nav id="navbar">
-  <a href="index" class="nav-logo"><img src="/assets/Noyesmedialogo.jpg" alt="Noyes Media" height="40"></a>
+  <a href="/index" class="nav-logo"><img src="/assets/Noyesmedialogo.jpg" alt="Noyes Media" height="40"></a>
   <ul class="nav-links">
     <li><a href="/index">Home</a></li>
     <li><a href="/services">Services</a></li>
@@ -513,7 +361,7 @@
 <div class="cart-banner" id="cartBanner">
   <div class="cart-banner-left">
     <span class="cart-banner-tag">Pre-Selected</span>
-    <span class="cart-banner-text" id="cartBannerText">Your services from the <strong>Services page</strong> have been pre-filled below.</span>
+    <span class="cart-banner-text" id="cartBannerText">Your services from the <strong>Pricing page</strong> have been pre-filled below.</span>
   </div>
   <button class="cart-banner-clear" onclick="clearCart()">✕ Clear selection</button>
 </div>
@@ -528,7 +376,6 @@
     <!-- LEFT: Info + summary -->
     <div class="contact-info fade-in-up">
       <h3>Ready to make your listing stand out? Let's talk.</h3>
-
       <div class="contact-detail">
         <span class="contact-detail-label">Email</span>
         <span class="contact-detail-value">NoyesMediaBooking@gmail.com</span>
@@ -547,17 +394,17 @@
       </div>
       <div class="contact-detail">
         <span class="contact-detail-label">Turnaround</span>
-        <span class="contact-detail-value">Standard 24 hrs</span>
+        <span class="contact-detail-value">Standard 24 hrs · Rush 8 hrs (add-on)</span>
       </div>
 
       <!-- Dynamic selection summary -->
       <div class="selected-summary" id="selectedSummary">
         <div class="selected-summary-header">
           <h4>Your Current Selection</h4>
-          <a href="/services" class="selected-summary-edit">Edit on Services →</a>
+          <a href="/pricing" class="selected-summary-edit">Edit on Pricing →</a>
         </div>
-        <div class="selected-summary-items" id="summaryItems"></div>
-        <div class="summary-saving" id="summarySaving"></div>
+        <div id="summaryItems"></div>
+        <div class="summary-note" id="summaryNote"></div>
         <div class="selected-summary-footer">
           <span class="summary-total-label">Estimated Total</span>
           <span class="summary-total-amount" id="summaryTotal">$0</span>
@@ -587,55 +434,49 @@
         <input type="tel" placeholder="(289) 555-0100" id="phoneField"/>
       </div>
 
-      <!-- ─── SMART SERVICE SELECTOR ─── -->
+      <!-- ─── SERVICE SELECTOR ─── -->
       <div class="service-selector-section">
         <span class="service-selector-label">Select Your Package</span>
         <div class="package-picker" id="packagePicker">
-          <div class="pkg-option" data-pkg="essential" data-price="249" data-orig="249" onclick="selectPackage(this)">
-            <span class="pkg-option-tier">Tier One</span>
+          <!-- Packages match pricing page exactly -->
+          <div class="pkg-option" data-pkg="essential" data-price="200" onclick="selectPackage(this)">
+            <span class="pkg-option-tier">Package One</span>
             <span class="pkg-option-name">Essential</span>
-            <span class="pkg-option-price">$249 CAD</span>
+            <span class="pkg-option-price">From $200 CAD</span>
           </div>
-          <div class="pkg-option" data-pkg="signature" data-price="499" data-orig="499" onclick="selectPackage(this)">
-            <span class="pkg-option-tier">Tier Two</span>
+          <div class="pkg-option" data-pkg="signature" data-price="350" onclick="selectPackage(this)">
+            <span class="pkg-option-tier">Package Two</span>
             <span class="pkg-option-name">Signature</span>
-            <span class="pkg-option-price">$499 CAD</span>
-          </div>
-          <div class="pkg-option" data-pkg="premium" data-price="824" data-orig="849" onclick="selectPackage(this)">
-            <span class="pkg-option-tier">Tier Three</span>
-            <span class="pkg-option-name">Premium</span>
-            <span class="pkg-option-price">$824 CAD</span>
+            <span class="pkg-option-price">From $350 CAD</span>
           </div>
         </div>
 
-        <span class="addons-label">Add-On Services <span style="color:var(--grey);font-weight:300;letter-spacing:0">(tap to toggle · greyed = included in your package)</span></span>
+        <span class="addons-label">Add-On Services <span style="color:var(--grey);font-weight:300;letter-spacing:0">(tap to toggle)</span></span>
         <div class="addon-toggles" id="addonToggles">
-          <button class="addon-toggle" data-addon="drone" data-price="120" data-orig="150" onclick="toggleAddon(this)">
-            Drone Aerial <span class="addon-price-tag">$120</span>
+          <!-- IDs and prices match pricing page exactly -->
+          <button class="addon-toggle" data-addon="drone" data-price="140" onclick="toggleAddon(this)">
+            Exterior &amp; Drone <span class="addon-price-tag">$140</span>
           </button>
-          <button class="addon-toggle" data-addon="virtualtour" data-price="230" data-orig="330" onclick="toggleAddon(this)">
-            Video Walkthrough <span class="addon-price-tag">$230</span>
+          <button class="addon-toggle" data-addon="walkthrough" data-price="230" onclick="toggleAddon(this)">
+            Virtual Walkthrough <span class="addon-price-tag">$230</span>
           </button>
-          <button class="addon-toggle" data-addon="floorplan2d" data-price="75" data-orig="100" onclick="toggleAddon(this)">
-            2D Floor Plan <span class="addon-price-tag">$75</span>
+          <button class="addon-toggle" data-addon="dronevideo" data-price="220" onclick="toggleAddon(this)">
+            Cinematic Drone Video <span class="addon-price-tag">$220</span>
           </button>
-          <button class="addon-toggle" data-addon="virtualtour" data-price="60" data-orig="120" onclick="toggleAddon(this)">
-            360° Virtual Tour <span class="addon-price-tag">$60</span>
+          <button class="addon-toggle" data-addon="reel" data-price="100" onclick="toggleAddon(this)">
+            Social Media Reel <span class="addon-price-tag">$100</span>
           </button>
-          <button class="addon-toggle" data-addon="staging" data-price="0" data-orig="0" data-custom="true" onclick="toggleAddon(this)">
-            Virtual Staging <span class="addon-price-tag">Quote</span>
+          <button class="addon-toggle" data-addon="twilight" data-price="50" onclick="toggleAddon(this)">
+            Virtual Twilight <span class="addon-price-tag">$50</span>
           </button>
-          <button class="addon-toggle" data-addon="twilight" data-price="75" data-orig="150" onclick="toggleAddon(this)">
-            Twilight / Golden Hour <span class="addon-price-tag">$75</span>
+          <button class="addon-toggle" data-addon="staging" data-price="50" onclick="toggleAddon(this)">
+            Virtual Staging <span class="addon-price-tag">$50</span>
           </button>
-          <button class="addon-toggle" data-addon="rush" data-price="40" data-orig="80" onclick="toggleAddon(this)">
+          <button class="addon-toggle" data-addon="rush" data-price="100" onclick="toggleAddon(this)">
             Rush Delivery (8 hr) <span class="addon-price-tag">$100</span>
           </button>
-          <button class="addon-toggle" data-addon="reel" data-price="50" data-orig="100" onclick="toggleAddon(this)">
-            Social Reel Cut <span class="addon-price-tag">$50</span>
-          </button>
-          <button class="addon-toggle" data-addon="extraphotos" data-price="30" data-orig="60" onclick="toggleAddon(this)">
-            Extra Photos (+10) <span class="addon-price-tag">$30</span>
+          <button class="addon-toggle" data-addon="reelcut" data-price="175" onclick="toggleAddon(this)">
+            Social Reel Cut <span class="addon-price-tag">$175</span>
           </button>
         </div>
       </div>
@@ -643,19 +484,29 @@
       <!-- Live total bar -->
       <div class="form-total-bar" id="formTotalBar">
         <div>
-          <div class="form-total-bar-label">Estimated Founding Rate Total</div>
-          <div class="form-total-bar-saving" id="formSaving"></div>
+          <div class="form-total-bar-label">Estimated Total</div>
+          <div class="form-total-bar-sub" id="formTotalSub"></div>
         </div>
         <div class="form-total-bar-amount" id="formTotal">$0</div>
       </div>
 
       <div class="form-field">
         <label>Property Address / City</label>
-        <input type="text" placeholder="123 Lakeview Dr, St. Catharines"/>
+        <input type="text" id="addressField" placeholder="123 Lakeview Dr, St. Catharines"/>
+      </div>
+      <div class="form-field">
+        <label>Property Size (approximate)</label>
+        <select id="sqftField">
+          <option value="">Select approximate square footage…</option>
+          <option value="under1000">Under 1,000 sqft</option>
+          <option value="1001-2000">1,001 – 2,000 sqft</option>
+          <option value="2001-3000">2,001 – 3,000 sqft</option>
+          <option value="3000+">Over 3,000 sqft</option>
+        </select>
       </div>
       <div class="form-field">
         <label>Preferred Shoot Date</label>
-        <input type="date"/>
+        <input type="date" id="dateField"/>
       </div>
       <div class="form-field">
         <label>Additional Notes</label>
@@ -691,7 +542,6 @@
         <li><a href="/pricing">Signature Package</a></li>
         <li><a href="/pricing">Premium Package</a></li>
         <li><a href="/pricing">Add-On Services</a></li>
-        <li><a href="/pricing">Founding Rate Offer</a></li>
       </ul>
     </div>
     <div class="footer-col">
@@ -729,40 +579,39 @@ const observer = new IntersectionObserver(entries => {
 }, { threshold: 0.12 });
 document.querySelectorAll('.fade-in-up').forEach((el, i) => { el.dataset.delay = i * 100; observer.observe(el); });
 
-// ─── PACKAGE INCLUDES MAP ───
-// Which add-ons come included in each package (so we grey them out)
+// ─── PACKAGE SQFT PRICE MAP ───
+// Used to show a precise estimate when sqft is selected
+const pkgSqftPrices = {
+  essential:  { 'under1000': 200, '1001-2000': 250, '2001-3000': 300, '3000+': null },
+  signature:  { 'under1000': 350, '1001-2000': 400, '2001-3000': 450, '3000+': null }
+};
+
+// Which addons are included (and therefore hidden) in each package
 const packageIncludes = {
   essential:  [],
-  signature:  ['drone', 'floorplan2d'],
-  premium:    ['drone', 'video', 'floorplan2d', 'floorplan3d', 'virtualtour', 'twilight']
+  signature:  ['drone', 'reel']
 };
 
 // ─── STATE ───
-let selectedPackage = null;   // { el, pkg, price, orig }
-let selectedAddons  = {};     // { addonId: { el, price, orig, custom } }
+let selectedPackage = null;
+let selectedAddons  = {};
 
 // ─── PACKAGE SELECT ───
 function selectPackage(el) {
-  // Deselect previous
   document.querySelectorAll('.pkg-option').forEach(p => p.classList.remove('selected'));
   el.classList.add('selected');
   selectedPackage = {
     el,
     pkg:   el.dataset.pkg,
-    name:  el.querySelector('.pkg-option-name').textContent,
-    price: parseInt(el.dataset.price),
-    orig:  parseInt(el.dataset.orig)
+    name:  el.querySelector('.pkg-option-name').textContent + ' Package',
+    price: parseInt(el.dataset.price)
   };
 
-  // Remove any addons that are now included in this package
+  // Remove addons now included in this package
   const included = packageIncludes[selectedPackage.pkg] || [];
-  included.forEach(addonId => {
-    if (selectedAddons[addonId]) {
-      delete selectedAddons[addonId];
-    }
-  });
+  included.forEach(id => { delete selectedAddons[id]; });
 
-  // Update addon UI — mark included ones
+  // Update addon UI
   document.querySelectorAll('.addon-toggle').forEach(btn => {
     const id = btn.dataset.addon;
     if (included.includes(id)) {
@@ -781,82 +630,82 @@ function selectPackage(el) {
 // ─── ADDON TOGGLE ───
 function toggleAddon(el) {
   if (el.disabled) return;
-  const id = el.dataset.addon;
+  const id    = el.dataset.addon;
+  const price = parseInt(el.dataset.price) || 0;
+  const name  = el.childNodes[0].textContent.trim();
   if (selectedAddons[id]) {
     delete selectedAddons[id];
     el.classList.remove('selected');
   } else {
-    selectedAddons[id] = {
-      name:   el.childNodes[0].textContent.trim(),
-      price:  parseInt(el.dataset.price) || 0,
-      orig:   parseInt(el.dataset.orig) || 0,
-      custom: el.dataset.custom === 'true'
-    };
+    selectedAddons[id] = { name, price };
     el.classList.add('selected');
   }
   recalculate();
 }
 
-// ─── RECALCULATE & UPDATE UI ───
+// ─── RECALCULATE ───
 function recalculate() {
-  let total = 0, origTotal = 0;
-  const lines = [];
+  const sqft   = document.getElementById('sqftField')?.value || '';
+  const lines  = [];
+  let total    = 0;
+  let pkgNote  = '';
 
   if (selectedPackage) {
-    total     += selectedPackage.price;
-    origTotal += selectedPackage.orig;
-    lines.push({ name: selectedPackage.name + ' Package', price: selectedPackage.price, custom: false });
-  }
+    const sqftPrice = sqft ? pkgSqftPrices[selectedPackage.pkg][sqft] : null;
+    const displayPrice = sqftPrice || selectedPackage.price;
+    total += displayPrice;
+    pkgNote = sqftPrice ? '' : 'Package price shown at starting rate — final price depends on sqft.';
+    lines.push({ name: selectedPackage.name, price: displayPrice, starting: !sqftPrice });
 
-  // Included add-ons (show in summary as free)
-  if (selectedPackage) {
-    const included = packageIncludes[selectedPackage.pkg] || [];
-    included.forEach(addonId => {
-      const btn = document.querySelector(`[data-addon="${addonId}"]`);
-      if (btn) lines.push({ name: btn.childNodes[0].textContent.trim() + ' (included)', price: 0, custom: false, dim: true });
+    // Show included addons in summary
+    (packageIncludes[selectedPackage.pkg] || []).forEach(id => {
+      const btn = document.querySelector(`[data-addon="${id}"]`);
+      if (btn) lines.push({ name: btn.childNodes[0].textContent.trim() + ' (included)', price: 0, dim: true });
     });
   }
 
   Object.values(selectedAddons).forEach(a => {
-    if (!a.custom) { total += a.price; origTotal += a.orig; }
-    lines.push({ name: a.name, price: a.price, custom: a.custom, dim: false });
+    total += a.price;
+    lines.push({ name: a.name, price: a.price });
   });
 
-  const saving = origTotal - total;
-
-  // Update left-side summary
-  const summaryEl   = document.getElementById('selectedSummary');
+  // Update left summary panel
+  const summaryEl = document.getElementById('selectedSummary');
   const summaryItems = document.getElementById('summaryItems');
   const summaryTotal = document.getElementById('summaryTotal');
-  const summarySaving = document.getElementById('summarySaving');
+  const summaryNote  = document.getElementById('summaryNote');
 
   if (lines.length > 0) {
     summaryEl.classList.add('visible');
     summaryItems.innerHTML = lines.map(l => `
       <div class="summary-item">
         <span class="summary-item-name" style="${l.dim ? 'opacity:0.5' : ''}">${l.name}</span>
-        <span class="summary-item-price">${l.custom ? 'TBD' : (l.price === 0 && l.dim ? '—' : '$' + l.price)}</span>
+        <span class="summary-item-price">${l.price === 0 && l.dim ? '—' : '$' + l.price + (l.starting ? '+' : '')}</span>
       </div>`).join('');
-    summaryTotal.textContent = total > 0 ? '$' + total + ' CAD' : 'TBD';
-    summarySaving.textContent = saving > 0 ? `↓ Saving $${saving} CAD vs. regular pricing` : '';
+    summaryTotal.textContent = '$' + total + (pkgNote ? '+' : '') + ' CAD';
+    summaryNote.textContent  = pkgNote;
+    summaryNote.style.display = pkgNote ? 'block' : 'none';
   } else {
     summaryEl.classList.remove('visible');
   }
 
-  // Update live total bar in form
+  // Update live total bar
   const totalBar = document.getElementById('formTotalBar');
-  const formTotalEl = document.getElementById('formTotal');
-  const formSavingEl = document.getElementById('formSaving');
+  const formTotalEl  = document.getElementById('formTotal');
+  const formTotalSub = document.getElementById('formTotalSub');
   if (total > 0 || lines.length > 0) {
     totalBar.classList.add('visible');
-    formTotalEl.textContent = total > 0 ? '$' + total + ' CAD' : 'TBD';
-    formSavingEl.textContent = saving > 0 ? `↓ You're saving $${saving} CAD at founding rate` : '';
+    formTotalEl.textContent  = '$' + total + (pkgNote ? '+' : '') + ' CAD';
+    formTotalSub.textContent = pkgNote || '';
   } else {
     totalBar.classList.remove('visible');
   }
 }
 
-// ─── LOAD FROM SESSION STORAGE (from /services or /pricing cart) ───
+// Re-run recalculate when sqft changes so price updates live
+document.getElementById('sqftField')?.addEventListener('change', recalculate);
+
+// ─── LOAD FROM SESSION STORAGE ───
 function loadCartFromStorage() {
   let cartItems = [];
   try {
@@ -865,90 +714,27 @@ function loadCartFromStorage() {
   } catch(e) { return; }
   if (!cartItems.length) return;
 
-  // ── PRICING PAGE ITEMS: have a pricingId field ──
-  // pricingId can be: essential | signature | premium | drone | video | floorplan3d | virtualtour | twilight | rush | reel | extraphotos
-  const pricingPkgMap = {
-    essential: 'essential',
-    signature: 'signature',
-    premium:   'premium'
-  };
-  const pricingAddonMap = {
-    drone:        'drone',
-    video:        'video',
-    floorplan3d:  'floorplan3d',
-    virtualtour:  'virtualtour',
-    twilight:     'twilight',
-    rush:         'rush',
-    reel:         'reel',
-    extraphotos:  'extraphotos'
-  };
-
-  // ── SERVICES PAGE ITEMS: use id field directly ──
-  const servicesAddonMap = {
-    drone:       'drone',
-    video:       'video',
-    floorplans:  'floorplan2d',
-    virtualtour: 'virtualtour',
-    staging:     'staging'
-  };
-
-  let pkgSelected = false;
+  const packageIds = ['essential', 'signature'];
+  const addonIds   = ['drone', 'walkthrough', 'dronevideo', 'reel', 'twilight', 'staging', 'rush', 'reelcut'];
 
   cartItems.forEach(item => {
-    const pid = item.pricingId || item.id;
-
-    // Check for explicit package from pricing page
-    if (pricingPkgMap[pid]) {
-      const pkgBtn = document.querySelector(`[data-pkg="${pricingPkgMap[pid]}"]`);
-      if (pkgBtn) { selectPackage(pkgBtn); pkgSelected = true; }
-      return;
-    }
-
-    // Pricing page add-ons
-    if (pricingAddonMap[pid]) {
-      const btn = document.querySelector(`[data-addon="${pricingAddonMap[pid]}"]`);
-      if (btn && !btn.disabled && !btn.classList.contains('selected')) toggleAddon(btn);
-      return;
-    }
-
-    // Services page items — photography triggers package auto-suggest
-    if (item.id === 'photography' && !pkgSelected) {
-      const essBtn = document.querySelector('[data-pkg="essential"]');
-      if (essBtn) { selectPackage(essBtn); pkgSelected = true; }
-    }
-    const sAddonId = servicesAddonMap[item.id];
-    if (sAddonId) {
-      const btn = document.querySelector(`[data-addon="${sAddonId}"]`);
+    if (packageIds.includes(item.id)) {
+      const btn = document.querySelector(`[data-pkg="${item.id}"]`);
+      if (btn) selectPackage(btn);
+    } else if (addonIds.includes(item.id)) {
+      const btn = document.querySelector(`[data-addon="${item.id}"]`);
       if (btn && !btn.disabled && !btn.classList.contains('selected')) toggleAddon(btn);
     }
   });
 
-  // If no explicit package was set via pricingId, auto-upgrade based on services
-  if (!pkgSelected) {
-    const hasVideo = cartItems.some(i => (i.pricingId||i.id) === 'video');
-    const hasVT    = cartItems.some(i => (i.pricingId||i.id) === 'virtualtour');
-    const hasDrone = cartItems.some(i => (i.pricingId||i.id) === 'drone');
-    const hasFP    = cartItems.some(i => ['floorplans','floorplan2d','floorplan3d'].includes(i.pricingId||i.id));
-
-    if (hasVideo || hasVT) {
-      const btn = document.querySelector('[data-pkg="premium"]');
-      if (btn) selectPackage(btn);
-    } else if (hasDrone || hasFP) {
-      const btn = document.querySelector('[data-pkg="signature"]');
-      if (btn) selectPackage(btn);
-    }
-  }
-
-  // Show banner
   const banner = document.getElementById('cartBanner');
   const bannerText = document.getElementById('cartBannerText');
   banner.classList.add('visible');
-  bannerText.innerHTML = `<strong>${cartItems.length} service${cartItems.length > 1 ? 's' : ''}</strong> from your selection have been pre-filled below.`;
+  bannerText.innerHTML = `<strong>${cartItems.length} service${cartItems.length > 1 ? 's' : ''}</strong> from your pricing selection have been pre-filled below.`;
 }
 
 function clearCart() {
   try { sessionStorage.removeItem('noyesCart'); } catch(e) {}
-  // Deselect all
   document.querySelectorAll('.pkg-option').forEach(p => p.classList.remove('selected'));
   document.querySelectorAll('.addon-toggle').forEach(b => { b.classList.remove('selected', 'included'); b.disabled = false; });
   selectedPackage = null;
@@ -961,59 +747,49 @@ function clearCart() {
 async function submitForm() {
   const first = document.getElementById('firstName').value.trim();
   const email = document.getElementById('emailField').value.trim();
-  if (!first || !email) {
-    alert('Please fill in your name and email address.');
-    return;
-  }
+  if (!first || !email) { alert('Please fill in your name and email address.'); return; }
 
-  // Build submission data
-  const phone    = document.getElementById('phoneField')?.value.trim() || '';
-  const address  = document.getElementById('addressField')?.value.trim() || '';
-  const date     = document.getElementById('dateField')?.value.trim() || '';
-  const notes    = document.getElementById('notesField')?.value.trim() || '';
-  const pkgName  = selectedPackage ? selectedPackage.name : 'No package selected';
-  const addons   = Object.values(selectedAddons).map(a => a.name).join(', ') || 'None';
-  const total    = (selectedPackage ? selectedPackage.price : 0)
-                 + Object.values(selectedAddons).reduce((s,a) => s + (a.custom ? 0 : a.price), 0);
+  const phone   = document.getElementById('phoneField').value.trim();
+  const address = document.getElementById('addressField').value.trim();
+  const sqft    = document.getElementById('sqftField').value;
+  const date    = document.getElementById('dateField').value;
+  const notes   = document.getElementById('notesField').value.trim();
+  const pkgName = selectedPackage ? selectedPackage.name : 'No package selected';
+  const addons  = Object.values(selectedAddons).map(a => a.name).join(', ') || 'None';
+  const total   = selectedPackage
+    ? (pkgSqftPrices[selectedPackage.pkg][sqft] || selectedPackage.price)
+      + Object.values(selectedAddons).reduce((s, a) => s + a.price, 0)
+    : Object.values(selectedAddons).reduce((s, a) => s + a.price, 0);
 
   const btn = document.querySelector('.submit-btn');
-  btn.textContent = 'Sending…';
-  btn.disabled = true;
+  btn.textContent = 'Sending…'; btn.disabled = true;
 
   try {
-    const res = await fetch('https://formspree.io/f/mojkvdvg', {  // ← REPLACE with your endpoint
+    const res = await fetch('https://formspree.io/f/mojkvdvg', {
       method: 'POST',
       headers: { 'Content-Type': 'application/json', 'Accept': 'application/json' },
       body: JSON.stringify({
-        name:     first,
-        email:    email,
-        phone:    phone,
-        address:  address,
-        date:     date,
-        package:  pkgName,
-        addons:   addons,
-        total:    total > 0 ? '$' + total + ' CAD (founding rate)' : 'TBD',
-        notes:    notes,
+        name: first, email, phone, address,
+        sqft: sqft || 'Not specified',
+        date: date || 'Not specified',
+        package: pkgName, addons,
+        estimated_total: total > 0 ? '$' + total + ' CAD' : 'TBD',
+        notes
       })
     });
-
     if (res.ok) {
       btn.textContent = '✓ Request Sent!';
       btn.style.background = '#2a5c2a';
-      // Clear the form
-      document.getElementById('firstName').value = '';
-      document.getElementById('emailField').value = '';
-      if (phone)   document.getElementById('phoneField').value   = '';
-      if (address) document.getElementById('addressField').value = '';
-      if (date)    document.getElementById('dateField').value    = '';
-      if (notes)   document.getElementById('notesField').value   = '';
-    } else {
-      throw new Error('Form error');
-    }
-  } catch(err) {
-    btn.textContent = 'Send Request';
-    btn.disabled = false;
-    alert('Something went wrong — please email us directly at hello@noyes-media.ca');
+      ['firstName','emailField','phoneField','addressField','notesField'].forEach(id => {
+        const el = document.getElementById(id);
+        if (el) el.value = '';
+      });
+      document.getElementById('sqftField').value = '';
+      document.getElementById('dateField').value  = '';
+    } else { throw new Error(); }
+  } catch {
+    btn.textContent = 'Send Request'; btn.disabled = false;
+    alert('Something went wrong — please email us directly at NoyesMediaBooking@gmail.com');
   }
 }
 
