@@ -658,11 +658,9 @@
       <ul class="price-features">
         <li>Unlimited HDR photos</li>
         <li>Full drone aerial package (10+ shots)</li>
-        <li>2D + 3D floor plan</li>
+        <li>2D floor plan</li>
         <li>Cinematic video walkthrough</li>
-        <li>360° virtual tour (MLS embed)</li>
-        <li>Golden hour / twilight shoot</li>
-        <li>Priority 12-hour delivery</li>
+        <li>Priority delivery</li>
         <li>Unlimited revisions</li>
       </ul>
       <button class="btn-book btn-book-outline" id="btn-premium"
@@ -761,7 +759,6 @@
         <li><a href="#pricing">Signature Package</a></li>
         <li><a href="#pricing">Premium Package</a></li>
         <li><a href="#pricing">Add-On Services</a></li>
-        <li><a href="#pricing">Founding Rate Offer</a></li>
       </ul>
     </div>
     <div class="footer-col">
@@ -974,7 +971,7 @@ try {
       if (addonIds.includes(pid)) {
         const priceMap2 = {drone:75,virtualtour:60,floorplan3d:50,video:100,twilight:75,extraphotos:30,rush:40,reel:50};
         const origMap2  = {drone:150,virtualtour:120,floorplan3d:100,video:200,twilight:150,extraphotos:60,rush:80,reel:100};
-        const nameMap2  = {drone:'Drone Aerial',virtualtour:'360° Virtual Tour',floorplan3d:'3D Floor Plan',video:'Video Walkthrough',twilight:'Twilight / Golden Hour',extraphotos:'Extra Photos (+10)',rush:'Rush Delivery (6 hr)',reel:'Social Reel Cut'};
+        const nameMap2  = {drone:'Drone Aerial',virtualtour:'360° Virtual Tour',floorplan3d:'2D Floor Plan',video:'Video Walkthrough',twilight:'Twilight / Golden Hour',extraphotos:'Extra Photos (+10)',rush:'Rush Delivery (6 hr)',reel:'Social Reel Cut'};
         cart[pid] = { id:pid, name:nameMap2[pid], price:priceMap2[pid], orig:origMap2[pid], type:'addon' };
         const addonEl = document.getElementById('addon-'+pid);
         if (addonEl) {
