@@ -31,8 +31,6 @@
     overflow-x: hidden;
   }
 
-
-  /* ─── SCROLLBAR ─── */
   ::-webkit-scrollbar { width: 3px; }
   ::-webkit-scrollbar-track { background: var(--black); }
   ::-webkit-scrollbar-thumb { background: var(--gold); }
@@ -70,7 +68,7 @@
     font-size: 0.75rem; font-weight: 600; letter-spacing: 0.2em;
     text-transform: uppercase; color: var(--black);
     background: var(--gold); border: none;
-    padding: 0.6rem 1.6rem; cursor: none;
+    padding: 0.6rem 1.6rem; cursor: pointer;
     transition: background 0.3s, transform 0.2s;
     text-decoration: none; display: inline-block;
   }
@@ -85,7 +83,7 @@
     font-family: 'Barlow Condensed', sans-serif;
     font-size: 0.75rem; font-weight: 500; letter-spacing: 0.15em;
     text-transform: uppercase; color: var(--gold);
-    cursor: none; transition: all 0.3s;
+    cursor: pointer; transition: all 0.3s;
     display: flex; align-items: center; gap: 0.6rem;
   }
   .cart-btn:hover { border-color: var(--gold); background: rgba(201,168,76,0.05); }
@@ -131,7 +129,7 @@
   }
   .cart-close {
     background: none; border: none; color: var(--grey);
-    font-size: 1.5rem; cursor: none; transition: color 0.3s;
+    font-size: 1.5rem; cursor: pointer; transition: color 0.3s;
     line-height: 1;
   }
   .cart-close:hover { color: var(--white); }
@@ -151,7 +149,6 @@
     from { opacity: 0; transform: translateX(20px); }
     to { opacity: 1; transform: translateX(0); }
   }
-  .cart-item-info {}
   .cart-item-name {
     font-family: 'Barlow Condensed', sans-serif;
     font-size: 0.85rem; font-weight: 500; letter-spacing: 0.1em;
@@ -164,7 +161,7 @@
   .cart-item-price { font-size: 0.85rem; color: var(--light-grey); }
   .cart-item-remove {
     background: none; border: none; color: var(--grey);
-    cursor: none; font-size: 1rem; transition: color 0.3s;
+    cursor: pointer; font-size: 1rem; transition: color 0.3s;
     padding: 0 0.3rem;
   }
   .cart-item-remove:hover { color: var(--red-deal); }
@@ -184,13 +181,9 @@
     font-family: 'Cormorant Garamond', serif;
     font-size: 2rem; color: var(--gold);
   }
-  .cart-total-orig {
-    font-size: 0.8rem; color: var(--grey); text-decoration: line-through;
-  }
-  .cart-saving-note {
-    font-size: 0.75rem; color: var(--red-deal);
-    font-family: 'Barlow Condensed', sans-serif; letter-spacing: 0.1em;
-    margin-bottom: 1.5rem;
+  .cart-note {
+    font-size: 0.75rem; color: var(--grey);
+    line-height: 1.5; margin-bottom: 1.5rem;
   }
   .cart-checkout-btn {
     display: block; width: 100%;
@@ -198,7 +191,7 @@
     border: none; padding: 1rem;
     font-family: 'Barlow Condensed', sans-serif;
     font-size: 0.8rem; font-weight: 700; letter-spacing: 0.25em;
-    text-transform: uppercase; cursor: none;
+    text-transform: uppercase; cursor: pointer;
     transition: background 0.3s; text-decoration: none;
     text-align: center;
   }
@@ -207,7 +200,7 @@
     display: block; text-align: center; margin-top: 1rem;
     font-family: 'Barlow Condensed', sans-serif;
     font-size: 0.75rem; letter-spacing: 0.15em; text-transform: uppercase;
-    color: var(--grey); background: none; border: none; cursor: none;
+    color: var(--grey); background: none; border: none; cursor: pointer;
     transition: color 0.3s;
   }
   .cart-continue:hover { color: var(--white); }
@@ -241,14 +234,11 @@
     display: flex; align-items: center; gap: 1rem;
     opacity: 0; animation: fadeSlideUp 0.8s 0.2s forwards;
   }
-  .page-eyebrow::before {
-    content: ''; display: block; width: 40px; height: 1px; background: var(--gold);
-  }
+  .page-eyebrow::before { content: ''; display: block; width: 40px; height: 1px; background: var(--gold); }
   .page-title {
     font-family: 'Cormorant Garamond', serif;
     font-size: clamp(3rem, 6vw, 5rem);
-    font-weight: 300; line-height: 1.05;
-    margin-bottom: 1.5rem;
+    font-weight: 300; line-height: 1.05; margin-bottom: 1.5rem;
     opacity: 0; animation: fadeSlideUp 0.8s 0.35s forwards;
   }
   .page-title em { font-style: italic; color: var(--gold); }
@@ -273,8 +263,7 @@
   .section-title {
     font-family: 'Cormorant Garamond', serif;
     font-size: clamp(2rem, 4vw, 3.2rem);
-    font-weight: 300; line-height: 1.2;
-    margin-bottom: 1rem;
+    font-weight: 300; line-height: 1.2; margin-bottom: 1rem;
   }
   .section-title em { font-style: italic; color: var(--gold); }
   .section-intro {
@@ -282,15 +271,13 @@
     max-width: 600px; margin-bottom: 5rem;
   }
 
-  /* ─── SERVICE DEEP DIVES ─── */
+  /* ─── SERVICE SECTIONS ─── */
   .service-section {
     padding: 7rem 5rem;
     position: relative; overflow: hidden;
   }
   .service-section:nth-child(odd) { background: var(--charcoal); }
   .service-section:nth-child(even) { background: var(--black); }
-
-  /* Decorative number watermark */
   .service-section::before {
     content: attr(data-num);
     position: absolute; right: 4rem; top: 50%;
@@ -298,8 +285,7 @@
     font-family: 'Cormorant Garamond', serif;
     font-size: 18rem; font-weight: 300;
     color: rgba(201,168,76,0.03);
-    line-height: 1; pointer-events: none;
-    user-select: none;
+    line-height: 1; pointer-events: none; user-select: none;
   }
 
   .service-inner {
@@ -316,26 +302,12 @@
     border: 1px solid rgba(201,168,76,0.12);
     position: relative; overflow: hidden;
   }
-  .service-visual-inner {
-    position: absolute; inset: 0;
-    display: flex; align-items: center; justify-content: center;
-    flex-direction: column; gap: 1rem;
-  }
-  .service-visual svg { opacity: 0.18; }
-  .service-visual-label {
-    font-family: 'Barlow Condensed', sans-serif;
-    font-size: 0.65rem; letter-spacing: 0.3em; text-transform: uppercase;
-    color: var(--gold); opacity: 0.5;
-  }
-  /* Animated accent line on visual */
   .service-visual::after {
     content: ''; position: absolute; bottom: 0; left: 0;
     width: 0; height: 2px; background: var(--gold);
     transition: width 0.6s ease;
   }
   .service-section:hover .service-visual::after { width: 100%; }
-
-  /* Decorative grid overlay on visuals */
   .service-visual::before {
     content: ''; position: absolute; inset: 0; z-index: 1;
     background-image:
@@ -344,20 +316,17 @@
     background-size: 30px 30px;
   }
 
-  .service-content {}
   .service-badge {
     font-family: 'Barlow Condensed', sans-serif;
     font-size: 0.65rem; font-weight: 600; letter-spacing: 0.3em;
     text-transform: uppercase; color: var(--gold);
     border: 1px solid rgba(201,168,76,0.3);
-    padding: 0.3rem 0.8rem; display: inline-block;
-    margin-bottom: 1.5rem;
+    padding: 0.3rem 0.8rem; display: inline-block; margin-bottom: 1.5rem;
   }
   .service-heading {
     font-family: 'Cormorant Garamond', serif;
     font-size: clamp(1.8rem, 3vw, 2.8rem);
-    font-weight: 300; line-height: 1.15;
-    margin-bottom: 1.2rem;
+    font-weight: 300; line-height: 1.15; margin-bottom: 1.2rem;
   }
   .service-heading em { font-style: italic; color: var(--gold); }
   .service-body {
@@ -379,7 +348,7 @@
     color: var(--white); font-weight: 500; display: block; margin-bottom: 0.15rem;
   }
 
-  /* Add to cart button */
+  /* Add to cart row */
   .add-to-cart-row {
     display: flex; align-items: center; gap: 1.5rem; flex-wrap: wrap;
   }
@@ -388,11 +357,13 @@
     font-size: 0.78rem; font-weight: 600; letter-spacing: 0.2em;
     text-transform: uppercase; color: var(--black);
     background: var(--gold); border: none;
-    padding: 0.85rem 2rem; cursor: none;
+    padding: 0.85rem 2rem; cursor: pointer;
     transition: all 0.3s; display: flex; align-items: center; gap: 0.7rem;
   }
   .btn-add-cart:hover { background: var(--gold-light); transform: translateY(-2px); }
-  .btn-add-cart.added { background: #2a5c2a; color: var(--white); }
+  .btn-add-cart.added { background: #2a5c2a; color: var(--white); cursor: default; }
+  .btn-add-cart:disabled { cursor: default; }
+
   .service-price-tag {
     font-family: 'Cormorant Garamond', serif;
     font-size: 1.4rem; color: var(--gold);
@@ -402,20 +373,22 @@
     font-size: 0.7rem; color: var(--grey); letter-spacing: 0.1em;
     text-transform: uppercase; margin-left: 0.3rem;
   }
-  .service-price-orig {
-    font-size: 0.8rem; color: var(--grey); text-decoration: line-through;
-    font-family: 'Barlow', sans-serif;
+  /* "Included in packages" badge — used for floor plans */
+  .service-included-note {
+    display: inline-flex; align-items: center; gap: 0.5rem;
+    font-family: 'Barlow Condensed', sans-serif;
+    font-size: 0.68rem; letter-spacing: 0.15em; text-transform: uppercase;
+    color: var(--gold);
+    border: 1px solid rgba(201,168,76,0.3);
+    padding: 0.4rem 0.9rem;
+  }
+  .service-included-note::before {
+    content: ''; display: block; width: 12px; height: 1px; background: var(--gold);
   }
 
-  /* ─── HOW WE WORK ─── */
-  #process-overview {
-    padding: 7rem 5rem;
-    background: var(--black);
-  }
-  .process-timeline {
-    margin-top: 4rem;
-    position: relative;
-  }
+  /* ─── PROCESS ─── */
+  #process-overview { padding: 7rem 5rem; background: var(--black); }
+  .process-timeline { margin-top: 4rem; position: relative; }
   .process-timeline::before {
     content: ''; position: absolute; left: 2rem; top: 0; bottom: 0;
     width: 1px; background: linear-gradient(to bottom, transparent, rgba(201,168,76,0.3) 10%, rgba(201,168,76,0.3) 90%, transparent);
@@ -441,26 +414,18 @@
     content: ''; position: absolute; inset: -4px;
     border-radius: 50%; border: 1px solid rgba(201,168,76,0.12);
   }
-  .timeline-content {}
-  .timeline-title {
-    font-family: 'Cormorant Garamond', serif;
-    font-size: 1.4rem; margin-bottom: 0.6rem;
-  }
+  .timeline-title { font-family: 'Cormorant Garamond', serif; font-size: 1.4rem; margin-bottom: 0.6rem; }
   .timeline-desc { font-size: 0.9rem; color: var(--grey); line-height: 1.8; max-width: 600px; }
 
   /* ─── DELIVERY SPECS ─── */
-  #delivery {
-    padding: 7rem 5rem;
-    background: var(--charcoal);
-  }
+  #delivery { padding: 7rem 5rem; background: var(--charcoal); }
   .specs-grid {
     display: grid; grid-template-columns: repeat(3, 1fr);
     gap: 1.5rem; margin-top: 4rem;
   }
   .spec-card {
     background: var(--dark); border: 1px solid rgba(255,255,255,0.05);
-    padding: 2.5rem;
-    transition: border-color 0.3s;
+    padding: 2.5rem; transition: border-color 0.3s;
     position: relative; overflow: hidden;
   }
   .spec-card::before {
@@ -471,10 +436,7 @@
   .spec-card:hover::before { width: 100%; }
   .spec-card:hover { border-color: rgba(201,168,76,0.2); }
   .spec-icon { margin-bottom: 1.5rem; opacity: 0.6; }
-  .spec-name {
-    font-family: 'Cormorant Garamond', serif;
-    font-size: 1.3rem; margin-bottom: 0.8rem;
-  }
+  .spec-name { font-family: 'Cormorant Garamond', serif; font-size: 1.3rem; margin-bottom: 0.8rem; }
   .spec-desc { font-size: 0.88rem; color: var(--grey); line-height: 1.8; }
   .spec-detail {
     margin-top: 1rem;
@@ -498,24 +460,16 @@
     background-size: 60px 60px;
   }
   .cta-band-content { position: relative; z-index: 1; }
-  .cta-band h2 {
-    font-family: 'Cormorant Garamond', serif;
-    font-size: clamp(2rem, 4vw, 3.5rem);
-    font-weight: 300; margin-bottom: 1rem;
-  }
+  .cta-band h2 { font-family: 'Cormorant Garamond', serif; font-size: clamp(2rem, 4vw, 3.5rem); font-weight: 300; margin-bottom: 1rem; }
   .cta-band h2 em { font-style: italic; color: var(--gold); }
-  .cta-band p {
-    font-size: 0.95rem; color: var(--light-grey);
-    line-height: 1.8; max-width: 480px; margin: 0 auto 2.5rem;
-  }
+  .cta-band p { font-size: 0.95rem; color: var(--light-grey); line-height: 1.8; max-width: 480px; margin: 0 auto 2.5rem; }
   .cta-btns { display: flex; gap: 1.5rem; justify-content: center; flex-wrap: wrap; }
   .btn-primary {
     font-family: 'Barlow Condensed', sans-serif;
     font-size: 0.8rem; font-weight: 600; letter-spacing: 0.2em;
     text-transform: uppercase; text-decoration: none;
     color: var(--black); background: var(--gold);
-    padding: 1rem 2.5rem; transition: all 0.3s;
-    display: inline-block;
+    padding: 1rem 2.5rem; transition: all 0.3s; display: inline-block; border: none; cursor: pointer;
   }
   .btn-primary:hover { background: var(--gold-light); transform: translateY(-2px); }
   .btn-secondary {
@@ -523,46 +477,22 @@
     font-size: 0.8rem; font-weight: 500; letter-spacing: 0.2em;
     text-transform: uppercase; text-decoration: none;
     color: var(--white); border: 1px solid rgba(255,255,255,0.2);
-    padding: 1rem 2.5rem; transition: all 0.3s;
-    display: inline-block;
+    padding: 1rem 2.5rem; transition: all 0.3s; display: inline-block;
   }
   .btn-secondary:hover { border-color: var(--gold); color: var(--gold); }
 
   /* ─── FOOTER ─── */
-  footer {
-    background: var(--charcoal);
-    border-top: 1px solid rgba(201,168,76,0.1);
-    padding: 4rem 5rem 2rem;
-  }
-  .footer-grid {
-    display: grid; grid-template-columns: 2fr 1fr 1fr 1fr;
-    gap: 4rem; margin-bottom: 4rem;
-  }
-  .footer-brand .brand-name {
-    font-family: 'Cormorant Garamond', serif;
-    font-size: 1.8rem; font-weight: 300; letter-spacing: 0.1em;
-    margin-bottom: 1rem;
-  }
+  footer { background: var(--charcoal); border-top: 1px solid rgba(201,168,76,0.1); padding: 4rem 5rem 2rem; }
+  .footer-grid { display: grid; grid-template-columns: 2fr 1fr 1fr 1fr; gap: 4rem; margin-bottom: 4rem; }
+  .footer-brand .brand-name { font-family: 'Cormorant Garamond', serif; font-size: 1.8rem; font-weight: 300; letter-spacing: 0.1em; margin-bottom: 1rem; }
   .footer-brand .brand-name span { color: var(--gold); }
   .footer-brand p { font-size: 0.85rem; color: var(--grey); line-height: 1.8; max-width: 280px; }
-  .footer-col h4 {
-    font-family: 'Barlow Condensed', sans-serif;
-    font-size: 0.65rem; font-weight: 700; letter-spacing: 0.3em;
-    text-transform: uppercase; color: var(--gold);
-    margin-bottom: 1.5rem;
-  }
+  .footer-col h4 { font-family: 'Barlow Condensed', sans-serif; font-size: 0.65rem; font-weight: 700; letter-spacing: 0.3em; text-transform: uppercase; color: var(--gold); margin-bottom: 1.5rem; }
   .footer-col ul { list-style: none; }
   .footer-col li { margin-bottom: 0.8rem; }
-  .footer-col a {
-    font-size: 0.85rem; color: var(--grey); text-decoration: none;
-    transition: color 0.3s;
-  }
+  .footer-col a { font-size: 0.85rem; color: var(--grey); text-decoration: none; transition: color 0.3s; }
   .footer-col a:hover { color: var(--white); }
-  .footer-bottom {
-    border-top: 1px solid rgba(255,255,255,0.05);
-    padding-top: 2rem; display: flex;
-    justify-content: space-between; align-items: center;
-  }
+  .footer-bottom { border-top: 1px solid rgba(255,255,255,0.05); padding-top: 2rem; display: flex; justify-content: space-between; align-items: center; }
   .footer-copy { font-size: 0.8rem; color: var(--grey); }
   .footer-copy span { color: var(--gold); }
   .footer-legal { display: flex; gap: 2rem; }
@@ -570,15 +500,8 @@
   .footer-legal a:hover { color: var(--white); }
 
   /* ─── ANIMATIONS ─── */
-  @keyframes fadeSlideUp {
-    from { opacity: 0; transform: translateY(30px); }
-    to { opacity: 1; transform: translateY(0); }
-  }
-  @keyframes fadeIn { to { opacity: 1; } }
-  .fade-in-up {
-    opacity: 0; transform: translateY(24px);
-    transition: opacity 0.7s ease, transform 0.7s ease;
-  }
+  @keyframes fadeSlideUp { from { opacity: 0; transform: translateY(30px); } to { opacity: 1; transform: translateY(0); } }
+  .fade-in-up { opacity: 0; transform: translateY(24px); transition: opacity 0.7s ease, transform 0.7s ease; }
   .fade-in-up.visible { opacity: 1; transform: translateY(0); }
 
   /* ─── TOAST ─── */
@@ -591,12 +514,9 @@
     font-size: 0.8rem; letter-spacing: 0.15em; text-transform: uppercase;
     color: var(--gold); z-index: 9000;
     transition: transform 0.4s cubic-bezier(0.4,0,0.2,1);
-    display: flex; align-items: center; gap: 0.8rem;
+    pointer-events: none;
   }
   .toast.show { transform: translateX(-50%) translateY(0); }
-  .toast::before {
-    content: '✓'; color: var(--gold); font-weight: 700;
-  }
 
   /* ─── RESPONSIVE ─── */
   @media (max-width: 1100px) {
@@ -606,9 +526,7 @@
     .footer-grid { grid-template-columns: 1fr 1fr; }
   }
   @media (max-width: 768px) {
-    nav { padding: 1.2rem 1.5rem; }
-    nav.scrolled { padding: 0.8rem 1.5rem; }
-    .nav-links { display: none; }
+    nav { padding: 1.2rem 1.5rem; } nav.scrolled { padding: 0.8rem 1.5rem; } .nav-links { display: none; }
     .page-hero { padding: 0 1.5rem 5rem; min-height: 50vh; }
     .service-section { padding: 5rem 1.5rem; }
     #process-overview, #delivery { padding: 5rem 1.5rem; }
@@ -625,10 +543,6 @@
 </head>
 <body>
 
-<div id="cursor"></div>
-<div id="cursor-ring"></div>
-
-<!-- Toast notification -->
 <div class="toast" id="toast"></div>
 
 <!-- ─── CART OVERLAY & DRAWER ─── -->
@@ -646,24 +560,18 @@
       <span class="cart-total-label">Estimated Total</span>
       <span class="cart-total-amount" id="cartTotal">$0</span>
     </div>
-    <div class="cart-total-row">
-      <span class="cart-total-label">Regular Price</span>
-      <span class="cart-total-orig" id="cartOrig">$0</span>
-    </div>
-    <p class="cart-saving-note" id="cartSaving"></p>
-    <a href="/contact" class="cart-checkout-btn" id="cartCheckout" onclick="saveCartToStorage()">
-      Book These Services →
-    </a>
+    <p class="cart-note" id="cartNote"></p>
+    <a href="/contact" class="cart-checkout-btn" onclick="saveCartToStorage()">Book These Services →</a>
     <button class="cart-continue" onclick="closeCart()">Continue browsing</button>
   </div>
 </div>
 
 <!-- ─── NAV ─── -->
 <nav id="navbar">
-  <a href="index" class="nav-logo"><img src="/assets/Noyesmedialogo.jpg" alt="Noyes Media" height="40"></a>
+  <a href="/index" class="nav-logo"><img src="/assets/Noyesmedialogo.jpg" alt="Noyes Media" height="40"></a>
   <ul class="nav-links">
     <li><a href="/index">Home</a></li>
-    <li><a href="/services">Services</a></li>
+    <li><a href="/services" class="active">Services</a></li>
     <li><a href="/pricing">Pricing</a></li>
     <li><a href="/gallery">Gallery</a></li>
     <li><a href="/socials">Socials</a></li>
@@ -693,13 +601,15 @@
   </div>
 </div>
 
-<!-- ─── PHOTOGRAPHY ─── -->
+<!-- ══════════════════════════════════════
+     SERVICE 01 — PHOTOGRAPHY
+     Price: From $200 CAD (included in both packages)
+     Cart ID: photography
+══════════════════════════════════════ -->
 <section class="service-section" id="photography" data-num="01">
   <div class="service-inner fade-in-up">
     <div class="service-visual">
-      <img src="assets/temphotos/housetemp.jpg" 
-  alt="Real Estate Photography by Noyes-Media"
-  style="width:100%; height:100%; object-fit:cover; display:block;"/>
+      <img src="assets/temphotos/housetemp.jpg" alt="Real Estate Photography by Noyes-Media" style="width:100%;height:100%;object-fit:cover;display:block;"/>
     </div>
     <div class="service-content">
       <span class="service-badge">Service 01</span>
@@ -712,15 +622,16 @@
         <li><div><strong>HDR Bracketed Exposure</strong>3 exposures blended per shot for balanced highlights and shadows throughout</div></li>
         <li><div><strong>Professional Editing</strong>Colour grade, white balance correction, lens distortion removal, and vertical line straightening</div></li>
         <li><div><strong>Sky Replacement</strong>Overcast or flat skies replaced with natural blue skies when conditions aren't ideal</div></li>
-        <li><div><strong>MLS & Social Export</strong>Delivered in both high-resolution and MLS-optimized sizes, ready to upload</div></li>
+        <li><div><strong>MLS &amp; Social Export</strong>Delivered in both high-resolution and MLS-optimized sizes, ready to upload</div></li>
         <li><div><strong>24-Hour Turnaround</strong>Standard delivery the next business day so your listing goes live fast</div></li>
       </ul>
       <div class="add-to-cart-row">
         <div>
-          <div class="service-price-orig">Regular from $300</div>
-          <div class="service-price-tag">From $150 <small>CAD ·</small></div>
+          <div class="service-price-tag">From $200 <small>CAD</small></div>
         </div>
-        <button class="btn-add-cart" onclick="addToCart('photography', 'Real Estate Photography', 124, 249)">
+        <!-- photography maps to Essential package on the contact page -->
+        <button class="btn-add-cart" id="btn-photography"
+          onclick="addToCart('photography', 'Real Estate Photography', 200)">
           <svg width="14" height="14" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><path d="M12 5v14M5 12h14"/></svg>
           Add to Selection
         </button>
@@ -729,14 +640,15 @@
   </div>
 </section>
 
-<!-- ─── DRONE / AERIAL ─── -->
+<!-- ══════════════════════════════════════
+     SERVICE 02 — DRONE
+     Price: $140 CAD (matches pricing page addon)
+     Cart ID: drone
+══════════════════════════════════════ -->
 <section class="service-section" id="drone" data-num="02">
   <div class="service-inner reverse fade-in-up">
     <div class="service-visual">
-      <img src="assets/temphotos/droneshottemp.webp" 
-  alt="Real Estate Photography by Noyes-Media"
-  style="width:100%; height:100%; object-fit:cover; display:block;"/>
-    </div>
+      <img src="assets/temphotos/droneshottemp.webp" alt="Drone Aerial Photography by Noyes-Media" style="width:100%;height:100%;object-fit:cover;display:block;"/>
     </div>
     <div class="service-content">
       <span class="service-badge">Service 02</span>
@@ -746,17 +658,17 @@
         <p>Every flight is planned around optimal light conditions and weather windows to ensure the cleanest, most impactful shots possible.</p>
       </div>
       <ul class="service-bullets">
-        <li><div><strong>Drone operations</strong>compliant, safe, and professional</div></li>
+        <li><div><strong>Drone Operations</strong>Compliant, safe, and professional</div></li>
         <li><div><strong>Multiple Angles</strong>5–10+ aerial perspectives including overhead, diagonal, and low-angle approaches</div></li>
         <li><div><strong>Neighbourhood Context</strong>Capture proximity to parks, water, schools, and key landmarks</div></li>
         <li><div><strong>High Resolution Delivery</strong>Full-resolution files suitable for print, signage, and digital marketing</div></li>
       </ul>
       <div class="add-to-cart-row">
         <div>
-          <div class="service-price-orig">Regular $150 add-on / $249+ package</div>
-          <div class="service-price-tag">From $120 <small>CAD ·</small></div>
+          <div class="service-price-tag">$140 <small>CAD · Add-on</small></div>
         </div>
-        <button class="btn-add-cart" onclick="addToCart('drone', 'Drone Aerial Photography', 75, 150)">
+        <button class="btn-add-cart" id="btn-drone"
+          onclick="addToCart('drone', 'Exterior &amp; Drone', 140)">
           <svg width="14" height="14" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><path d="M12 5v14M5 12h14"/></svg>
           Add to Selection
         </button>
@@ -765,14 +677,15 @@
   </div>
 </section>
 
-<!-- ─── VIDEO WALKTHROUGH ─── -->
+<!-- ══════════════════════════════════════
+     SERVICE 03 — VIDEO WALKTHROUGH
+     Price: $230 CAD (matches pricing page addon)
+     Cart ID: walkthrough
+══════════════════════════════════════ -->
 <section class="service-section" id="video" data-num="03">
   <div class="service-inner fade-in-up">
     <div class="service-visual">
-      <img src="assets/temphotos/housetourtemp.gif" 
-  alt="Real Estate Photography by Noyes-Media"
-  style="width:100%; height:100%; object-fit:cover; display:block;"/>
-    </div>
+      <img src="assets/temphotos/housetourtemp.gif" alt="Cinematic Video Walkthrough by Noyes-Media" style="width:100%;height:100%;object-fit:cover;display:block;"/>
     </div>
     <div class="service-content">
       <span class="service-badge">Service 03</span>
@@ -785,15 +698,15 @@
         <li><div><strong>Gimbal-Stabilized Footage</strong>Smooth, professional camera movement throughout every room and transition</div></li>
         <li><div><strong>Cinematic Colour Grade</strong>Custom grade applied for warm, inviting tones that make every space feel aspirational</div></li>
         <li><div><strong>MLS Embed Ready</strong>Delivered as an MP4 and hosted link compatible with all major MLS platforms</div></li>
-        <li><div><strong>Social Reel Cut</strong>Optional 30–60 second vertical cut for Instagram Reels and TikTok (add-on)</div></li>
+        <li><div><strong>Social Reel Cut</strong>Optional 30–60 second vertical cut for Instagram Reels and TikTok — see add-ons</div></li>
         <li><div><strong>Music</strong>Royalty-free background score included — no copyright issues on any platform</div></li>
       </ul>
       <div class="add-to-cart-row">
         <div>
-          <div class="service-price-orig">Regular $460</div>
-          <div class="service-price-tag">$230 <small>CAD ·</small></div>
+          <div class="service-price-tag">$230 <small>CAD · Add-on</small></div>
         </div>
-        <button class="btn-add-cart" onclick="addToCart('video', 'Cinematic Video Walkthrough', 100, 200)">
+        <button class="btn-add-cart" id="btn-walkthrough"
+          onclick="addToCart('walkthrough', 'Virtual Walkthrough', 230)">
           <svg width="14" height="14" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><path d="M12 5v14M5 12h14"/></svg>
           Add to Selection
         </button>
@@ -802,14 +715,15 @@
   </div>
 </section>
 
-<!-- ─── FLOOR PLANS ─── -->
+<!-- ══════════════════════════════════════
+     SERVICE 04 — FLOOR PLANS
+     Included in both packages — no standalone price shown
+     No cart button
+══════════════════════════════════════ -->
 <section class="service-section" id="floorplans" data-num="04">
   <div class="service-inner reverse fade-in-up">
     <div class="service-visual">
-      <img src="assets/temphotos/floorplantemp.jpg" 
-  alt="Real Estate Photography by Noyes-Media"
-  style="width:100%; height:100%; object-fit:cover; display:block;"/>
-    </div>
+      <img src="assets/temphotos/floorplantemp.jpg" alt="2D Floor Plans by Noyes-Media" style="width:100%;height:100%;object-fit:cover;display:block;"/>
     </div>
     <div class="service-content">
       <span class="service-badge">Service 04</span>
@@ -821,32 +735,26 @@
       <ul class="service-bullets">
         <li><div><strong>On-Site Measurement</strong>Accurate room-by-room measurement completed during your photo shoot — no extra visit needed</div></li>
         <li><div><strong>2D Schematic Plan</strong>Clean, labelled floor plan showing room names and dimensions — standard for MLS</div></li>
-        <li><div><strong>Rendered Plan</strong>Bird's-eye  view that makes layouts intuitive and visually appealing for buyers</div></li>
+        <li><div><strong>Rendered Plan</strong>Bird's-eye view that makes layouts intuitive and visually appealing for buyers</div></li>
         <li><div><strong>Branded Files</strong>Optional agent/brokerage branding applied to all floor plan deliverables</div></li>
         <li><div><strong>Multiple Floors</strong>Multi-storey properties handled — all levels measured and mapped</div></li>
       </ul>
       <div class="add-to-cart-row">
-        <div>
-          <div class="service-price-orig">Regular from $150</div>
-          <div class="service-price-tag">From $75 <small>CAD ·</small></div>
-        </div>
-        <button class="btn-add-cart" onclick="addToCart('floorplans', '2D  Floor Plans', 50, 100)">
-          <svg width="14" height="14" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><path d="M12 5v14M5 12h14"/></svg>
-          Add to Selection
-        </button>
+        <span class="service-included-note">Included in all packages — see <a href="/pricing" style="color:var(--gold);text-decoration:underline;text-underline-offset:3px;">Pricing</a></span>
       </div>
     </div>
   </div>
 </section>
 
-<!-- ─── VIRTUAL STAGING ─── -->
+<!-- ══════════════════════════════════════
+     SERVICE 05 — VIRTUAL STAGING
+     Price: $50 CAD (matches pricing page addon)
+     Cart ID: staging
+══════════════════════════════════════ -->
 <section class="service-section" id="staging" data-num="05">
   <div class="service-inner fade-in-up">
     <div class="service-visual">
-      <img src="assets/temphotos/stagingtemp.gif" 
-  alt="Real Estate Photography by Noyes-Media"
-  style="width:100%; height:100%; object-fit:cover; display:block;"/>
-    </div>
+      <img src="assets/temphotos/stagingtemp.gif" alt="Virtual Staging by Noyes-Media" style="width:100%;height:100%;object-fit:cover;display:block;"/>
     </div>
     <div class="service-content">
       <span class="service-badge">Service 05</span>
@@ -864,10 +772,10 @@
       </ul>
       <div class="add-to-cart-row">
         <div>
-          <div class="service-price-orig">Inquire for pricing</div>
-          <div class="service-price-tag">Custom Quote <small>CAD · </small></div>
+          <div class="service-price-tag">$50 <small>CAD · Add-on</small></div>
         </div>
-        <button class="btn-add-cart" onclick="addToCart('staging', 'Virtual Staging', 0, 0, true)">
+        <button class="btn-add-cart" id="btn-staging"
+          onclick="addToCart('staging', 'Virtual Staging', 50)">
           <svg width="14" height="14" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><path d="M12 5v14M5 12h14"/></svg>
           Add to Selection
         </button>
@@ -876,18 +784,16 @@
   </div>
 </section>
 
-
 <!-- ─── HOW WE WORK ─── -->
 <section id="process-overview">
   <p class="section-label">Our Approach</p>
   <h2 class="section-title">How Every<br><em>Shoot Works</em></h2>
   <p class="section-intro">A streamlined process designed around your schedule and your listing timeline. No complexity, no chasing — just results delivered fast.</p>
-
   <div class="process-timeline">
     <div class="timeline-step fade-in-up">
       <div class="timeline-dot">01</div>
       <div class="timeline-content">
-        <h3 class="timeline-title">Book & Brief</h3>
+        <h3 class="timeline-title">Book &amp; Brief</h3>
         <p class="timeline-desc">Select your services and submit your booking through our contact form. We'll confirm availability, discuss any specific features of the property you want highlighted, and lock in a shoot time that works around showings and sellers.</p>
       </div>
     </div>
@@ -901,15 +807,15 @@
     <div class="timeline-step fade-in-up">
       <div class="timeline-dot">03</div>
       <div class="timeline-content">
-        <h3 class="timeline-title">Edit & Deliver</h3>
+        <h3 class="timeline-title">Edit &amp; Deliver</h3>
         <p class="timeline-desc">Post-processing begins same-day. Standard delivery is within 24 hours. Rush 8-hour delivery available as an add-on. You'll receive a private online gallery with all files organized, labelled, and ready to download in every format you need.</p>
       </div>
     </div>
     <div class="timeline-step fade-in-up">
       <div class="timeline-dot">04</div>
       <div class="timeline-content">
-        <h3 class="timeline-title">Revisions & Support</h3>
-        <p class="timeline-desc">Not satisfied with a shot? We'll fix it. Premium package clients get unlimited revisions. All packages include one round of edit revisions. We're not done until you're confident your listing is presented at its absolute best.</p>
+        <h3 class="timeline-title">Revisions &amp; Support</h3>
+        <p class="timeline-desc">Not satisfied with a shot? We'll fix it. All packages include one round of edit revisions. We're not done until you're confident your listing is presented at its absolute best.</p>
       </div>
     </div>
   </div>
@@ -920,64 +826,39 @@
   <p class="section-label">Delivery Standards</p>
   <h2 class="section-title">What You <em>Receive</em></h2>
   <p class="section-intro">Every deliverable is organized, labelled, and formatted for immediate use — no technical headaches on your end.</p>
-
   <div class="specs-grid">
     <div class="spec-card fade-in-up">
-      <div class="spec-icon">
-        <svg width="32" height="32" viewBox="0 0 24 24" fill="none" stroke="#c9a84c" stroke-width="1.2">
-          <rect x="2" y="3" width="20" height="14" rx="1"/><path d="M8 21h8M12 17v4"/>
-        </svg>
-      </div>
+      <div class="spec-icon"><svg width="32" height="32" viewBox="0 0 24 24" fill="none" stroke="#c9a84c" stroke-width="1.2"><rect x="2" y="3" width="20" height="14" rx="1"/><path d="M8 21h8M12 17v4"/></svg></div>
       <h3 class="spec-name">Private Online Gallery</h3>
       <p class="spec-desc">Every delivery includes a private, password-protected gallery link. Browse, select favourites, and download in any size — organized by room and file type.</p>
       <p class="spec-detail">Hosted · 90-day access · Instant download</p>
     </div>
     <div class="spec-card fade-in-up">
-      <div class="spec-icon">
-        <svg width="32" height="32" viewBox="0 0 24 24" fill="none" stroke="#c9a84c" stroke-width="1.2">
-          <path d="M21 15v4a2 2 0 01-2 2H5a2 2 0 01-2-2v-4"/><polyline points="7 10 12 15 17 10"/><line x1="12" y1="15" x2="12" y2="3"/>
-        </svg>
-      </div>
+      <div class="spec-icon"><svg width="32" height="32" viewBox="0 0 24 24" fill="none" stroke="#c9a84c" stroke-width="1.2"><path d="M21 15v4a2 2 0 01-2 2H5a2 2 0 01-2-2v-4"/><polyline points="7 10 12 15 17 10"/><line x1="12" y1="15" x2="12" y2="3"/></svg></div>
       <h3 class="spec-name">Multiple Export Formats</h3>
       <p class="spec-desc">Photos delivered in full-resolution JPEG for print/signage and compressed web versions optimized for MLS upload limits and fast loading on listings.</p>
       <p class="spec-detail">Print-ready · MLS-optimized · Social-ready</p>
     </div>
     <div class="spec-card fade-in-up">
-      <div class="spec-icon">
-        <svg width="32" height="32" viewBox="0 0 24 24" fill="none" stroke="#c9a84c" stroke-width="1.2">
-          <circle cx="12" cy="12" r="10"/><polyline points="12 6 12 12 16 14"/>
-        </svg>
-      </div>
+      <div class="spec-icon"><svg width="32" height="32" viewBox="0 0 24 24" fill="none" stroke="#c9a84c" stroke-width="1.2"><circle cx="12" cy="12" r="10"/><polyline points="12 6 12 12 16 14"/></svg></div>
       <h3 class="spec-name">24-Hour Standard Turnaround</h3>
-      <p class="spec-desc">Photos and floor plans delivered within 24 hours of the shoot. Video within 48 hours. Rush 6-hour delivery available for same-day listing needs.</p>
-      <p class="spec-detail">Standard: 24 hr · Rush: 6 hr (add-on)</p>
+      <p class="spec-desc">Photos and floor plans delivered within 24 hours of the shoot. Video within 48 hours. Rush 8-hour delivery available as an add-on for same-day listing needs.</p>
+      <p class="spec-detail">Standard: 24 hr · Rush: 8 hr (add-on · $100)</p>
     </div>
     <div class="spec-card fade-in-up">
-      <div class="spec-icon">
-        <svg width="32" height="32" viewBox="0 0 24 24" fill="none" stroke="#c9a84c" stroke-width="1.2">
-          <path d="M14 2H6a2 2 0 00-2 2v16a2 2 0 002 2h12a2 2 0 002-2V8z"/><polyline points="14 2 14 8 20 8"/><line x1="12" y1="18" x2="12" y2="12"/><line x1="9" y1="15" x2="15" y2="15"/>
-        </svg>
-      </div>
+      <div class="spec-icon"><svg width="32" height="32" viewBox="0 0 24 24" fill="none" stroke="#c9a84c" stroke-width="1.2"><path d="M14 2H6a2 2 0 00-2 2v16a2 2 0 002 2h12a2 2 0 002-2V8z"/><polyline points="14 2 14 8 20 8"/><line x1="12" y1="18" x2="12" y2="12"/><line x1="9" y1="15" x2="15" y2="15"/></svg></div>
       <h3 class="spec-name">Full Licensing Included</h3>
       <p class="spec-desc">All delivered media is fully licensed for use in your listing, brokerage materials, social media, print marketing, and personal portfolio — no restrictions.</p>
       <p class="spec-detail">MLS · Social · Print · Brokerage use</p>
     </div>
     <div class="spec-card fade-in-up">
-      <div class="spec-icon">
-        <svg width="32" height="32" viewBox="0 0 24 24" fill="none" stroke="#c9a84c" stroke-width="1.2">
-          <path d="M11 4H4a2 2 0 00-2 2v14a2 2 0 002 2h14a2 2 0 002-2v-7"/><path d="M18.5 2.5a2.121 2.121 0 013 3L12 15l-4 1 1-4 9.5-9.5z"/>
-        </svg>
-      </div>
+      <div class="spec-icon"><svg width="32" height="32" viewBox="0 0 24 24" fill="none" stroke="#c9a84c" stroke-width="1.2"><path d="M11 4H4a2 2 0 00-2 2v14a2 2 0 002 2h14a2 2 0 002-2v-7"/><path d="M18.5 2.5a2.121 2.121 0 013 3L12 15l-4 1 1-4 9.5-9.5z"/></svg></div>
       <h3 class="spec-name">Revisions Included</h3>
       <p class="spec-desc">One round of edit revisions included with every package. Not happy with a shot's colour, crop, or sky? We'll re-edit to your specifications at no extra cost.</p>
-      <p class="spec-detail">1 revision round · Unlimited on Premium</p>
+      <p class="spec-detail">1 revision round included with all packages</p>
     </div>
     <div class="spec-card fade-in-up">
-      <div class="spec-icon">
-        <svg width="32" height="32" viewBox="0 0 24 24" fill="none" stroke="#c9a84c" stroke-width="1.2">
-          <path d="M22 16.92v3a2 2 0 01-2.18 2 19.79 19.79 0 01-8.63-3.07 19.5 19.5 0 01-6-6 19.79 19.79 0 01-3.07-8.67A2 2 0 014.11 2h3a2 2 0 012 1.72 12.84 12.84 0 00.7 2.81 2 2 0 01-.45 2.11L8.09 9.91a16 16 0 006 6l1.27-1.27a2 2 0 012.11-.45 12.84 12.84 0 002.81.7A2 2 0 0122 16.92z"/>
-        </svg>
-      </div>
+      <div class="spec-icon"><svg width="32" height="32" viewBox="0 0 24 24" fill="none" stroke="#c9a84c" stroke-width="1.2"><path d="M22 16.92v3a2 2 0 01-2.18 2 19.79 19.79 0 01-8.63-3.07 19.5 19.5 0 01-6-6 19.79 19.79 0 01-3.07-8.67A2 2 0 014.11 2h3a2 2 0 012 1.72 12.84 12.84 0 00.7 2.81 2 2 0 01-.45 2.11L8.09 9.91a16 16 0 006 6l1.27-1.27a2 2 0 012.11-.45 12.84 12.84 0 002.81.7A2 2 0 0122 16.92z"/></svg></div>
       <h3 class="spec-name">Dedicated Agent Support</h3>
       <p class="spec-desc">Direct communication throughout the process. Questions, scheduling changes, or special requests — you'll always reach a real person, not a ticketing system.</p>
       <p class="spec-detail">Phone · Email · Text — always responsive</p>
@@ -989,7 +870,7 @@
 <div class="cta-band">
   <div class="cta-band-content">
     <h2>Ready to List<br>with <em>Confidence?</em></h2>
-    <p>Select the services you need above and book your shoot, or get in touch and we'll recommend the right package for your property.</p>
+    <p>Select the services you need above and book your shoot, or browse our packages to find the right fit for your property.</p>
     <div class="cta-btns">
       <button class="btn-primary" onclick="openCart()">View My Selection</button>
       <a href="/pricing" class="btn-secondary">See All Packages</a>
@@ -1012,7 +893,6 @@
         <li><a href="#video">Video Walkthrough</a></li>
         <li><a href="#floorplans">Floor Plans</a></li>
         <li><a href="#staging">Virtual Staging</a></li>
-        <li><a href="#virtualtour">360° Virtual Tour</a></li>
       </ul>
     </div>
     <div class="footer-col">
@@ -1020,7 +900,6 @@
       <ul>
         <li><a href="/pricing">Essential Package</a></li>
         <li><a href="/pricing">Signature Package</a></li>
-        <li><a href="/pricing">Premium Package</a></li>
         <li><a href="/pricing">Add-On Services</a></li>
       </ul>
     </div>
@@ -1047,19 +926,15 @@
 </footer>
 
 <script>
-
 // ─── NAV ───
 const navbar = document.getElementById('navbar');
-window.addEventListener('scroll', () => {
-  navbar.classList.toggle('scrolled', window.scrollY > 60);
-});
+window.addEventListener('scroll', () => navbar.classList.toggle('scrolled', window.scrollY > 60));
 
 // ─── SCROLL FADE ───
 const observer = new IntersectionObserver((entries) => {
-  entries.forEach((entry, i) => {
-    if (entry.isIntersecting) {
+  entries.forEach(entry => {
+    if (entry.isIntersecting)
       setTimeout(() => entry.target.classList.add('visible'), entry.target.dataset.delay || 0);
-    }
   });
 }, { threshold: 0.12 });
 document.querySelectorAll('.fade-in-up').forEach((el, i) => {
@@ -1067,26 +942,30 @@ document.querySelectorAll('.fade-in-up').forEach((el, i) => {
   observer.observe(el);
 });
 
-// ─── CART SYSTEM ───
+// ─── CART ───
+// IDs must match the canonical IDs used on pricing.html and contact.html:
+//   photography → triggers Essential package suggestion on contact page
+//   drone       → maps to addon 'drone'        ($140)
+//   walkthrough → maps to addon 'walkthrough'  ($230)
+//   staging     → maps to addon 'staging'      ($50)
+// Floor plans have no cart button — included in packages.
+
 let cart = {};
 
-function addToCart(id, name, price, origPrice, isCustom = false) {
-  const already = cart[id];
-  cart[id] = { id, name, price, origPrice, isCustom };
+function addToCart(id, name, price) {
+  cart[id] = { id, name, price };
 
-  // Update button state
-  const btns = document.querySelectorAll(`[onclick*="addToCart('${id}'"]`);
-  btns.forEach(btn => {
+  const btn = document.getElementById('btn-' + id);
+  if (btn) {
     btn.innerHTML = `<svg width="14" height="14" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><polyline points="20 6 9 17 4 12"/></svg> Added`;
     btn.classList.add('added');
     btn.disabled = true;
-  });
+  }
 
   updateCartUI();
   persistCart();
-  showToast(`${name} added to your selection`);
+  showToast(name + ' added to your selection');
 
-  // Bump cart count
   const countEl = document.getElementById('cartCount');
   countEl.classList.remove('bump');
   void countEl.offsetWidth;
@@ -1095,31 +974,29 @@ function addToCart(id, name, price, origPrice, isCustom = false) {
 
 function removeFromCart(id) {
   if (!cart[id]) return;
-  const name = cart[id].name;
   delete cart[id];
 
-  // Re-enable add button
-  const btns = document.querySelectorAll(`[onclick*="addToCart('${id}'"]`);
-  btns.forEach(btn => {
+  const btn = document.getElementById('btn-' + id);
+  if (btn) {
     btn.innerHTML = `<svg width="14" height="14" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><path d="M12 5v14M5 12h14"/></svg> Add to Selection`;
     btn.classList.remove('added');
     btn.disabled = false;
-  });
+  }
 
   updateCartUI();
   persistCart();
 }
 
 function updateCartUI() {
-  const items = Object.values(cart);
-  const countEl = document.getElementById('cartCount');
+  const items     = Object.values(cart);
+  const countEl   = document.getElementById('cartCount');
   countEl.textContent = items.length;
 
-  const cartItemsEl = document.getElementById('cartItems');
-  const cartEmptyEl = document.getElementById('cartEmpty');
+  const cartItemsEl  = document.getElementById('cartItems');
+  const cartEmptyEl  = document.getElementById('cartEmpty');
   const cartFooterEl = document.getElementById('cartFooter');
 
-  if (items.length === 0) {
+  if (!items.length) {
     cartEmptyEl.style.display = 'block';
     cartFooterEl.style.display = 'none';
     cartItemsEl.innerHTML = '';
@@ -1130,71 +1007,57 @@ function updateCartUI() {
   cartEmptyEl.style.display = 'none';
   cartFooterEl.style.display = 'block';
 
-  // Build items HTML
-  let html = '';
-  let total = 0, origTotal = 0;
+  let total = 0, html = '';
   items.forEach(item => {
     total += item.price;
-    origTotal += item.origPrice;
-    const priceDisplay = item.isCustom ? 'Custom Quote' : `$${item.price} CAD`;
     html += `
       <div class="cart-item">
-        <div class="cart-item-info">
+        <div>
           <div class="cart-item-type">Service</div>
           <div class="cart-item-name">${item.name}</div>
-          <div class="cart-item-price">${priceDisplay} · Founding Rate</div>
+          <div class="cart-item-price">$${item.price} CAD</div>
         </div>
         <button class="cart-item-remove" onclick="removeFromCart('${item.id}')" title="Remove">✕</button>
       </div>`;
   });
   cartItemsEl.innerHTML = html;
 
-  // Totals
-  const saving = origTotal - total;
-  document.getElementById('cartTotal').textContent = total > 0 ? `$${total}` : 'Custom';
-  document.getElementById('cartOrig').textContent = origTotal > 0 ? `Regular: $${origTotal}` : '';
-  document.getElementById('cartSaving').textContent = saving > 0 ? `↓ You're saving $${saving} CAD with founding rate pricing` : '';
+  document.getElementById('cartTotal').textContent = '$' + total + ' CAD';
+  document.getElementById('cartNote').textContent  =
+    'Package pricing depends on property sqft — confirmed at booking.';
 }
 
-function openCart() {
+function openCart()  {
   document.getElementById('cartDrawer').classList.add('open');
   document.getElementById('cartOverlay').classList.add('open');
   document.body.style.overflow = 'hidden';
 }
-
 function closeCart() {
   document.getElementById('cartDrawer').classList.remove('open');
   document.getElementById('cartOverlay').classList.remove('open');
   document.body.style.overflow = '';
 }
 
+// Save to sessionStorage in the format contact.html expects
 function saveCartToStorage() {
-  // Save to sessionStorage with pricingId mapping so /contact can read it correctly
-  const servicesIdToPricingId = {
-    photography: null,      // contact page handles this via package auto-suggest
+  // Map services IDs → canonical addon IDs used on contact/pricing pages
+  const idMap = {
+    photography: 'photography', // contact.html handles this → suggests Essential package
     drone:       'drone',
-    video:       'video',
-    floorplans:  'floorplan3d',
-    virtualtour: 'virtualtour',
+    walkthrough: 'walkthrough',
     staging:     'staging',
   };
   const items = Object.values(cart).map(item => ({
-    id:       item.id,
-    pricingId: servicesIdToPricingId[item.id] || null,
-    name:     item.name,
-    price:    item.price,
-    orig:     item.origPrice,
-    type:     'addon',
-    isCustom: item.isCustom || false,
+    id:   idMap[item.id] || item.id,
+    name: item.name,
+    price: item.price,
+    type: item.id === 'photography' ? 'package-suggest' : 'addon',
   }));
-  try {
-    sessionStorage.setItem('noyesCart', JSON.stringify(items));
-  } catch(e) {}
+  try { sessionStorage.setItem('noyesCart', JSON.stringify(items)); } catch(e) {}
 }
 
 function persistCart() { saveCartToStorage(); }
 
-// Toast
 function showToast(msg) {
   const t = document.getElementById('toast');
   t.textContent = '✓  ' + msg;
@@ -1202,22 +1065,21 @@ function showToast(msg) {
   setTimeout(() => t.classList.remove('show'), 2800);
 }
 
-// On load — restore cart from sessionStorage
+// ─── RESTORE STATE on back-navigation ───
 try {
   const saved = sessionStorage.getItem('noyesCart');
   if (saved) {
     const items = JSON.parse(saved);
     items.forEach(item => {
-      // Services page items have item.id matching addToCart IDs
       const id = item.id;
       if (!id) return;
-      cart[id] = { id, name: item.name, price: item.price, origPrice: item.orig, isCustom: item.isCustom || false };
-      const btns = document.querySelectorAll(`[onclick*="addToCart('${id}'"]`);
-      btns.forEach(btn => {
+      cart[id] = { id, name: item.name, price: item.price };
+      const btn = document.getElementById('btn-' + id);
+      if (btn) {
         btn.innerHTML = `<svg width="14" height="14" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><polyline points="20 6 9 17 4 12"/></svg> Added`;
         btn.classList.add('added');
         btn.disabled = true;
-      });
+      }
     });
     updateCartUI();
   }
