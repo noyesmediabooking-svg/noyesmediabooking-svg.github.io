@@ -100,7 +100,6 @@
     transition: transform 0.35s ease, opacity 0.25s ease, width 0.3s ease;
     transform-origin: center;
   }
-  /* X state */
   .nav-hamburger.open span:nth-child(1) { transform: translateY(6.5px) rotate(45deg); }
   .nav-hamburger.open span:nth-child(2) { opacity: 0; width: 0; }
   .nav-hamburger.open span:nth-child(3) { transform: translateY(-6.5px) rotate(-45deg); }
@@ -109,7 +108,7 @@
      MOBILE MENU DRAWER
   ════════════════════════════════════ */
   .mobile-menu {
-    display: none; /* shown only on mobile via media query */
+    display: none;
     position: fixed; inset: 0; z-index: 101;
     background: rgba(10,10,10,0.98);
     backdrop-filter: blur(16px);
@@ -119,10 +118,7 @@
     transition: transform 0.4s cubic-bezier(0.4,0,0.2,1);
     padding: 6rem 2rem 4rem;
   }
-  .mobile-menu.open {
-    transform: translateX(0);
-  }
-  /* Gold grid overlay on mobile menu */
+  .mobile-menu.open { transform: translateX(0); }
   .mobile-menu::before {
     content: '';
     position: absolute; inset: 0; pointer-events: none;
@@ -147,7 +143,6 @@
   }
   .mobile-menu-links li:first-child { border-top: 1px solid rgba(201,168,76,0.1); }
   .mobile-menu.open .mobile-menu-links li { opacity: 1; transform: translateY(0); }
-  /* Staggered entry delays */
   .mobile-menu.open .mobile-menu-links li:nth-child(1) { transition-delay: 0.08s; }
   .mobile-menu.open .mobile-menu-links li:nth-child(2) { transition-delay: 0.14s; }
   .mobile-menu.open .mobile-menu-links li:nth-child(3) { transition-delay: 0.20s; }
@@ -179,7 +174,6 @@
     font-family: 'Barlow Condensed', sans-serif;
     font-size: 0.85rem; font-weight: 700; letter-spacing: 0.25em;
     text-transform: uppercase; text-align: center; text-decoration: none;
-    transition: background 0.3s;
     position: relative; z-index: 1;
     opacity: 0; transform: translateY(20px);
     transition: opacity 0.3s ease 0.44s, transform 0.3s ease 0.44s, background 0.3s;
@@ -242,13 +236,17 @@
     border: 1px solid rgba(201,168,76,0.2);
     overflow: hidden; position: relative;
     display: block; text-decoration: none; color: inherit;
+    background: var(--dark);
   }
   .photo-block:nth-child(1) { grid-row: span 2; }
+
+  /* ── FIX: images get z-index: 1 so they sit above the block background ── */
   .photo-block img {
     position: absolute; inset: 0;
     width: 100%; height: 100%;
     object-fit: cover; object-position: center;
     display: block;
+    z-index: 1;
     transition: transform 0.6s ease, filter 0.4s ease;
     filter: brightness(0.75) saturate(0.9);
   }
@@ -504,25 +502,16 @@
 
   /* ════════════════════════════════════
      RESPONSIVE — MOBILE (≤768px)
-     Key changes:
-     • Hide desktop nav links & cta
-     • Show hamburger button
-     • Show mobile menu drawer
-     • Full-width hero content
-     • Stack all grids
-     • Increase tap target sizes
   ════════════════════════════════════ */
   @media (max-width: 768px) {
-    /* Nav */
     nav { padding: 0.9rem 1.4rem; }
     nav.scrolled { padding: 0.7rem 1.4rem; }
-    .nav-links { display: none; } /* hidden — replaced by mobile menu */
-    .nav-cta { display: none; }   /* hidden — CTA is in mobile menu instead */
+    .nav-links { display: none; }
+    .nav-cta { display: none; }
     .nav-hamburger { display: flex; }
     .mobile-menu { display: flex; }
 
-    /* Hero */
-    #hero { min-height: 100svh; /* use small viewport height on mobile */ }
+    #hero { min-height: 100svh; }
     .hero-content {
       padding: 0 1.4rem 6rem;
       max-width: 100%;
@@ -534,7 +523,6 @@
     .hero-photo-collage { display: none; }
     .hero-scroll { display: none; }
 
-    /* Sections */
     section { padding: 4rem 1.4rem; }
     .services-grid { grid-template-columns: 1fr; }
     .process-steps {
@@ -545,14 +533,12 @@
     .why-grid { gap: 1.5rem; }
     .why-item { padding: 1.5rem; gap: 1.2rem; }
 
-    /* Footer */
     footer { padding: 3rem 1.4rem 2rem; }
     .footer-grid { grid-template-columns: 1fr; gap: 2.5rem; }
     .footer-bottom { flex-direction: column; gap: 1rem; text-align: center; }
     .footer-legal { flex-wrap: wrap; justify-content: center; }
   }
 
-  /* Extra small phones */
   @media (max-width: 380px) {
     .hero-title { font-size: 2.2rem; }
     .btn-primary, .btn-secondary { font-size: 0.72rem; }
@@ -589,7 +575,6 @@
     <li><a href="/contact">Contact</a></li>
   </ul>
   <button class="nav-cta" onclick="window.location.href='/contact'">Book a Shoot</button>
-  <!-- Hamburger — visible on mobile only -->
   <button class="nav-hamburger" id="hamburger" onclick="toggleMenu()" aria-label="Open navigation menu" aria-expanded="false">
     <span></span>
     <span></span>
@@ -604,22 +589,20 @@
   <div class="hero-accent"></div>
   <div class="hero-accent2"></div>
 
+  <!-- Photo collage — inline gradient divs REMOVED; z-index: 1 on img handles stacking -->
   <div class="hero-photo-collage">
     <a href="/gallery" class="photo-block" aria-label="View Gallery — Drone Shoots">
-      <img src="assets/temphotos/dronestock.avif" alt="Drone Photography" onerror="this.style.display='none'"/>
-      <div style="position:absolute;inset:0;background:linear-gradient(160deg,#16200d 0%,#0a120a 100%);z-index:0;"></div>
+      <img src="assets/temphotos/dronestock.avif" alt="Drone Photography"/>
       <div class="photo-hover-overlay"><span class="photo-hover-text">View Gallery →</span></div>
       <span class="photo-label">Drone Photos</span>
     </a>
     <a href="/socials" class="photo-block" aria-label="Our Socials">
-      <img src="assets/temphotos/socialsstock.png" alt="Socials" onerror="this.style.display='none'"/>
-      <div style="position:absolute;inset:0;background:linear-gradient(160deg,#0d1420 0%,#080d16 100%);z-index:0;"></div>
+      <img src="assets/temphotos/socialsstock.png" alt="Socials"/>
       <div class="photo-hover-overlay"><span class="photo-hover-text">Our Socials →</span></div>
       <span class="photo-label">Socials</span>
     </a>
     <a href="/gallery" class="photo-block" aria-label="View Gallery — Floor Plans">
-      <img src="assets/temphotos/floorplantemp.jpg" alt="Floor Plan" onerror="this.style.display='none'"/>
-      <div style="position:absolute;inset:0;background:linear-gradient(160deg,#1a1208 0%,#0d0a04 100%);z-index:0;"></div>
+      <img src="assets/temphotos/floorplantemp.jpg" alt="Floor Plan"/>
       <div class="photo-hover-overlay"><span class="photo-hover-text">View Gallery →</span></div>
       <span class="photo-label">Floor Plan</span>
     </a>
@@ -879,8 +862,8 @@ const navbar = document.getElementById('navbar');
 window.addEventListener('scroll', () => navbar.classList.toggle('scrolled', window.scrollY > 60));
 
 // ─── HAMBURGER / MOBILE MENU ───
-const hamburger   = document.getElementById('hamburger');
-const mobileMenu  = document.getElementById('mobileMenu');
+const hamburger  = document.getElementById('hamburger');
+const mobileMenu = document.getElementById('mobileMenu');
 let menuOpen = false;
 
 function toggleMenu() {
@@ -888,7 +871,6 @@ function toggleMenu() {
   hamburger.classList.toggle('open', menuOpen);
   mobileMenu.classList.toggle('open', menuOpen);
   hamburger.setAttribute('aria-expanded', menuOpen);
-  // Prevent background scroll while menu is open
   document.body.style.overflow = menuOpen ? 'hidden' : '';
 }
 
@@ -900,7 +882,6 @@ function closeMenu() {
   document.body.style.overflow = '';
 }
 
-// Close menu on Escape key
 document.addEventListener('keydown', e => { if (e.key === 'Escape' && menuOpen) closeMenu(); });
 
 // ─── SCROLL FADE ───
