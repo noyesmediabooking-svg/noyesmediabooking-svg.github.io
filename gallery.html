@@ -18,7 +18,6 @@
     --white: #f8f5f0;
     --grey: #888;
     --light-grey: #bbb;
-    --red-deal: #c0392b;
   }
 
   *, *::before, *::after { margin: 0; padding: 0; box-sizing: border-box; }
@@ -28,8 +27,6 @@
     font-family: 'Barlow', sans-serif; font-weight: 300;
     overflow-x: hidden;
   }
-
-
 
   /* ─── SCROLLBAR ─── */
   ::-webkit-scrollbar { width: 3px; }
@@ -68,7 +65,7 @@
     font-size: 0.75rem; font-weight: 600; letter-spacing: 0.2em;
     text-transform: uppercase; color: var(--black);
     background: var(--gold); border: none;
-    padding: 0.6rem 1.6rem; cursor: none;
+    padding: 0.6rem 1.6rem; cursor: pointer;
     transition: background 0.3s, transform 0.2s;
     text-decoration: none; display: inline-block;
   }
@@ -94,7 +91,8 @@
     width: 45vw; height: 100%;
     background: linear-gradient(to bottom left, rgba(201,168,76,0.08), transparent 60%);
   }
-  /* Decorative stacked frames in hero */
+
+  /* ─── HERO FRAMES ─── */
   .hero-frames {
     position: absolute; right: 6vw; top: 50%;
     transform: translateY(-50%);
@@ -105,28 +103,29 @@
     position: absolute;
     border: 1px solid rgba(201,168,76,0.2);
     background: var(--dark);
+    overflow: hidden;
   }
-  .hero-frame:nth-child(1) { inset: 0; }
-  .hero-frame:nth-child(2) { inset: -12px -12px 12px 12px; z-index: -1; opacity: 0.5; }
-  .hero-frame:nth-child(3) { inset: -22px -22px 22px 22px; z-index: -2; opacity: 0.25; }
-  .hero-frame-inner {
+  .hero-frame:nth-child(1) { inset: 0; z-index: 1; }
+  .hero-frame:nth-child(2) { inset: -12px -12px 12px 12px; z-index: 0; opacity: 0.5; }
+  .hero-frame:nth-child(3) { inset: -22px -22px 22px 22px; z-index: -1; opacity: 0.25; }
+
+  /* Image fills the frame completely */
+  .hero-frame img {
     position: absolute; inset: 0;
-    display: flex; align-items: center; justify-content: center; flex-direction: column; gap: 1rem;
+    width: 100%; height: 100%;
+    object-fit: cover;
+    display: block;
   }
-  .hero-frame-inner svg { opacity: 0.15; }
-  .hero-frame-label {
-    font-family: 'Barlow Condensed', sans-serif;
-    font-size: 0.6rem; letter-spacing: 0.3em; text-transform: uppercase;
-    color: var(--gold); opacity: 0.4;
-  }
-  /* Scanline overlay */
+
+  /* Scanline overlay on top of image */
   .hero-frame:nth-child(1)::after {
     content: '';
-    position: absolute; inset: 0;
+    position: absolute; inset: 0; z-index: 2;
     background: repeating-linear-gradient(
       0deg, transparent, transparent 3px,
       rgba(201,168,76,0.015) 3px, rgba(201,168,76,0.015) 4px
     );
+    pointer-events: none;
   }
 
   .page-hero-content { position: relative; z-index: 2; max-width: 55%; }
@@ -169,7 +168,7 @@
     font-size: 0.72rem; font-weight: 500; letter-spacing: 0.2em;
     text-transform: uppercase; color: var(--grey);
     padding: 1.1rem 1.8rem;
-    background: none; border: none; cursor: none;
+    background: none; border: none; cursor: pointer;
     border-bottom: 2px solid transparent;
     transition: color 0.3s, border-color 0.3s;
     white-space: nowrap; flex-shrink: 0;
@@ -184,9 +183,7 @@
   }
 
   /* ─── GALLERY SECTION ─── */
-  .gallery-section {
-    padding: 6rem 5rem;
-  }
+  .gallery-section { padding: 6rem 5rem; }
   .gallery-section:nth-child(odd)  { background: var(--black); }
   .gallery-section:nth-child(even) { background: var(--charcoal); }
 
@@ -194,7 +191,6 @@
     display: flex; align-items: flex-end; justify-content: space-between;
     margin-bottom: 3.5rem; gap: 2rem;
   }
-  .section-header-left {}
   .section-eyebrow {
     font-family: 'Barlow Condensed', sans-serif;
     font-size: 0.7rem; font-weight: 500; letter-spacing: 0.4em;
@@ -218,21 +214,15 @@
     line-height: 1.8; max-width: 320px; text-align: right;
   }
 
-  /* ─── PHOTO GRID LAYOUTS ─── */
-  /* Each section uses a different grid for variety */
-
-  /* Layout A: Large featured + 3 grid (Photography) */
+  /* ─── GRID LAYOUTS ─── */
   .grid-a {
     display: grid;
     grid-template-columns: 1.6fr 1fr 1fr;
     grid-template-rows: auto auto;
     gap: 6px;
   }
-  .grid-a .photo-slot:first-child {
-    grid-row: span 2;
-  }
+  .grid-a .photo-slot:first-child { grid-row: span 2; }
 
-  /* Layout B: Cinematic widescreen row + 2 below (Video) */
   .grid-b {
     display: grid;
     grid-template-columns: 1fr 1fr 1fr;
@@ -244,7 +234,6 @@
     aspect-ratio: 21/7 !important;
   }
 
-  /* Layout C: Masonry-ish asymmetric (Drone) */
   .grid-c {
     display: grid;
     grid-template-columns: 1fr 1fr 1fr 1fr;
@@ -254,14 +243,12 @@
   .grid-c .photo-slot:nth-child(1) { grid-column: span 2; }
   .grid-c .photo-slot:nth-child(4) { grid-column: span 2; }
 
-  /* Layout D: Equal 3-col (Floor Plans) */
   .grid-d {
     display: grid;
     grid-template-columns: repeat(3, 1fr);
     gap: 6px;
   }
 
-  /* Layout E: 2 large side by side (Virtual Staging) */
   .grid-e {
     display: grid;
     grid-template-columns: 1fr 1fr;
@@ -270,40 +257,32 @@
   }
   .grid-e .photo-slot:nth-child(3) { grid-column: span 2; aspect-ratio: 21/7 !important; }
 
-  /* Layout F: 4-col tight grid (Virtual Tour) */
-  .grid-f {
-    display: grid;
-    grid-template-columns: repeat(4, 1fr);
-    gap: 6px;
-  }
-
-  /* ─── PHOTO SLOT (placeholder) ─── */
+  /* ─── PHOTO SLOT ─── */
   .photo-slot {
     position: relative; overflow: hidden;
     aspect-ratio: 4/3;
     background: var(--dark);
     border: 1px solid rgba(201,168,76,0.08);
     transition: border-color 0.4s;
+    cursor: pointer;
   }
   .photo-slot:hover { border-color: rgba(201,168,76,0.3); }
 
-  /* Real image (swap placeholder for this) */
   .photo-slot img {
     position: absolute; inset: 0;
     width: 100%; height: 100%;
-    object-fit: cover;
+    object-fit: cover; display: block;
     transition: transform 0.6s cubic-bezier(0.4,0,0.2,1);
   }
   .photo-slot:hover img { transform: scale(1.04); }
 
-  /* Placeholder interior */
+  /* Placeholder (shown when no image loaded) */
   .placeholder {
     position: absolute; inset: 0;
     display: flex; flex-direction: column;
     align-items: center; justify-content: center;
     gap: 1rem;
   }
-  /* Architectural placeholder background pattern */
   .placeholder::before {
     content: '';
     position: absolute; inset: 0;
@@ -317,8 +296,7 @@
     font-family: 'Barlow Condensed', sans-serif;
     font-size: 0.65rem; font-weight: 500; letter-spacing: 0.3em;
     text-transform: uppercase; color: var(--gold);
-    opacity: 0.4; position: relative; z-index: 1;
-    text-align: center;
+    opacity: 0.4; position: relative; z-index: 1; text-align: center;
   }
   .placeholder-num {
     position: absolute; bottom: 0.8rem; right: 1rem;
@@ -327,7 +305,6 @@
     color: rgba(201,168,76,0.06); line-height: 1;
     pointer-events: none;
   }
-  /* Corner accent lines */
   .placeholder::after {
     content: '';
     position: absolute;
@@ -336,13 +313,17 @@
     pointer-events: none;
   }
 
-  /* Hover overlay on real photos */
+  /* Hide placeholder when image is present */
+  .photo-slot img ~ .placeholder { display: none; }
+
+  /* Hover overlay */
   .photo-overlay {
-    position: absolute; inset: 0;
+    position: absolute; inset: 0; z-index: 3;
     background: linear-gradient(to top, rgba(0,0,0,0.7) 0%, transparent 50%);
     opacity: 0; transition: opacity 0.3s;
     display: flex; align-items: flex-end;
     padding: 1.2rem;
+    pointer-events: none;
   }
   .photo-slot:hover .photo-overlay { opacity: 1; }
   .photo-overlay-text {
@@ -350,10 +331,6 @@
     font-size: 0.65rem; letter-spacing: 0.2em; text-transform: uppercase;
     color: var(--gold);
   }
-
-  /* Lightbox trigger indicator */
-  .photo-slot.has-image { cursor: none; }
-  .photo-slot.has-image:hover .placeholder { display: none; }
 
   /* ─── LIGHTBOX ─── */
   .lightbox {
@@ -368,12 +345,11 @@
     max-width: 90vw; max-height: 88vh;
     object-fit: contain;
     border: 1px solid rgba(201,168,76,0.15);
-    transition: transform 0.3s;
   }
   .lightbox-close {
     position: absolute; top: 2rem; right: 2rem;
     background: none; border: none; color: var(--grey);
-    font-size: 2rem; cursor: none; transition: color 0.3s; line-height: 1;
+    font-size: 2rem; cursor: pointer; transition: color 0.3s; line-height: 1;
   }
   .lightbox-close:hover { color: var(--white); }
   .lightbox-nav {
@@ -382,7 +358,7 @@
     color: var(--gold); font-size: 1.5rem;
     width: 3rem; height: 3rem;
     display: flex; align-items: center; justify-content: center;
-    cursor: none; transition: background 0.3s; border-radius: 0;
+    cursor: pointer; transition: background 0.3s;
   }
   .lightbox-nav:hover { background: rgba(201,168,76,0.2); }
   .lightbox-prev { left: 2rem; }
@@ -397,8 +373,7 @@
 
   /* ─── CTA BAND ─── */
   .section-cta {
-    margin-top: 3.5rem;
-    padding: 2.5rem 3rem;
+    margin-top: 3.5rem; padding: 2.5rem 3rem;
     border: 1px solid rgba(201,168,76,0.15);
     background: linear-gradient(90deg, rgba(201,168,76,0.05), transparent);
     display: flex; align-items: center; justify-content: space-between; gap: 2rem;
@@ -408,7 +383,6 @@
     content: ''; position: absolute; left: 0; top: 0; bottom: 0;
     width: 3px; background: var(--gold);
   }
-  .section-cta-text {}
   .section-cta-text h4 {
     font-family: 'Cormorant Garamond', serif;
     font-size: 1.4rem; font-weight: 300; margin-bottom: 0.4rem;
@@ -420,10 +394,9 @@
     font-size: 0.78rem; font-weight: 600; letter-spacing: 0.2em;
     text-transform: uppercase; color: var(--black);
     background: var(--gold); border: none;
-    padding: 0.9rem 2rem; cursor: none;
+    padding: 0.9rem 2rem; cursor: pointer;
     transition: all 0.3s; text-decoration: none;
-    white-space: nowrap; flex-shrink: 0;
-    display: inline-block;
+    white-space: nowrap; flex-shrink: 0; display: inline-block;
   }
   .btn-cta-gold:hover { background: var(--gold-light); transform: translateY(-2px); }
   .btn-cta-outline {
@@ -431,15 +404,14 @@
     font-size: 0.78rem; font-weight: 500; letter-spacing: 0.2em;
     text-transform: uppercase; color: var(--white);
     background: transparent; border: 1px solid rgba(255,255,255,0.2);
-    padding: 0.9rem 2rem; cursor: none;
+    padding: 0.9rem 2rem; cursor: pointer;
     transition: all 0.3s; text-decoration: none;
-    white-space: nowrap; flex-shrink: 0;
-    display: inline-block;
+    white-space: nowrap; flex-shrink: 0; display: inline-block;
   }
   .btn-cta-outline:hover { border-color: var(--gold); color: var(--gold); }
   .cta-btns { display: flex; gap: 1rem; flex-shrink: 0; flex-wrap: wrap; }
 
-  /* ─── FINAL CTA BAND ─── */
+  /* ─── FINAL CTA ─── */
   .final-cta {
     padding: 8rem 5rem;
     background: linear-gradient(135deg, #0d1117 0%, #1a1208 50%, #0d0d0d 100%);
@@ -512,24 +484,12 @@
   }
   .fade-in-up.visible { opacity: 1; transform: translateY(0); }
 
-  /* ─── ADDING PHOTOS GUIDE ─── */
-  /* 
-    HOW TO ADD PHOTOS:
-    1. Find the placeholder div: <div class="photo-slot">
-    2. Replace the <div class="placeholder">...</div> with:
-       <img src="your-photo.jpg" alt="description"/>
-       <div class="photo-overlay"><span class="photo-overlay-text">Your Caption</span></div>
-    3. Add class "has-image" to the photo-slot div
-    4. The lightbox and hover effects will work automatically
-  */
-
   /* ─── RESPONSIVE ─── */
   @media (max-width: 1100px) {
     .grid-a { grid-template-columns: 1fr 1fr; }
     .grid-a .photo-slot:first-child { grid-row: auto; }
     .grid-c { grid-template-columns: 1fr 1fr; }
     .grid-c .photo-slot:nth-child(1), .grid-c .photo-slot:nth-child(4) { grid-column: auto; }
-    .grid-f { grid-template-columns: repeat(2, 1fr); }
     .footer-grid { grid-template-columns: 1fr 1fr; }
     .hero-frames { display: none; }
     .page-hero-content { max-width: 100%; }
@@ -547,7 +507,7 @@
     .grid-a .photo-slot:first-child, .grid-b .photo-slot:first-child { grid-column: auto; grid-row: auto; }
     .grid-b .photo-slot:first-child { aspect-ratio: 4/3 !important; }
     .grid-e .photo-slot:nth-child(3) { grid-column: auto; aspect-ratio: 4/3 !important; }
-    .grid-c, .grid-f { grid-template-columns: 1fr 1fr; }
+    .grid-c { grid-template-columns: 1fr 1fr; }
     .grid-c .photo-slot:nth-child(1), .grid-c .photo-slot:nth-child(4) { grid-column: auto; }
     .section-cta { flex-direction: column; align-items: flex-start; }
     .final-cta { padding: 5rem 1.5rem; }
@@ -557,10 +517,6 @@
 </style>
 </head>
 <body>
-
-<div id="cursor"></div>
-<div id="cursor-ring"></div>
-<div id="cursor-label"></div>
 
 <!-- ─── LIGHTBOX ─── -->
 <div class="lightbox" id="lightbox">
@@ -573,12 +529,12 @@
 
 <!-- ─── NAV ─── -->
 <nav id="navbar">
-  <a href="index" class="nav-logo"><img src="/assets/Noyesmedialogo.jpg" alt="Noyes Media" height="40"></a>
+  <a href="/index" class="nav-logo"><img src="/assets/Noyesmedialogo.jpg" alt="Noyes Media" height="40"></a>
   <ul class="nav-links">
     <li><a href="/index">Home</a></li>
     <li><a href="/services">Services</a></li>
     <li><a href="/pricing">Pricing</a></li>
-    <li><a href="/gallery">Gallery</a></li>
+    <li><a href="/gallery" class="active">Gallery</a></li>
     <li><a href="/socials">Socials</a></li>
     <li><a href="/contact">Contact</a></li>
   </ul>
@@ -591,6 +547,7 @@
   <div class="page-hero-accent"></div>
   <div class="hero-frames">
     <div class="hero-frame">
+      <!-- HERO IMAGE: replace path below -->
       <img src="assets/our photos/Interior Exterior/image (14).png" alt="Noyes Media Hero">
     </div>
     <div class="hero-frame"></div>
@@ -606,10 +563,10 @@
 <!-- ─── STICKY CATEGORY NAV ─── -->
 <nav class="cat-nav" id="catNav">
   <button class="cat-nav-item active" onclick="scrollToSection('photography', this)">
-    Photography <span class="cat-nav-count">6</span>
+    Photography <span class="cat-nav-count">5</span>
   </button>
   <button class="cat-nav-item" onclick="scrollToSection('drone', this)">
-    Drone &amp; Aerial <span class="cat-nav-count">4</span>
+    Drone &amp; Aerial <span class="cat-nav-count">3</span>
   </button>
   <button class="cat-nav-item" onclick="scrollToSection('video', this)">
     Video Walkthrough <span class="cat-nav-count">3</span>
@@ -618,9 +575,10 @@
     Floor Plans <span class="cat-nav-count">3</span>
   </button>
   <button class="cat-nav-item" onclick="scrollToSection('staging', this)">
-    Virtual Staging <span class="cat-nav-count">4</span>
+    Virtual Staging <span class="cat-nav-count">3</span>
   </button>
 </nav>
+
 
 <!-- ═══════════════════════════════════════════ -->
 <!-- ─── 01 · PHOTOGRAPHY ─── -->
@@ -636,31 +594,30 @@
 
   <div class="grid-a" id="gallery-photography">
 
-    <div class="photo-slot fade-in-up" data-section="photography" data-index="0">
-  <img src="assets/our photos/Interior Exterior/image (13).png" alt="Interior / Exterior Photo">
-  <div class="photo-overlay"><span class="photo-overlay-text">View Photo</span></div>
-</div>
+    <div class="photo-slot fade-in-up">
+      <img src="assets/our photos/Interior Exterior/image (13).png" alt="Interior Photo">
+      <div class="photo-overlay"><span class="photo-overlay-text">View Photo</span></div>
+    </div>
 
-    <div class="photo-slot fade-in-up" data-section="photography" data-index="0">
-  <img src="assets/our photos/Interior Exterior/image (9).png" alt="Interior / Exterior Photo">
-  <div class="photo-overlay"><span class="photo-overlay-text">View Photo</span></div>
-</div>
+    <div class="photo-slot fade-in-up">
+      <img src="assets/our photos/Interior Exterior/image (9).png" alt="Interior Photo">
+      <div class="photo-overlay"><span class="photo-overlay-text">View Photo</span></div>
+    </div>
 
-    <div class="photo-slot fade-in-up" data-section="photography" data-index="0">
-  <img src="assets/our photos/Interior Exterior/image (10).png" alt="Interior / Exterior Photo">
-  <div class="photo-overlay"><span class="photo-overlay-text">View Photo</span></div>
-</div>
+    <div class="photo-slot fade-in-up">
+      <img src="assets/our photos/Interior Exterior/image (10).png" alt="Interior Photo">
+      <div class="photo-overlay"><span class="photo-overlay-text">View Photo</span></div>
+    </div>
 
-    <div class="photo-slot fade-in-up" data-section="photography" data-index="0">
-  <img src="assets/our photos/Interior Exterior/image (11).png" alt="Interior / Exterior Photo">
-  <div class="photo-overlay"><span class="photo-overlay-text">View Photo</span></div>
-</div>
+    <div class="photo-slot fade-in-up">
+      <img src="assets/our photos/Interior Exterior/image (11).png" alt="Interior Photo">
+      <div class="photo-overlay"><span class="photo-overlay-text">View Photo</span></div>
+    </div>
 
-    <div class="photo-slot fade-in-up" data-section="photography" data-index="0">
-  <img src="assets/our photos/Interior Exterior/image (12).png" alt="Interior / Exterior Photo">
-  <div class="photo-overlay"><span class="photo-overlay-text">View Photo</span></div>
-</div>
-
+    <div class="photo-slot fade-in-up">
+      <img src="assets/our photos/Interior Exterior/image (12).png" alt="Interior Photo">
+      <div class="photo-overlay"><span class="photo-overlay-text">View Photo</span></div>
+    </div>
 
   </div>
 
@@ -676,6 +633,7 @@
   </div>
 </section>
 
+
 <!-- ═══════════════════════════════════════════ -->
 <!-- ─── 02 · DRONE & AERIAL ─── -->
 <!-- ═══════════════════════════════════════════ -->
@@ -690,20 +648,20 @@
 
   <div class="grid-c" id="gallery-drone">
 
-    <div class="photo-slot fade-in-up" data-section="photography" data-index="0">
-  <img src="assets/our photos/Drone/image (6).png" alt="Interior / Exterior Photo">
-  <div class="photo-overlay"><span class="photo-overlay-text">View Photo</span></div>
-</div>
+    <div class="photo-slot fade-in-up">
+      <img src="assets/our photos/Drone/image (6).png" alt="Drone Photo">
+      <div class="photo-overlay"><span class="photo-overlay-text">View Photo</span></div>
+    </div>
 
-    <div class="photo-slot fade-in-up" data-section="photography" data-index="0">
-  <img src="assets/our photos/Drone/image (7).png" alt="Interior / Exterior Photo">
-  <div class="photo-overlay"><span class="photo-overlay-text">View Photo</span></div>
-</div>
+    <div class="photo-slot fade-in-up">
+      <img src="assets/our photos/Drone/image (7).png" alt="Drone Photo">
+      <div class="photo-overlay"><span class="photo-overlay-text">View Photo</span></div>
+    </div>
 
-    <div class="photo-slot fade-in-up" data-section="photography" data-index="0">
-  <img src="assets/our photos/Drone/image (8).png" alt="Interior / Exterior Photo">
-  <div class="photo-overlay"><span class="photo-overlay-text">View Photo</span></div>
-</div>
+    <div class="photo-slot fade-in-up">
+      <img src="assets/our photos/Drone/image (8).png" alt="Drone Photo">
+      <div class="photo-overlay"><span class="photo-overlay-text">View Photo</span></div>
+    </div>
 
   </div>
 
@@ -719,6 +677,7 @@
   </div>
 </section>
 
+
 <!-- ═══════════════════════════════════════════ -->
 <!-- ─── 03 · VIDEO WALKTHROUGH ─── -->
 <!-- ═══════════════════════════════════════════ -->
@@ -733,20 +692,21 @@
 
   <div class="grid-b" id="gallery-video">
 
-    <div class="photo-slot fade-in-up" data-section="photography" data-index="0">
-  <img src="assets/our photos/" alt="Interior / Exterior Photo">
-  <div class="photo-overlay"><span class="photo-overlay-text">View Photo</span></div>
-</div>
+    <!-- VIDEO THUMBNAILS: replace paths below -->
+    <div class="photo-slot fade-in-up">
+      <img src="assets/our photos/Video/YOUR-VIDEO-THUMB-1.jpg" alt="Video Walkthrough">
+      <div class="photo-overlay"><span class="photo-overlay-text">View Photo</span></div>
+    </div>
 
-  <div class="photo-slot fade-in-up" data-section="photography" data-index="0">
-  <img src="assets/our photos" alt="Interior / Exterior Photo">
-  <div class="photo-overlay"><span class="photo-overlay-text">View Photo</span></div>
-</div>
+    <div class="photo-slot fade-in-up">
+      <img src="assets/our photos/Video/YOUR-VIDEO-THUMB-2.jpg" alt="Video Walkthrough">
+      <div class="photo-overlay"><span class="photo-overlay-text">View Photo</span></div>
+    </div>
 
-    <div class="photo-slot fade-in-up" data-section="photography" data-index="0">
-  <img src="assets/our photos/" alt="Interior / Exterior Photo">
-  <div class="photo-overlay"><span class="photo-overlay-text">View Photo</span></div>
-</div>
+    <div class="photo-slot fade-in-up">
+      <img src="assets/our photos/Video/YOUR-VIDEO-THUMB-3.jpg" alt="Video Walkthrough">
+      <div class="photo-overlay"><span class="photo-overlay-text">View Photo</span></div>
+    </div>
 
   </div>
 
@@ -762,6 +722,7 @@
   </div>
 </section>
 
+
 <!-- ═══════════════════════════════════════════ -->
 <!-- ─── 04 · FLOOR PLANS ─── -->
 <!-- ═══════════════════════════════════════════ -->
@@ -776,20 +737,21 @@
 
   <div class="grid-d" id="gallery-floorplans">
 
-   <div class="photo-slot fade-in-up" data-section="photography" data-index="0">
-  <img src="assets/our photos/Floor Plans/image (3).png (6).png" alt="Interior / Exterior Photo">
-  <div class="photo-overlay"><span class="photo-overlay-text">View Photo</span></div>
-</div>
+    <div class="photo-slot fade-in-up">
+      <img src="assets/our photos/Floor Plans/image (3).png" alt="Floor Plan">
+      <div class="photo-overlay"><span class="photo-overlay-text">View Photo</span></div>
+    </div>
 
- <div class="photo-slot fade-in-up" data-section="photography" data-index="0">
-  <img src="assets/our photos/Floor Plans/image (4).png" alt="Interior / Exterior Photo">
-  <div class="photo-overlay"><span class="photo-overlay-text">View Photo</span></div>
-</div>
+    <div class="photo-slot fade-in-up">
+      <img src="assets/our photos/Floor Plans/image (4).png" alt="Floor Plan">
+      <div class="photo-overlay"><span class="photo-overlay-text">View Photo</span></div>
+    </div>
 
- <div class="photo-slot fade-in-up" data-section="photography" data-index="0">
-  <img src="assets/our photos/Floor Plans/image (5).png" alt="Interior / Exterior Photo">
-  <div class="photo-overlay"><span class="photo-overlay-text">View Photo</span></div>
-</div>
+    <div class="photo-slot fade-in-up">
+      <img src="assets/our photos/Floor Plans/image (5).png" alt="Floor Plan">
+      <div class="photo-overlay"><span class="photo-overlay-text">View Photo</span></div>
+    </div>
+
   </div>
 
   <div class="section-cta fade-in-up">
@@ -803,6 +765,7 @@
     </div>
   </div>
 </section>
+
 
 <!-- ═══════════════════════════════════════════ -->
 <!-- ─── 05 · VIRTUAL STAGING ─── -->
@@ -818,21 +781,20 @@
 
   <div class="grid-e" id="gallery-staging">
 
-    <div class="photo-slot fade-in-up" data-section="photography" data-index="0">
-  <img src="assets/our photos/Virtual Staging/image (1).png" alt="Interior / Exterior Photo">
-  <div class="photo-overlay"><span class="photo-overlay-text">View Photo</span></div>
-</div>
+    <div class="photo-slot fade-in-up">
+      <img src="assets/our photos/Virtual Staging/image (1).png" alt="Virtual Staging">
+      <div class="photo-overlay"><span class="photo-overlay-text">View Photo</span></div>
+    </div>
 
- <div class="photo-slot fade-in-up" data-section="photography" data-index="0">
-  <img src="assets/our photos/Virtual Staging/image (2).png" alt="Interior / Exterior Photo">
-  <div class="photo-overlay"><span class="photo-overlay-text">View Photo</span></div>
-</div>
+    <div class="photo-slot fade-in-up">
+      <img src="assets/our photos/Virtual Staging/image (2).png" alt="Virtual Staging">
+      <div class="photo-overlay"><span class="photo-overlay-text">View Photo</span></div>
+    </div>
 
- <div class="photo-slot fade-in-up" data-section="photography" data-index="0">
-  <img src="assets/our photos/Virtual Staging/image.png" alt="Interior / Exterior Photo">
-  <div class="photo-overlay"><span class="photo-overlay-text">View Photo</span></div>
-</div>
-
+    <div class="photo-slot fade-in-up">
+      <img src="assets/our photos/Virtual Staging/image.png" alt="Virtual Staging">
+      <div class="photo-overlay"><span class="photo-overlay-text">View Photo</span></div>
+    </div>
 
   </div>
 
@@ -848,6 +810,7 @@
   </div>
 </section>
 
+
 <!-- ─── FINAL CTA ─── -->
 <div class="final-cta">
   <div class="final-cta-content fade-in-up">
@@ -859,6 +822,7 @@
     </div>
   </div>
 </div>
+
 
 <!-- ─── FOOTER ─── -->
 <footer>
@@ -909,103 +873,105 @@
   </div>
 </footer>
 
+
 <script>
-// ─── NAV SCROLL ───
-const navbar = document.getElementById('navbar');
-window.addEventListener('scroll', () => navbar.classList.toggle('scrolled', window.scrollY > 60));
+  // ─── NAV SCROLL ───
+  const navbar = document.getElementById('navbar');
+  window.addEventListener('scroll', () => navbar.classList.toggle('scrolled', window.scrollY > 60));
 
-// ─── FADE IN ───
-const observer = new IntersectionObserver(entries => {
-  entries.forEach(entry => {
-    if (entry.isIntersecting) setTimeout(() => entry.target.classList.add('visible'), entry.target.dataset.delay || 0);
+  // ─── FADE IN ───
+  const observer = new IntersectionObserver(entries => {
+    entries.forEach(entry => {
+      if (entry.isIntersecting) {
+        setTimeout(() => entry.target.classList.add('visible'), entry.target.dataset.delay || 0);
+      }
+    });
+  }, { threshold: 0.1 });
+  document.querySelectorAll('.fade-in-up').forEach((el, i) => {
+    el.dataset.delay = (i % 5) * 80;
+    observer.observe(el);
   });
-}, { threshold: 0.1 });
-document.querySelectorAll('.fade-in-up').forEach((el, i) => {
-  el.dataset.delay = (i % 5) * 80;
-  observer.observe(el);
-});
 
-// ─── STICKY CAT NAV ACTIVE STATE ───
-const sections = ['photography','drone','video','floorplans','staging','virtualtour'];
-const catNavItems = document.querySelectorAll('.cat-nav-item');
-const catNavEl    = document.getElementById('catNav');
+  // ─── STICKY CAT NAV ACTIVE STATE ───
+  const sections    = ['photography','drone','video','floorplans','staging'];
+  const catNavItems = document.querySelectorAll('.cat-nav-item');
+  const catNavEl    = document.getElementById('catNav');
 
-window.addEventListener('scroll', () => {
-  const catNavBottom = catNavEl.getBoundingClientRect().bottom;
-  let current = sections[0];
-  sections.forEach(id => {
+  window.addEventListener('scroll', () => {
+    const catNavBottom = catNavEl.getBoundingClientRect().bottom;
+    let current = sections[0];
+    sections.forEach(id => {
+      const el = document.getElementById(id);
+      if (el && el.getBoundingClientRect().top < catNavBottom + 80) current = id;
+    });
+    catNavItems.forEach(btn => {
+      btn.classList.toggle('active', btn.getAttribute('onclick').includes(current));
+    });
+  });
+
+  function scrollToSection(id, btn) {
     const el = document.getElementById(id);
-    if (el && el.getBoundingClientRect().top < catNavBottom + 80) current = id;
+    if (!el) return;
+    const offset = catNavEl.offsetHeight + navbar.offsetHeight;
+    const top    = el.getBoundingClientRect().top + window.scrollY - offset;
+    window.scrollTo({ top, behavior: 'smooth' });
+    catNavItems.forEach(b => b.classList.remove('active'));
+    btn.classList.add('active');
+  }
+
+  // ─── LIGHTBOX ───
+  let lightboxImages = [];
+  let lightboxIndex  = 0;
+
+  function buildLightboxImages() {
+    lightboxImages = [];
+    document.querySelectorAll('.photo-slot img').forEach(img => {
+      lightboxImages.push({ src: img.src, alt: img.alt });
+    });
+  }
+
+  document.querySelectorAll('.photo-slot').forEach(slot => {
+    slot.addEventListener('click', () => {
+      buildLightboxImages();
+      const allSlots = Array.from(document.querySelectorAll('.photo-slot'));
+      lightboxIndex  = allSlots.indexOf(slot);
+      openLightbox();
+    });
   });
-  catNavItems.forEach(btn => {
-    btn.classList.toggle('active', btn.getAttribute('onclick').includes(current));
-  });
-});
 
-function scrollToSection(id, btn) {
-  const el = document.getElementById(id);
-  if (!el) return;
-  const offset = catNavEl.offsetHeight + navbar.offsetHeight;
-  const top    = el.getBoundingClientRect().top + window.scrollY - offset;
-  window.scrollTo({ top, behavior: 'smooth' });
-  catNavItems.forEach(b => b.classList.remove('active'));
-  btn.classList.add('active');
-}
+  function openLightbox() {
+    if (!lightboxImages.length) return;
+    const lb  = document.getElementById('lightbox');
+    const img = document.getElementById('lightboxImg');
+    img.src   = lightboxImages[lightboxIndex].src;
+    img.alt   = lightboxImages[lightboxIndex].alt;
+    document.getElementById('lightboxCounter').textContent =
+      (lightboxIndex + 1) + ' / ' + lightboxImages.length;
+    lb.classList.add('open');
+    document.body.style.overflow = 'hidden';
+  }
 
-// ─── LIGHTBOX ───
-let lightboxImages = [];
-let lightboxIndex  = 0;
+  function closeLightbox() {
+    document.getElementById('lightbox').classList.remove('open');
+    document.body.style.overflow = '';
+  }
 
-// Collect all photo slots with real images (has-image class)
-function buildLightboxImages() {
-  lightboxImages = [];
-  document.querySelectorAll('.photo-slot.has-image img').forEach((img, i) => {
-    lightboxImages.push({ src: img.src, alt: img.alt });
-  });
-}
-
-document.querySelectorAll('.photo-slot.has-image').forEach((slot, i) => {
-  slot.addEventListener('click', () => {
-    buildLightboxImages();
-    // Find index within has-image slots
-    const allSlots = Array.from(document.querySelectorAll('.photo-slot.has-image'));
-    lightboxIndex = allSlots.indexOf(slot);
+  function lightboxNav(dir) {
+    lightboxIndex = (lightboxIndex + dir + lightboxImages.length) % lightboxImages.length;
     openLightbox();
+  }
+
+  document.addEventListener('keydown', e => {
+    const lb = document.getElementById('lightbox');
+    if (!lb.classList.contains('open')) return;
+    if (e.key === 'Escape')     closeLightbox();
+    if (e.key === 'ArrowRight') lightboxNav(1);
+    if (e.key === 'ArrowLeft')  lightboxNav(-1);
   });
-});
 
-function openLightbox() {
-  if (!lightboxImages.length) return;
-  const lb  = document.getElementById('lightbox');
-  const img = document.getElementById('lightboxImg');
-  img.src   = lightboxImages[lightboxIndex].src;
-  img.alt   = lightboxImages[lightboxIndex].alt;
-  document.getElementById('lightboxCounter').textContent =
-    (lightboxIndex + 1) + ' / ' + lightboxImages.length;
-  lb.classList.add('open');
-  document.body.style.overflow = 'hidden';
-}
-
-function closeLightbox() {
-  document.getElementById('lightbox').classList.remove('open');
-  document.body.style.overflow = '';
-}
-
-function lightboxNav(dir) {
-  lightboxIndex = (lightboxIndex + dir + lightboxImages.length) % lightboxImages.length;
-  openLightbox();
-}
-
-document.addEventListener('keydown', e => {
-  const lb = document.getElementById('lightbox');
-  if (!lb.classList.contains('open')) return;
-  if (e.key === 'Escape')      closeLightbox();
-  if (e.key === 'ArrowRight')  lightboxNav(1);
-  if (e.key === 'ArrowLeft')   lightboxNav(-1);
-});
-document.getElementById('lightbox').addEventListener('click', e => {
-  if (e.target === e.currentTarget) closeLightbox();
-});
+  document.getElementById('lightbox').addEventListener('click', e => {
+    if (e.target === e.currentTarget) closeLightbox();
+  });
 </script>
 </body>
 </html>
