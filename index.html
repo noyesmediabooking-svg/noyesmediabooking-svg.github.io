@@ -433,7 +433,6 @@
   }
   .coverage-map {
     aspect-ratio: 1;
-    border: 1px solid rgba(201,168,76,0.2);
     position: relative; overflow: hidden; background: var(--dark);
   }
   .map-svg { position: absolute; inset: 0; width: 100%; height: 100%; opacity: 0.12; }
@@ -544,11 +543,10 @@
     .btn-primary, .btn-secondary { font-size: 0.72rem; }
   }
 
-  css.coverage-photo {
+  .coverage-photo {
   width: 100%;
   height: 100%;
   object-fit: cover;
-  border-radius: inherit; /* matches whatever rounding .coverage-map has */
 }
 </style>
 </head>
@@ -732,7 +730,6 @@
   <div class="coverage-content">
     <div class="coverage-map">
       <img src="assets/temphotos/image15.png" alt="Niagara Region service area" class="coverage-photo" />
-      <div class="map-label"><h3>Niagara Region, ON</h3><p style="font-size:0.75rem;color:var(--grey);letter-spacing:0.1em">Canada</p></div>
     </div>
     <div>
       <ul class="coverage-list fade-in-up">
