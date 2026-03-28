@@ -543,6 +543,13 @@
     .hero-title { font-size: 2.2rem; }
     .btn-primary, .btn-secondary { font-size: 0.72rem; }
   }
+
+  css.coverage-photo {
+  width: 100%;
+  height: 100%;
+  object-fit: cover;
+  border-radius: inherit; /* matches whatever rounding .coverage-map has */
+}
 </style>
 </head>
 <!-- Google tag (gtag.js) -->
@@ -724,17 +731,7 @@
   <h2 class="section-title">Proudly Serving<br><em>Niagara</em> Region</h2>
   <div class="coverage-content">
     <div class="coverage-map">
-      <svg class="map-svg" viewBox="0 0 400 400" fill="none">
-        <path d="M50 200 C60 100 150 50 200 60 C280 40 350 100 370 200 C390 300 320 380 240 370 C160 390 60 360 50 280 Z" stroke="#c9a84c" stroke-width="0.8" fill="none"/>
-        <circle cx="140" cy="210" r="3" fill="#c9a84c"/><circle cx="200" cy="240" r="5" fill="#c9a84c"/><circle cx="260" cy="260" r="3" fill="#c9a84c"/>
-        <circle cx="300" cy="220" r="3" fill="#c9a84c"/><circle cx="170" cy="290" r="3" fill="#c9a84c"/><circle cx="220" cy="190" r="3" fill="#c9a84c"/>
-        <line x1="100" y1="0" x2="100" y2="400" stroke="#c9a84c" stroke-width="0.3"/>
-        <line x1="200" y1="0" x2="200" y2="400" stroke="#c9a84c" stroke-width="0.3"/>
-        <line x1="300" y1="0" x2="300" y2="400" stroke="#c9a84c" stroke-width="0.3"/>
-        <line x1="0" y1="100" x2="400" y2="100" stroke="#c9a84c" stroke-width="0.3"/>
-        <line x1="0" y1="200" x2="400" y2="200" stroke="#c9a84c" stroke-width="0.3"/>
-        <line x1="0" y1="300" x2="400" y2="300" stroke="#c9a84c" stroke-width="0.3"/>
-      </svg>
+      <img src="assets/temphotos/image15.png" alt="Niagara Region service area" class="coverage-photo" />
       <div class="map-label"><h3>Niagara Region, ON</h3><p style="font-size:0.75rem;color:var(--grey);letter-spacing:0.1em">Canada</p></div>
     </div>
     <div>
