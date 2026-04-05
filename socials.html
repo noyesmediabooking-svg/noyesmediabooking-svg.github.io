@@ -11,10 +11,8 @@
     --black: #0a0a0a;
     --charcoal: #141414;
     --dark: #1c1c1c;
-    --mid: #2e2e2e;
     --gold: #c9a84c;
     --gold-light: #e8c97a;
-    --gold-pale: #f5e9c8;
     --white: #f8f5f0;
     --grey: #888;
     --light-grey: #bbb;
@@ -29,7 +27,9 @@
     font-family: 'Barlow', sans-serif; font-weight: 300;
     overflow-x: hidden;
   }
-
+  ::-webkit-scrollbar { width: 3px; }
+  ::-webkit-scrollbar-track { background: var(--black); }
+  ::-webkit-scrollbar-thumb { background: var(--gold); }
 
   /* ─── NAV ─── */
   nav {
@@ -44,12 +44,6 @@
     border-bottom: 1px solid rgba(201,168,76,0.15);
     padding: 1rem 4rem;
   }
-  .nav-logo {
-    font-family: 'Cormorant Garamond', serif;
-    font-size: 1.6rem; font-weight: 300; letter-spacing: 0.15em;
-    color: var(--white); text-decoration: none;
-  }
-  .nav-logo span { color: var(--gold); }
   .nav-links { display: flex; gap: 2.5rem; list-style: none; }
   .nav-links a {
     font-family: 'Barlow Condensed', sans-serif;
@@ -89,7 +83,6 @@
     width: 40vw; height: 100%;
     background: linear-gradient(to bottom left, rgba(201,168,76,0.07), transparent 60%);
   }
-  /* Floating platform icons in hero */
   .hero-platforms {
     position: absolute; right: 6vw; top: 50%; transform: translateY(-50%);
     display: flex; flex-direction: column; gap: 1.5rem;
@@ -104,20 +97,16 @@
   }
   .hero-platform-pill-icon {
     width: 28px; height: 28px; border-radius: 6px;
-    display: flex; align-items: center; justify-content: center;
-    flex-shrink: 0;
+    display: flex; align-items: center; justify-content: center; flex-shrink: 0;
   }
   .hero-platform-pill-icon.ig { background: var(--ig-grad); }
   .hero-platform-pill-icon.fb { background: var(--fb-blue); }
-  .hero-platform-pill-text {}
   .hero-platform-pill-name {
     font-family: 'Barlow Condensed', sans-serif;
     font-size: 0.75rem; font-weight: 600; letter-spacing: 0.15em;
     text-transform: uppercase; color: var(--white); display: block;
   }
-  .hero-platform-pill-handle {
-    font-size: 0.7rem; color: var(--grey); display: block; margin-top: 0.1rem;
-  }
+  .hero-platform-pill-handle { font-size: 0.7rem; color: var(--grey); display: block; margin-top: 0.1rem; }
 
   .page-hero-content { position: relative; z-index: 2; max-width: 54%; }
   .page-eyebrow {
@@ -143,21 +132,15 @@
   }
 
   /* ─── PLATFORM SECTIONS ─── */
-  .platform-section {
-    padding: 7rem 5rem;
-  }
+  .platform-section { padding: 7rem 5rem; }
   .platform-section:nth-child(odd)  { background: var(--black); }
   .platform-section:nth-child(even) { background: var(--charcoal); }
 
-  /* Platform header */
   .platform-header {
     display: grid; grid-template-columns: auto 1fr auto;
-    align-items: center; gap: 2.5rem;
-    margin-bottom: 3.5rem;
+    align-items: center; gap: 2.5rem; margin-bottom: 3.5rem;
   }
-  .platform-identity {
-    display: flex; align-items: center; gap: 1.5rem;
-  }
+  .platform-identity { display: flex; align-items: center; gap: 1.5rem; }
   .platform-icon-wrap {
     width: 56px; height: 56px; border-radius: 14px;
     display: flex; align-items: center; justify-content: center;
@@ -167,50 +150,30 @@
   .platform-icon-wrap.fb { background: var(--fb-blue); }
   .platform-icon-wrap::after {
     content: ''; position: absolute; inset: -4px;
-    border-radius: 18px;
-    border: 1px solid rgba(201,168,76,0.2);
+    border-radius: 18px; border: 1px solid rgba(201,168,76,0.2);
   }
-  .platform-name-block {}
   .platform-name {
     font-family: 'Cormorant Garamond', serif;
-    font-size: 2rem; font-weight: 300; line-height: 1;
-    margin-bottom: 0.3rem;
+    font-size: 2rem; font-weight: 300; line-height: 1; margin-bottom: 0.3rem;
   }
   .platform-handle {
     font-family: 'Barlow Condensed', sans-serif;
-    font-size: 0.75rem; letter-spacing: 0.2em; color: var(--grey);
-    text-transform: uppercase;
+    font-size: 0.75rem; letter-spacing: 0.2em; color: var(--grey); text-transform: uppercase;
   }
-  /* Divider line in header */
-  .platform-header-line {
-    height: 1px;
-    background: linear-gradient(to right, rgba(201,168,76,0.2), transparent);
-  }
-  /* Follow CTA */
+  .platform-header-line { height: 1px; background: linear-gradient(to right, rgba(201,168,76,0.2), transparent); }
   .platform-follow-btn {
     font-family: 'Barlow Condensed', sans-serif;
-    font-size: 0.75rem; font-weight: 600; letter-spacing: 0.2em;
-    text-transform: uppercase;
-    padding: 0.75rem 1.8rem;
-    text-decoration: none; display: inline-flex;
-    align-items: center; gap: 0.7rem;
-    transition: all 0.3s; flex-shrink: 0;
-    border: none;
+    font-size: 0.75rem; font-weight: 600; letter-spacing: 0.2em; text-transform: uppercase;
+    padding: 0.75rem 1.8rem; text-decoration: none;
+    display: inline-flex; align-items: center; gap: 0.7rem;
+    transition: all 0.3s; flex-shrink: 0; border: none; cursor: pointer;
   }
-  .platform-follow-btn.ig {
-    background: var(--ig-grad); color: #fff;
-  }
+  .platform-follow-btn.ig { background: var(--ig-grad); color: #fff; }
   .platform-follow-btn.ig:hover { opacity: 0.85; transform: translateY(-2px); }
-  .platform-follow-btn.fb {
-    background: var(--fb-blue); color: #fff;
-  }
+  .platform-follow-btn.fb { background: var(--fb-blue); color: #fff; }
   .platform-follow-btn.fb:hover { opacity: 0.85; transform: translateY(-2px); }
 
-  /* Stats row */
-  .platform-stats {
-    display: flex; gap: 3rem; margin-bottom: 3rem;
-  }
-  .stat-item {}
+  .platform-stats { display: flex; gap: 3rem; margin-bottom: 3rem; }
   .stat-value {
     font-family: 'Cormorant Garamond', serif;
     font-size: 2rem; font-weight: 300; color: var(--gold);
@@ -221,26 +184,28 @@
     font-size: 0.65rem; font-weight: 500; letter-spacing: 0.25em;
     text-transform: uppercase; color: var(--grey);
   }
-  .stat-divider {
-    width: 1px; background: rgba(255,255,255,0.06); align-self: stretch;
-  }
+  .stat-divider { width: 1px; background: rgba(255,255,255,0.06); align-self: stretch; }
 
-  /* ─── FEED GRID ─── */
-  /* Instagram: square 3-col grid */
+  /* ─── FEED GRIDS ─── */
+  /*
+    Instagram: 6-column grid, first post is 2×2 featured.
+    Each post links to the real URL via data-url + JS click handler.
+  */
   .feed-grid-ig {
     display: grid;
     grid-template-columns: repeat(6, 1fr);
     grid-template-rows: auto auto;
     gap: 4px;
   }
-  /* First post is featured (2x2) */
   .feed-grid-ig .feed-post:first-child {
     grid-column: span 2;
     grid-row: span 2;
     aspect-ratio: 1 !important;
   }
 
-  /* Facebook: wider, more editorial */
+  /*
+    Facebook: 3-column editorial, first post is portrait.
+  */
   .feed-grid-fb {
     display: grid;
     grid-template-columns: 1.5fr 1fr 1fr;
@@ -251,93 +216,52 @@
     aspect-ratio: 4/5 !important;
   }
 
-  /* ─── FEED POST (placeholder) ─── */
+  /* ─── FEED POST ─── */
   .feed-post {
     position: relative; overflow: hidden;
     aspect-ratio: 1;
     background: var(--dark);
-    border: 1px solid rgba(255,255,255,0.04);
+    cursor: pointer;
   }
-
-  /* Real image — add src to swap placeholder */
   .feed-post img {
     position: absolute; inset: 0;
     width: 100%; height: 100%; object-fit: cover;
+    display: block;
     transition: transform 0.5s cubic-bezier(0.4,0,0.2,1);
   }
   .feed-post:hover img { transform: scale(1.05); }
 
-  /* Placeholder interior */
-  .post-placeholder {
-    position: absolute; inset: 0;
-    display: flex; flex-direction: column;
-    align-items: center; justify-content: center;
-    gap: 0.8rem;
-  }
-  .post-placeholder::before {
-    content: '';
-    position: absolute; inset: 0;
-    background-image:
-      linear-gradient(rgba(201,168,76,0.025) 1px, transparent 1px),
-      linear-gradient(90deg, rgba(201,168,76,0.025) 1px, transparent 1px);
-    background-size: 20px 20px;
-  }
-  .post-placeholder-icon { opacity: 0.1; position: relative; z-index: 1; }
-  .post-placeholder-label {
-    font-family: 'Barlow Condensed', sans-serif;
-    font-size: 0.58rem; letter-spacing: 0.25em; text-transform: uppercase;
-    color: var(--gold); opacity: 0.35;
-    position: relative; z-index: 1; text-align: center;
-    padding: 0 0.5rem;
-  }
-  /* Corner tick marks */
-  .post-placeholder::after {
-    content: '';
-    position: absolute;
-    top: 8px; left: 8px; right: 8px; bottom: 8px;
-    border: 1px solid rgba(201,168,76,0.06);
-    pointer-events: none;
-  }
-  /* Post number ghost */
-  .post-num {
-    position: absolute; bottom: 0.5rem; right: 0.8rem;
-    font-family: 'Cormorant Garamond', serif;
-    font-size: 2rem; font-weight: 300;
-    color: rgba(201,168,76,0.05); line-height: 1;
-    pointer-events: none;
-  }
-
-  /* Hover overlay (real posts) */
+  /* Hover overlay */
   .post-overlay {
     position: absolute; inset: 0;
-    background: rgba(0,0,0,0.55);
+    background: rgba(0,0,0,0.45);
     display: flex; align-items: center; justify-content: center;
-    flex-direction: column; gap: 0.6rem;
     opacity: 0; transition: opacity 0.3s;
+    z-index: 2;
   }
-  .feed-post.has-image:hover .post-overlay { opacity: 1; }
-  .feed-post.has-image:hover .post-placeholder { display: none; }
-  .post-overlay-stats {
-    display: flex; gap: 1.5rem;
+  .feed-post:hover .post-overlay { opacity: 1; }
+  .post-overlay-inner {
+    display: flex; flex-direction: column; align-items: center; gap: 0.5rem;
   }
-  .post-overlay-stat {
-    display: flex; align-items: center; gap: 0.4rem;
+  .post-overlay-view {
     font-family: 'Barlow Condensed', sans-serif;
-    font-size: 0.8rem; font-weight: 500; letter-spacing: 0.05em;
-    color: #fff;
+    font-size: 0.7rem; font-weight: 600; letter-spacing: 0.2em;
+    text-transform: uppercase; color: #fff;
+    border: 1px solid rgba(255,255,255,0.5);
+    padding: 0.45rem 1rem;
   }
 
-  /* Post type badge (Reel, Photo, Carousel) */
+  /* Post type badge */
   .post-badge {
     position: absolute; top: 0.6rem; right: 0.6rem;
     font-family: 'Barlow Condensed', sans-serif;
     font-size: 0.55rem; font-weight: 700; letter-spacing: 0.2em;
     text-transform: uppercase; color: var(--black);
     background: var(--gold); padding: 0.2rem 0.5rem;
-    z-index: 2;
+    z-index: 3;
   }
 
-  /* ─── CAPTION STRIP (below feed) ─── */
+  /* ─── CAPTION STRIP ─── */
   .feed-caption-strip {
     margin-top: 2rem;
     display: grid; grid-template-columns: 1fr auto;
@@ -348,8 +272,7 @@
   }
   .caption-strip-text {
     font-family: 'Cormorant Garamond', serif;
-    font-size: 1.05rem; font-style: italic; color: var(--light-grey);
-    line-height: 1.7;
+    font-size: 1.05rem; font-style: italic; color: var(--light-grey); line-height: 1.7;
   }
   .caption-strip-text strong { font-style: normal; color: var(--gold); }
   .caption-strip-link {
@@ -357,8 +280,7 @@
     font-size: 0.7rem; font-weight: 600; letter-spacing: 0.2em;
     text-transform: uppercase; color: var(--gold);
     text-decoration: none; white-space: nowrap;
-    transition: color 0.3s;
-    display: flex; align-items: center; gap: 0.5rem;
+    transition: color 0.3s; display: flex; align-items: center; gap: 0.5rem;
   }
   .caption-strip-link:hover { color: var(--gold-light); }
   .caption-strip-link::after { content: '→'; }
@@ -378,29 +300,6 @@
   }
   .follow-band-text h4 em { font-style: italic; color: var(--gold); }
   .follow-band-text p { font-size: 0.85rem; color: var(--grey); }
-
-  /* ─── HOW TO ADD POSTS — instruction strip ─── */
-  .add-posts-guide {
-    margin-top: 2rem;
-    padding: 1.2rem 1.8rem;
-    border: 1px dashed rgba(201,168,76,0.2);
-    background: rgba(201,168,76,0.02);
-    display: flex; align-items: flex-start; gap: 1.2rem;
-  }
-  .guide-icon {
-    font-family: 'Barlow Condensed', sans-serif;
-    font-size: 0.6rem; letter-spacing: 0.15em; text-transform: uppercase;
-    color: var(--gold); background: rgba(201,168,76,0.1);
-    padding: 0.3rem 0.6rem; flex-shrink: 0; margin-top: 2px;
-  }
-  .guide-text {
-    font-size: 0.8rem; color: var(--grey); line-height: 1.7;
-  }
-  .guide-text code {
-    font-size: 0.75rem; color: var(--gold-light);
-    background: rgba(201,168,76,0.08); padding: 0.1rem 0.4rem;
-    font-family: 'Courier New', monospace;
-  }
 
   /* ─── FINAL CTA ─── */
   .final-cta {
@@ -427,16 +326,14 @@
     font-family: 'Barlow Condensed', sans-serif;
     font-size: 0.78rem; font-weight: 600; letter-spacing: 0.2em; text-transform: uppercase;
     color: var(--black); background: var(--gold); border: none;
-    padding: 0.9rem 2rem; text-decoration: none; display: inline-block;
-    transition: all 0.3s;
+    padding: 0.9rem 2rem; text-decoration: none; display: inline-block; transition: all 0.3s;
   }
   .btn-gold:hover { background: var(--gold-light); transform: translateY(-2px); }
   .btn-outline {
     font-family: 'Barlow Condensed', sans-serif;
     font-size: 0.78rem; font-weight: 500; letter-spacing: 0.2em; text-transform: uppercase;
     color: var(--white); background: transparent; border: 1px solid rgba(255,255,255,0.2);
-    padding: 0.9rem 2rem; text-decoration: none; display: inline-block;
-    transition: all 0.3s;
+    padding: 0.9rem 2rem; text-decoration: none; display: inline-block; transition: all 0.3s;
   }
   .btn-outline:hover { border-color: var(--gold); color: var(--gold); }
 
@@ -500,7 +397,7 @@
     .platform-header { grid-template-columns: 1fr; gap: 1.5rem; }
     .platform-header-line { display: none; }
     .feed-grid-ig { grid-template-columns: repeat(3, 1fr); }
-    .feed-grid-ig .feed-post:first-child { grid-column: span 1; grid-row: span 1; aspect-ratio: 1 !important; }
+    .feed-grid-ig .feed-post:first-child { grid-column: span 1; grid-row: span 1; }
     .feed-grid-fb { grid-template-columns: 1fr 1fr; }
     .feed-grid-fb .feed-post:first-child { grid-row: auto; aspect-ratio: 1 !important; }
     .platform-stats { gap: 1.5rem; }
@@ -518,17 +415,13 @@
   window.dataLayer = window.dataLayer || [];
   function gtag(){dataLayer.push(arguments);}
   gtag('js', new Date());
-
   gtag('config', 'G-2BWXFZXX35');
 </script>
 <body>
 
-<div id="cursor"></div>
-<div id="cursor-ring"></div>
-
 <!-- ─── NAV ─── -->
 <nav id="navbar">
-  <a href="index" class="nav-logo"><img src="/assets/Noyesmedialogo.jpg" alt="Noyes Media" height="40"></a>
+  <a href="/index" class="nav-logo"><img src="/assets/Noyesmedialogo.jpg" alt="Noyes Media" height="40"></a>
   <ul class="nav-links">
     <li><a href="/index">Home</a></li>
     <li><a href="/services">Services</a></li>
@@ -544,38 +437,31 @@
 <div class="page-hero">
   <div class="page-hero-grid"></div>
   <div class="page-hero-accent"></div>
-
-  <!-- Floating platform pills — right side decoration -->
   <div class="hero-platforms">
     <div class="hero-platform-pill">
       <div class="hero-platform-pill-icon ig">
-        <!-- Instagram icon -->
         <svg width="16" height="16" viewBox="0 0 24 24" fill="none" stroke="#fff" stroke-width="2" stroke-linecap="round">
           <rect x="2" y="2" width="20" height="20" rx="5"/><circle cx="12" cy="12" r="4"/>
           <circle cx="17.5" cy="6.5" r="0.5" fill="#fff"/>
         </svg>
       </div>
-      <div class="hero-platform-pill-text">
+      <div>
         <span class="hero-platform-pill-name">Instagram</span>
-        <!-- UPDATE: replace with your actual handle -->
         <span class="hero-platform-pill-handle">@noyes_media</span>
       </div>
     </div>
     <div class="hero-platform-pill">
       <div class="hero-platform-pill-icon fb">
-        <!-- Facebook icon -->
         <svg width="16" height="16" viewBox="0 0 24 24" fill="#fff">
           <path d="M18 2h-3a5 5 0 0 0-5 5v3H7v4h3v8h4v-8h3l1-4h-4V7a1 1 0 0 1 1-1h3z"/>
         </svg>
       </div>
-      <div class="hero-platform-pill-text">
+      <div>
         <span class="hero-platform-pill-name">Facebook</span>
-        <!-- UPDATE: replace with your actual handle -->
         <span class="hero-platform-pill-handle">Noyes Media</span>
       </div>
     </div>
   </div>
-
   <div class="page-hero-content">
     <p class="page-eyebrow">Follow Along</p>
     <h1 class="page-title">Behind the<br><em>Lens</em></h1>
@@ -584,9 +470,20 @@
 </div>
 
 
-<!-- ══════════════════════════════════════════ -->
-<!-- ─── INSTAGRAM ─── -->
-<!-- ══════════════════════════════════════════ -->
+<!-- ══════════════════════════════════════════════════════════
+     INSTAGRAM SECTION
+     ══════════════════════════════════════════════════════════
+     HOW TO ADD / UPDATE PHOTOS:
+       1. Drop your image files into your /assets/ folder (or wherever you keep site images).
+       2. Replace the src="INSERT_FILE_HERE" on each <img> tag with the correct path,
+          e.g. src="/assets/ig-post-1.jpg"
+       3. Update the data-url on each .feed-post div to point to the real Instagram post URL
+          so clicking the image opens that post.
+       4. Update the alt="" text on each <img> to describe the photo (good for SEO).
+       5. To ADD more posts, copy any <div class="feed-post"> block and paste it
+          inside the .feed-grid-ig div. The grid will flow automatically.
+       6. To REMOVE a post, delete the entire <div class="feed-post">...</div> block.
+     ══════════════════════════════════════════════════════════ -->
 <section class="platform-section" id="instagram">
 
   <div class="platform-header fade-in-up">
@@ -598,34 +495,30 @@
           <circle cx="17.5" cy="6.5" r="0.6" fill="#fff" stroke="none"/>
         </svg>
       </div>
-      <div class="platform-name-block">
+      <div>
         <div class="platform-name">Instagram</div>
-        <!-- UPDATE: your Instagram handle -->
         <div class="platform-handle">@noyes_media &nbsp;·&nbsp; Niagara Region, ON</div>
       </div>
     </div>
     <div class="platform-header-line"></div>
-    <!-- UPDATE: href to your actual Instagram profile URL -->
     <a href="https://instagram.com/noyes_media" target="_blank" class="platform-follow-btn ig">
       <svg width="14" height="14" viewBox="0 0 24 24" fill="none" stroke="#fff" stroke-width="2" stroke-linecap="round">
         <rect x="2" y="2" width="20" height="20" rx="5"/><circle cx="12" cy="12" r="4"/>
-        <circle cx="17.5" cy="6.5" r="0.5" fill="#fff"/>
       </svg>
       Follow on Instagram
     </a>
   </div>
 
-  <!-- Stats row — UPDATE these numbers -->
   <div class="platform-stats fade-in-up">
     <div class="stat-item">
-      <!-- UPDATE: follower count -->
-      <span class="stat-value">—</span>
+      <!-- UPDATE: replace — with your real follower count once you have it -->
+      <span class="stat-value">5</span>
       <span class="stat-label">Followers</span>
     </div>
     <div class="stat-divider"></div>
     <div class="stat-item">
-      <!-- UPDATE: post count -->
-      <span class="stat-value">—</span>
+      <!-- UPDATE: replace — with your real post count -->
+      <span class="stat-value">1</span>
       <span class="stat-label">Posts</span>
     </div>
     <div class="stat-divider"></div>
@@ -635,147 +528,101 @@
     </div>
   </div>
 
-  <!-- ─── INSTAGRAM FEED GRID ─── -->
-  <!--
-    HOW TO ADD POSTS:
-    1. Add class "has-image" to each .feed-post div you want to populate
-    2. Add <img src="your-photo.jpg" alt="..."/> inside the .feed-post div
-    3. Remove the .post-placeholder div from that post
-    4. Optionally update the .post-badge text (Photo / Reel / Carousel)
-    5. Update the like/comment counts in .post-overlay-stats
-    6. Repeat for as many posts as you have — add more .feed-post divs to the grid as needed
-  -->
-  <div class="feed-grid-ig fade-in-up" id="ig-feed">
+  <div class="feed-grid-ig fade-in-up">
 
-    <!-- POST 1 — Featured (large, spans 2 cols & 2 rows) -->
-    <div class="feed-post" data-url="https://instagram.com/p/noyes_media">
-      <div class="post-placeholder">
-        <svg class="post-placeholder-icon" width="36" height="36" viewBox="0 0 24 24" fill="none" stroke="#c9a84c" stroke-width="0.8">
-          <rect x="2" y="7" width="20" height="15" rx="1"/><circle cx="12" cy="14.5" r="3.5"/>
-          <path d="M16.5 7L15 4H9L7.5 7"/>
-        </svg>
-        <span class="post-placeholder-label">Featured Post<br>Coming Soon</span>
-      </div>
-      <div class="post-overlay">
-        <div class="post-overlay-stats">
-          <span class="post-overlay-stat">
-            <svg width="14" height="14" viewBox="0 0 24 24" fill="#fff" stroke="none"><path d="M20.84 4.61a5.5 5.5 0 0 0-7.78 0L12 5.67l-1.06-1.06a5.5 5.5 0 0 0-7.78 7.78l1.06 1.06L12 21.23l7.78-7.78 1.06-1.06a5.5 5.5 0 0 0 0-7.78z"/></svg>
-            —
-          </span>
-          <span class="post-overlay-stat">
-            <svg width="14" height="14" viewBox="0 0 24 24" fill="none" stroke="#fff" stroke-width="2"><path d="M21 15a2 2 0 0 1-2 2H7l-4 4V5a2 2 0 0 1 2-2h14a2 2 0 0 1 2 2z"/></svg>
-            —
-          </span>
-        </div>
-      </div>
-      <span class="post-num">01</span>
-    </div>
-
-    <!-- POST 2 -->
-    <div class="feed-post" data-url="https://instagram.com/p/noyes_media">
+    <!-- IG POST 1 — Featured (large, spans 2 cols × 2 rows) -->
+    <!-- UPDATE data-url to the real Instagram post link -->
+    <div class="feed-post" data-url="https://www.instagram.com/p/DWorEGnju_d/?img_index=1">
       <span class="post-badge">Photo</span>
-      <div class="post-placeholder">
-        <svg class="post-placeholder-icon" width="28" height="28" viewBox="0 0 24 24" fill="none" stroke="#c9a84c" stroke-width="0.8">
-          <rect x="2" y="7" width="20" height="15" rx="1"/><circle cx="12" cy="14.5" r="3.5"/>
-        </svg>
-        <span class="post-placeholder-label">Coming Soon</span>
-      </div>
+      <!-- UPDATE src with your image path, e.g. src="/assets/ig-1.jpg" -->
+      <img src="assets/social media/" alt="Real estate photo by Noyes Media">
       <div class="post-overlay">
-        <div class="post-overlay-stats">
-          <span class="post-overlay-stat"><svg width="12" height="12" viewBox="0 0 24 24" fill="#fff"><path d="M20.84 4.61a5.5 5.5 0 0 0-7.78 0L12 5.67l-1.06-1.06a5.5 5.5 0 0 0-7.78 7.78l1.06 1.06L12 21.23l7.78-7.78 1.06-1.06a5.5 5.5 0 0 0 0-7.78z"/></svg> —</span>
+        <div class="post-overlay-inner">
+          <span class="post-overlay-view">View Post</span>
         </div>
       </div>
-      <span class="post-num">02</span>
     </div>
 
-    <!-- POST 3 -->
-    <div class="feed-post" data-url="https://instagram.com/p/noyes_media">
+    <!-- IG POST 2 -->
+    <div class="feed-post" data-url="https://instagram.com/noyes_media">
+      <span class="post-badge">Photo</span>
+      <img src="INSERT_FILE_HERE" alt="Real estate photo by Noyes Media">
+      <div class="post-overlay">
+        <div class="post-overlay-inner"><span class="post-overlay-view">View Post</span></div>
+      </div>
+    </div>
+
+    <!-- IG POST 3 -->
+    <div class="feed-post" data-url="https://instagram.com/noyes_media">
       <span class="post-badge">Reel</span>
-      <div class="post-placeholder">
-        <svg class="post-placeholder-icon" width="28" height="28" viewBox="0 0 24 24" fill="none" stroke="#c9a84c" stroke-width="0.8">
-          <circle cx="12" cy="12" r="10"/><polygon points="10 8 16 12 10 16 10 8" fill="#c9a84c" stroke="none" opacity="0.3"/>
-        </svg>
-        <span class="post-placeholder-label">Reel<br>Coming Soon</span>
-      </div>
+      <img src="INSERT_FILE_HERE" alt="Real estate reel thumbnail by Noyes Media">
       <div class="post-overlay">
-        <div class="post-overlay-stats">
-          <span class="post-overlay-stat"><svg width="12" height="12" viewBox="0 0 24 24" fill="#fff"><path d="M20.84 4.61a5.5 5.5 0 0 0-7.78 0L12 5.67l-1.06-1.06a5.5 5.5 0 0 0-7.78 7.78l1.06 1.06L12 21.23l7.78-7.78 1.06-1.06a5.5 5.5 0 0 0 0-7.78z"/></svg> —</span>
-        </div>
+        <div class="post-overlay-inner"><span class="post-overlay-view">View Post</span></div>
       </div>
-      <span class="post-num">03</span>
     </div>
 
-    <!-- POST 4 -->
-    <div class="feed-post" data-url="https://instagram.com/p/noyes_media">
+    <!-- IG POST 4 -->
+    <div class="feed-post" data-url="https://instagram.com/noyes_media">
       <span class="post-badge">Photo</span>
-      <div class="post-placeholder">
-        <svg class="post-placeholder-icon" width="28" height="28" viewBox="0 0 24 24" fill="none" stroke="#c9a84c" stroke-width="0.8">
-          <rect x="2" y="7" width="20" height="15" rx="1"/><circle cx="12" cy="14.5" r="3.5"/>
-        </svg>
-        <span class="post-placeholder-label">Coming Soon</span>
-      </div>
+      <img src="INSERT_FILE_HERE" alt="Real estate photo by Noyes Media">
       <div class="post-overlay">
-        <div class="post-overlay-stats">
-          <span class="post-overlay-stat"><svg width="12" height="12" viewBox="0 0 24 24" fill="#fff"><path d="M20.84 4.61a5.5 5.5 0 0 0-7.78 0L12 5.67l-1.06-1.06a5.5 5.5 0 0 0-7.78 7.78l1.06 1.06L12 21.23l7.78-7.78 1.06-1.06a5.5 5.5 0 0 0 0-7.78z"/></svg> —</span>
-        </div>
+        <div class="post-overlay-inner"><span class="post-overlay-view">View Post</span></div>
       </div>
-      <span class="post-num">04</span>
     </div>
 
-    <!-- POST 5 -->
-    <div class="feed-post" data-url="https://instagram.com/p/noyes_media">
+    <!-- IG POST 5 -->
+    <div class="feed-post" data-url="https://instagram.com/noyes_media">
       <span class="post-badge">Carousel</span>
-      <div class="post-placeholder">
-        <svg class="post-placeholder-icon" width="28" height="28" viewBox="0 0 24 24" fill="none" stroke="#c9a84c" stroke-width="0.8">
-          <rect x="2" y="7" width="20" height="15" rx="1"/>
-          <rect x="5" y="4" width="14" height="2" rx="1" fill="#c9a84c" opacity="0.2"/>
-        </svg>
-        <span class="post-placeholder-label">Carousel<br>Coming Soon</span>
-      </div>
+      <img src="INSERT_FILE_HERE" alt="Real estate carousel by Noyes Media">
       <div class="post-overlay">
-        <div class="post-overlay-stats">
-          <span class="post-overlay-stat"><svg width="12" height="12" viewBox="0 0 24 24" fill="#fff"><path d="M20.84 4.61a5.5 5.5 0 0 0-7.78 0L12 5.67l-1.06-1.06a5.5 5.5 0 0 0-7.78 7.78l1.06 1.06L12 21.23l7.78-7.78 1.06-1.06a5.5 5.5 0 0 0 0-7.78z"/></svg> —</span>
-        </div>
+        <div class="post-overlay-inner"><span class="post-overlay-view">View Post</span></div>
       </div>
-      <span class="post-num">05</span>
     </div>
 
-    <!-- POST 6 -->
-    <div class="feed-post" data-url="https://instagram.com/p/noyes_media">
-      <span class="post-badge">Reel</span>
-      <div class="post-placeholder">
-        <svg class="post-placeholder-icon" width="28" height="28" viewBox="0 0 24 24" fill="none" stroke="#c9a84c" stroke-width="0.8">
-          <circle cx="12" cy="12" r="10"/><polygon points="10 8 16 12 10 16 10 8" fill="#c9a84c" stroke="none" opacity="0.3"/>
-        </svg>
-        <span class="post-placeholder-label">Reel<br>Coming Soon</span>
-      </div>
+    <!-- IG POST 6 -->
+    <div class="feed-post" data-url="https://instagram.com/noyes_media">
+      <span class="post-badge">Photo</span>
+      <img src="INSERT_FILE_HERE" alt="Real estate photo by Noyes Media">
       <div class="post-overlay">
-        <div class="post-overlay-stats">
-          <span class="post-overlay-stat"><svg width="12" height="12" viewBox="0 0 24 24" fill="#fff"><path d="M20.84 4.61a5.5 5.5 0 0 0-7.78 0L12 5.67l-1.06-1.06a5.5 5.5 0 0 0-7.78 7.78l1.06 1.06L12 21.23l7.78-7.78 1.06-1.06a5.5 5.5 0 0 0 0-7.78z"/></svg> —</span>
-        </div>
+        <div class="post-overlay-inner"><span class="post-overlay-view">View Post</span></div>
       </div>
-      <span class="post-num">06</span>
     </div>
+
+    <!-- IG POST 7 -->
+    <div class="feed-post" data-url="https://instagram.com/noyes_media">
+      <span class="post-badge">Photo</span>
+      <img src="INSERT_FILE_HERE" alt="Real estate photo by Noyes Media">
+      <div class="post-overlay">
+        <div class="post-overlay-inner"><span class="post-overlay-view">View Post</span></div>
+      </div>
+    </div>
+
+    <!-- IG POST 8 -->
+    <div class="feed-post" data-url="https://instagram.com/noyes_media">
+      <span class="post-badge">Reel</span>
+      <img src="INSERT_FILE_HERE" alt="Real estate reel thumbnail by Noyes Media">
+      <div class="post-overlay">
+        <div class="post-overlay-inner"><span class="post-overlay-view">View Post</span></div>
+      </div>
+    </div>
+
+    <!-- To add more posts, copy any block above and paste it here. -->
 
   </div>
 
-  <!-- Caption strip — UPDATE the italic quote with a real recent caption -->
   <div class="feed-caption-strip fade-in-up">
     <p class="caption-strip-text">
       <strong>Latest from Instagram —</strong>
       follow along for behind-the-scenes shoots, twilight sessions, and everything we're working on across Niagara.
     </p>
-    <!-- UPDATE href -->
     <a href="https://instagram.com/noyes_media" target="_blank" class="caption-strip-link">View full feed</a>
   </div>
 
-  <!-- Follow band -->
   <div class="follow-band fade-in-up">
     <div class="follow-band-text">
       <h4>See every <em>listing</em> as we shoot it</h4>
       <p>Stories, reels, and behind-the-scenes content posted regularly.</p>
     </div>
-    <!-- UPDATE href -->
     <a href="https://instagram.com/noyes_media" target="_blank" class="platform-follow-btn ig">
       <svg width="14" height="14" viewBox="0 0 24 24" fill="none" stroke="#fff" stroke-width="2" stroke-linecap="round">
         <rect x="2" y="2" width="20" height="20" rx="5"/><circle cx="12" cy="12" r="4"/>
@@ -784,11 +631,15 @@
     </a>
   </div>
 
+</section>
 
 
-<!-- ══════════════════════════════════════════ -->
-<!-- ─── FACEBOOK ─── -->
-<!-- ══════════════════════════════════════════ -->
+<!-- ══════════════════════════════════════════════════════════
+     FACEBOOK SECTION
+     ══════════════════════════════════════════════════════════
+     Same instructions as Instagram above.
+     Update src="INSERT_FILE_HERE" and data-url for each post.
+     ══════════════════════════════════════════════════════════ -->
 <section class="platform-section" id="facebook">
 
   <div class="platform-header fade-in-up">
@@ -798,14 +649,12 @@
           <path d="M18 2h-3a5 5 0 0 0-5 5v3H7v4h3v8h4v-8h3l1-4h-4V7a1 1 0 0 1 1-1h3z"/>
         </svg>
       </div>
-      <div class="platform-name-block">
+      <div>
         <div class="platform-name">Facebook</div>
-        <!-- UPDATE: your Facebook page name/handle -->
         <div class="platform-handle">Noyes Media &nbsp;·&nbsp; Niagara Region, ON</div>
       </div>
     </div>
     <div class="platform-header-line"></div>
-    <!-- UPDATE: href to your actual Facebook page URL -->
     <a href="https://www.facebook.com/profile.php?id=61577472329827" target="_blank" class="platform-follow-btn fb">
       <svg width="14" height="14" viewBox="0 0 24 24" fill="#fff">
         <path d="M18 2h-3a5 5 0 0 0-5 5v3H7v4h3v8h4v-8h3l1-4h-4V7a1 1 0 0 1 1-1h3z"/>
@@ -814,15 +663,16 @@
     </a>
   </div>
 
-  <!-- Stats row — UPDATE -->
   <div class="platform-stats fade-in-up">
     <div class="stat-item">
-      <span class="stat-value">—</span>
+      <!-- UPDATE: replace — with your real page likes -->
+      <span class="stat-value">5</span>
       <span class="stat-label">Page Likes</span>
     </div>
     <div class="stat-divider"></div>
     <div class="stat-item">
-      <span class="stat-value">—</span>
+      <!-- UPDATE: replace — with your real follower count -->
+      <span class="stat-value">5</span>
       <span class="stat-label">Followers</span>
     </div>
     <div class="stat-divider"></div>
@@ -832,126 +682,72 @@
     </div>
   </div>
 
-  <!-- ─── FACEBOOK FEED GRID ─── -->
-  <!--
-    HOW TO ADD POSTS:
-    Same process as Instagram above.
-    Facebook posts can be wider format — the first post spans 2 rows (portrait aspect).
-    Update data-url on each post with the real Facebook post permalink.
-  -->
-  <div class="feed-grid-fb fade-in-up" id="fb-feed">
+  <div class="feed-grid-fb fade-in-up">
 
-    <!-- POST 1 — Featured (tall, portrait) -->
-    <div class="feed-post" style="aspect-ratio:4/5" data-url="https://facebook.com/YOUR_POST_URL">
-      <div class="post-placeholder">
-        <svg class="post-placeholder-icon" width="36" height="36" viewBox="0 0 24 24" fill="none" stroke="#c9a84c" stroke-width="0.8">
-          <rect x="2" y="7" width="20" height="15" rx="1"/><circle cx="12" cy="14.5" r="3.5"/>
-          <path d="M16.5 7L15 4H9L7.5 7"/>
-        </svg>
-        <span class="post-placeholder-label">Featured Post<br>Coming Soon</span>
-      </div>
+    <!-- FB POST 1 — Featured (tall portrait, spans 2 rows) -->
+    <!-- UPDATE data-url to the real Facebook post link -->
+    <div class="feed-post" style="aspect-ratio:4/5" data-url="https://www.facebook.com/photo?fbid=122104860752915744&set=pcb.122104861994915744">
+      <span class="post-badge">Photo</span>
+      <!-- UPDATE src with your image path -->
+      <img src="assets/social media/facebook/662691659_122104860764915744_1736410274539360850_n.jpg" alt="Real estate photo by Noyes Media">
       <div class="post-overlay">
-        <div class="post-overlay-stats">
-          <span class="post-overlay-stat">
-            <svg width="14" height="14" viewBox="0 0 24 24" fill="#fff"><path d="M14 9V5a3 3 0 0 0-3-3l-4 9v11h11.28a2 2 0 0 0 2-1.7l1.38-9a2 2 0 0 0-2-2.3H14z"/></svg>
-            —
-          </span>
-          <span class="post-overlay-stat">
-            <svg width="14" height="14" viewBox="0 0 24 24" fill="none" stroke="#fff" stroke-width="2"><path d="M21 15a2 2 0 0 1-2 2H7l-4 4V5a2 2 0 0 1 2-2h14a2 2 0 0 1 2 2z"/></svg>
-            —
-          </span>
-        </div>
+        <div class="post-overlay-inner"><span class="post-overlay-view">View Post</span></div>
       </div>
-      <span class="post-num">01</span>
     </div>
 
-    <!-- POST 2 -->
+    <!-- FB POST 2 -->
     <div class="feed-post" data-url="https://www.facebook.com/photo/?fbid=122104860752915744&set=pcb.122104861994915744">
       <span class="post-badge">Photo</span>
-      <div class="post-placeholder">
-        <svg class="post-placeholder-icon" width="28" height="28" viewBox="0 0 24 24" fill="none" stroke="#c9a84c" stroke-width="0.8">
-          <rect x="2" y="7" width="20" height="15" rx="1"/><circle cx="12" cy="14.5" r="3.5"/>
-        </svg>
-        <span class="post-placeholder-label">Coming Soon</span>
-      </div>
+      <img src="INSERT_FILE_HERE" alt="Real estate photo by Noyes Media">
       <div class="post-overlay">
-        <div class="post-overlay-stats">
-          <span class="post-overlay-stat"><svg width="12" height="12" viewBox="0 0 24 24" fill="#fff"><path d="M14 9V5a3 3 0 0 0-3-3l-4 9v11h11.28a2 2 0 0 0 2-1.7l1.38-9a2 2 0 0 0-2-2.3H14z"/></svg> —</span>
-        </div>
+        <div class="post-overlay-inner"><span class="post-overlay-view">View Post</span></div>
       </div>
-      <span class="post-num">02</span>
     </div>
 
-    <!-- POST 3 -->
+    <!-- FB POST 3 -->
     <div class="feed-post" data-url="https://www.facebook.com/reel/1625682895406472/?s=single_unit">
       <span class="post-badge">Video</span>
-      <div class="post-placeholder">
-        <svg class="post-placeholder-icon" width="28" height="28" viewBox="0 0 24 24" fill="none" stroke="#c9a84c" stroke-width="0.8">
-          <rect x="1" y="5" width="15" height="14" rx="1"/><polygon points="23 7 16 12 23 17 23 7"/>
-        </svg>
-        <span class="post-placeholder-label">Video<br>Coming Soon</span>
-      </div>
+      <img src="INSERT_FILE_HERE" alt="Real estate video thumbnail by Noyes Media">
       <div class="post-overlay">
-        <div class="post-overlay-stats">
-          <span class="post-overlay-stat"><svg width="12" height="12" viewBox="0 0 24 24" fill="#fff"><path d="M14 9V5a3 3 0 0 0-3-3l-4 9v11h11.28a2 2 0 0 0 2-1.7l1.38-9a2 2 0 0 0-2-2.3H14z"/></svg> —</span>
-        </div>
+        <div class="post-overlay-inner"><span class="post-overlay-view">View Post</span></div>
       </div>
-      <span class="post-num">03</span>
     </div>
 
-    <!-- POST 4 -->
+    <!-- FB POST 4 -->
     <div class="feed-post" data-url="https://www.facebook.com/photo?fbid=122104860854915744&set=pcb.122104861994915744">
       <span class="post-badge">Photo</span>
-      <div class="post-placeholder">
-        <svg class="post-placeholder-icon" width="28" height="28" viewBox="0 0 24 24" fill="none" stroke="#c9a84c" stroke-width="0.8">
-          <rect x="2" y="7" width="20" height="15" rx="1"/><circle cx="12" cy="14.5" r="3.5"/>
-        </svg>
-        <span class="post-placeholder-label">Coming Soon</span>
-      </div>
+      <img src="INSERT_FILE_HERE" alt="Real estate photo by Noyes Media">
       <div class="post-overlay">
-        <div class="post-overlay-stats">
-          <span class="post-overlay-stat"><svg width="12" height="12" viewBox="0 0 24 24" fill="#fff"><path d="M14 9V5a3 3 0 0 0-3-3l-4 9v11h11.28a2 2 0 0 0 2-1.7l1.38-9a2 2 0 0 0-2-2.3H14z"/></svg> —</span>
-        </div>
+        <div class="post-overlay-inner"><span class="post-overlay-view">View Post</span></div>
       </div>
-      <span class="post-num">04</span>
     </div>
 
-    <!-- POST 5 -->
+    <!-- FB POST 5 -->
     <div class="feed-post" data-url="https://www.facebook.com/photo?fbid=122104860806915744&set=pcb.122104861994915744">
       <span class="post-badge">Photo</span>
-      <div class="post-placeholder">
-        <svg class="post-placeholder-icon" width="28" height="28" viewBox="0 0 24 24" fill="none" stroke="#c9a84c" stroke-width="0.8">
-          <rect x="2" y="7" width="20" height="15" rx="1"/><circle cx="12" cy="14.5" r="3.5"/>
-        </svg>
-        <span class="post-placeholder-label">Coming Soon</span>
-      </div>
+      <img src="INSERT_FILE_HERE" alt="Real estate photo by Noyes Media">
       <div class="post-overlay">
-        <div class="post-overlay-stats">
-          <span class="post-overlay-stat"><svg width="12" height="12" viewBox="0 0 24 24" fill="#fff"><path d="M14 9V5a3 3 0 0 0-3-3l-4 9v11h11.28a2 2 0 0 0 2-1.7l1.38-9a2 2 0 0 0-2-2.3H14z"/></svg> —</span>
-        </div>
+        <div class="post-overlay-inner"><span class="post-overlay-view">View Post</span></div>
       </div>
-      <span class="post-num">05</span>
     </div>
+
+    <!-- To add more posts, copy any block above and paste it here. -->
 
   </div>
 
-  <!-- Caption strip -->
   <div class="feed-caption-strip fade-in-up">
     <p class="caption-strip-text">
       <strong>Latest from Facebook —</strong>
       longer-form posts, listing announcements, and local market content for agents across Niagara.
     </p>
-    <!-- UPDATE href -->
     <a href="https://www.facebook.com/profile.php?id=61577472329827" target="_blank" class="caption-strip-link">View Facebook page</a>
   </div>
 
-  <!-- Follow band -->
   <div class="follow-band fade-in-up">
     <div class="follow-band-text">
       <h4>Stay <em>in the loop</em> on listings</h4>
       <p>New shoots, agent tips, and local real estate content posted weekly.</p>
     </div>
-    <!-- UPDATE href -->
     <a href="https://www.facebook.com/profile.php?id=61577472329827" target="_blank" class="platform-follow-btn fb">
       <svg width="14" height="14" viewBox="0 0 24 24" fill="#fff">
         <path d="M18 2h-3a5 5 0 0 0-5 5v3H7v4h3v8h4v-8h3l1-4h-4V7a1 1 0 0 1 1-1h3z"/>
@@ -1020,8 +816,6 @@
 </footer>
 
 <script>
-
-
 // ─── NAV SCROLL ───
 const navbar = document.getElementById('navbar');
 window.addEventListener('scroll', () => navbar.classList.toggle('scrolled', window.scrollY > 60));
@@ -1029,14 +823,21 @@ window.addEventListener('scroll', () => navbar.classList.toggle('scrolled', wind
 // ─── FADE IN ───
 const observer = new IntersectionObserver(entries => {
   entries.forEach(entry => {
-    if (entry.isIntersecting) {
+    if (entry.isIntersecting)
       setTimeout(() => entry.target.classList.add('visible'), entry.target.dataset.delay || 0);
-    }
   });
 }, { threshold: 0.1 });
 document.querySelectorAll('.fade-in-up').forEach((el, i) => {
   el.dataset.delay = (i % 6) * 60;
   observer.observe(el);
+});
+
+// ─── CLICK POSTS TO OPEN LINK ───
+// Clicking any feed post opens its data-url in a new tab.
+document.querySelectorAll('.feed-post[data-url]').forEach(post => {
+  post.addEventListener('click', () => {
+    window.open(post.dataset.url, '_blank', 'noopener');
+  });
 });
 </script>
 </body>
