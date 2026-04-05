@@ -133,11 +133,13 @@
   .cart-close:hover { color: var(--white); }
   .cart-items { flex: 1; overflow-y: auto; padding: 1rem 2rem; }
   .cart-empty {
-    text-align: center; padding: 4rem 0;
+    display: none;
+    text-align: center; padding: 4rem 2rem;
     color: var(--grey);
     font-family: 'Cormorant Garamond', serif;
     font-size: 1.2rem; font-style: italic;
   }
+  .cart-empty.visible { display: block; }
   .cart-item {
     display: flex; justify-content: space-between; align-items: flex-start;
     padding: 1.1rem 0; border-bottom: 1px solid rgba(255,255,255,0.05);
@@ -308,16 +310,17 @@
     border-color: var(--gold);
     box-shadow: 0 0 0 1px rgba(201,168,76,0.2);
   }
-  .price-card.in-cart::after {
-    content: '✓ IN YOUR SELECTION';
+  .price-card-selected-banner {
+    display: none;
     font-family: 'Barlow Condensed', sans-serif;
     font-size: 0.6rem; font-weight: 700; letter-spacing: 0.2em;
     background: rgba(201,168,76,0.12); color: var(--gold);
     border-top: 1px solid rgba(201,168,76,0.2);
     padding: 0.6rem 1rem;
-    display: block; text-align: center;
+    text-align: center;
     margin: 1rem -2.5rem -2.5rem;
   }
+  .price-card.in-cart .price-card-selected-banner { display: block; }
   .price-tier {
     font-family: 'Barlow Condensed', sans-serif;
     font-size: 0.7rem; font-weight: 600; letter-spacing: 0.3em;
@@ -496,7 +499,6 @@
   window.dataLayer = window.dataLayer || [];
   function gtag(){dataLayer.push(arguments);}
   gtag('js', new Date());
-
   gtag('config', 'G-2BWXFZXX35');
 </script>
 <body>
@@ -510,9 +512,8 @@
     <h2>Your Selection</h2>
     <button class="cart-close" onclick="closeCart()">✕</button>
   </div>
-  <div class="cart-items" id="cartItems">
-    <div class="cart-empty" id="cartEmpty">No services selected yet.</div>
-  </div>
+  <div class="cart-empty" id="cartEmpty">No services selected yet.</div>
+  <div class="cart-items" id="cartItems"></div>
   <div class="cart-footer" id="cartFooter" style="display:none">
     <div class="cart-total-row">
       <span class="cart-total-label">Estimated Total</span>
@@ -594,6 +595,7 @@
         onclick="togglePackage('essential', 'Essential Package', 200, this)">
         + Add to Selection
       </button>
+      <div class="price-card-selected-banner">✓ IN YOUR SELECTION</div>
     </div>
 
     <!-- ── SIGNATURE ── -->
@@ -623,13 +625,17 @@
         onclick="togglePackage('signature', 'Signature Package', 450, this)">
         + Add to Selection
       </button>
+      <div class="price-card-selected-banner">✓ IN YOUR SELECTION</div>
     </div>
-
-
 
   </div>
 
   <!-- ─── ADD-ONS ─── -->
+  <!--
+    RULE: every addon element id   = "addon-{KEY}"
+          every toggleAddon call   = toggleAddon('{KEY}', ...)
+    Keys used below: drone | walkthrough | dronevideo | reel | twilight | staging | floorplan | exterior | condo | tour2d
+  -->
   <div class="addons-header">
     <h3 class="addons-title">Add-On Services</h3>
     <span class="addons-note">All add-ons are fixed price, independent of sqft.</span>
@@ -691,40 +697,40 @@
       <button class="addon-add-btn" onclick="toggleAddon('staging', 'Virtual Staging', 50, this)">+ Add to Selection</button>
     </div>
 
-    <!-- floor plan upgrade -->
-    <div class="addon fade-in-up" id="addon-upgrade">
+    <!-- floor plan upgrade — KEY: floorplan -->
+    <div class="addon fade-in-up" id="addon-floorplan">
       <p class="addon-icon">Floor Plan</p>
       <p class="addon-name">Floor Plan Upgrade</p>
       <p class="addon-desc">Showcases Bathroom / Laundry Room Fixtures, Kitchen Countertops / Sink</p>
       <p class="addon-price">$45 <small>CAD</small></p>
-      <button class="addon-add-btn" onclick="toggleAddon('floor plan', 'Floor Plan Upgrade', 45, this)">+ Add to Selection</button>
+      <button class="addon-add-btn" onclick="toggleAddon('floorplan', 'Floor Plan Upgrade', 45, this)">+ Add to Selection</button>
     </div>
 
-    <!-- Exterior Only(longer form) -->
+    <!-- exterior only — KEY: exterior -->
     <div class="addon fade-in-up" id="addon-exterior">
       <p class="addon-icon">Exterior</p>
       <p class="addon-name">Exterior Only</p>
-      <p class="addon-desc">10 Photos Print & MLS Ready</p>
+      <p class="addon-desc">10 Photos Print &amp; MLS Ready</p>
       <p class="addon-price">$100 <small>CAD</small></p>
       <button class="addon-add-btn" onclick="toggleAddon('exterior', 'Exterior Only', 100, this)">+ Add to Selection</button>
     </div>
 
-    <!-- Condo Facility(longer form) -->
+    <!-- condo facility — KEY: condo -->
     <div class="addon fade-in-up" id="addon-condo">
       <p class="addon-icon">Condo Facility</p>
       <p class="addon-name">Condo Facility</p>
       <p class="addon-desc">Showcases Condo Amenities</p>
       <p class="addon-price">$50 <small>CAD</small></p>
-      <button class="addon-add-btn" onclick="toggleAddon('condo', 'Condo Facility Only', 50, this)">+ Add to Selection</button>
+      <button class="addon-add-btn" onclick="toggleAddon('condo', 'Condo Facility', 50, this)">+ Add to Selection</button>
     </div>
 
-    <!-- Interactive 2D Tour(longer form) -->
-    <div class="addon fade-in-up" id="addon-2D tour">
+    <!-- interactive 2D tour — KEY: tour2d -->
+    <div class="addon fade-in-up" id="addon-tour2d">
       <p class="addon-icon">Interactive 2D Tour</p>
       <p class="addon-name">Interactive 2D Tour</p>
       <p class="addon-desc">2D Floor Plan with Interactive Photo Views</p>
-      <p class="addon-price">Starting at $125 for under 1,ooo sqft <small>CAD</small></p>
-      <button class="addon-add-btn" onclick="toggleAddon('reelcut', 'Interactive 2D Tour', 125, this)">+ Add to Selection</button>
+      <p class="addon-price">Starting at $125 <small>CAD · under 1,000 sqft</small></p>
+      <button class="addon-add-btn" onclick="toggleAddon('tour2d', 'Interactive 2D Tour', 125, this)">+ Add to Selection</button>
     </div>
 
   </div>
@@ -753,7 +759,6 @@
       <ul>
         <li><a href="#pricing">Essential Package</a></li>
         <li><a href="#pricing">Signature Package</a></li>
-        <li><a href="#pricing">Premium Package</a></li>
         <li><a href="#pricing">Add-On Services</a></li>
       </ul>
     </div>
@@ -786,20 +791,22 @@ window.addEventListener('scroll', () => navbar.classList.toggle('scrolled', wind
 
 // ─── FADE IN ───
 const obs = new IntersectionObserver(entries => {
-  entries.forEach(e => { if (e.isIntersecting) setTimeout(() => e.target.classList.add('visible'), e.target.dataset.delay || 0); });
+  entries.forEach(e => {
+    if (e.isIntersecting) setTimeout(() => e.target.classList.add('visible'), e.target.dataset.delay || 0);
+  });
 }, { threshold: 0.12 });
 document.querySelectorAll('.fade-in-up').forEach((el, i) => { el.dataset.delay = (i % 4) * 80; obs.observe(el); });
 
 // ─── CART STATE ───
-// Canonical add-on IDs (used across pricing & contact pages):
-// drone | walkthrough | dronevideo | reel | twilight | staging | rush | reelcut
 let cart = {};
 const PACKAGE_IDS = ['essential', 'signature'];
 
+// ─── PACKAGE TOGGLE ───
 function togglePackage(id, name, price, btn) {
   if (cart[id]) {
     removeItem(id);
   } else {
+    // Only one package at a time — remove any other package first
     PACKAGE_IDS.forEach(pid => { if (pid !== id && cart[pid]) removeItem(pid); });
     cart[id] = { id, name, price, type: 'package' };
     document.getElementById('card-' + id).classList.add('in-cart');
@@ -807,11 +814,12 @@ function togglePackage(id, name, price, btn) {
     btn.textContent = '✓ Selected — click to remove';
     bumpCount();
     showToast(name + ' added');
+    updateDrawer();
+    persistCart();
   }
-  updateDrawer();
-  persistCart();
 }
 
+// ─── ADDON TOGGLE ───
 function toggleAddon(id, name, price, btn) {
   if (cart[id]) {
     removeItem(id);
@@ -822,46 +830,64 @@ function toggleAddon(id, name, price, btn) {
     btn.textContent = '✕ Remove';
     bumpCount();
     showToast(name + ' added');
+    updateDrawer();
+    persistCart();
   }
-  updateDrawer();
-  persistCart();
 }
 
+// ─── REMOVE ITEM ───
+// Handles both packages and addons cleanly.
 function removeItem(id) {
   if (!cart[id]) return;
+  const type = cart[id].type;
   delete cart[id];
-  const card = document.getElementById('card-' + id);
-  if (card) {
-    card.classList.remove('in-cart');
+
+  if (type === 'package') {
+    const card = document.getElementById('card-' + id);
+    if (card) card.classList.remove('in-cart');
     const btn = document.getElementById('btn-' + id);
-    if (btn) { btn.classList.remove('in-cart-btn'); btn.textContent = '+ Add to Selection'; }
+    if (btn) {
+      btn.classList.remove('in-cart-btn');
+      btn.textContent = '+ Add to Selection';
+    }
+  } else {
+    const el = document.getElementById('addon-' + id);
+    if (el) {
+      el.classList.remove('in-cart');
+      const abtn = el.querySelector('.addon-add-btn');
+      if (abtn) abtn.textContent = '+ Add to Selection';
+    }
   }
-  const addonEl = document.getElementById('addon-' + id);
-  if (addonEl) {
-    addonEl.classList.remove('in-cart');
-    const abtn = addonEl.querySelector('.addon-add-btn');
-    if (abtn) abtn.textContent = '+ Add to Selection';
-  }
+
   updateDrawer();
   persistCart();
 }
 
 function bumpCount() {
   const el = document.getElementById('cartCount');
-  el.classList.remove('bump'); void el.offsetWidth; el.classList.add('bump');
+  el.classList.remove('bump');
+  void el.offsetWidth;
+  el.classList.add('bump');
 }
 
 function updateDrawer() {
   const items = Object.values(cart);
   document.getElementById('cartCount').textContent = items.length;
+
   const itemsEl  = document.getElementById('cartItems');
   const emptyEl  = document.getElementById('cartEmpty');
   const footerEl = document.getElementById('cartFooter');
+
   if (!items.length) {
-    itemsEl.innerHTML = ''; itemsEl.appendChild(emptyEl);
-    emptyEl.style.display = 'block'; footerEl.style.display = 'none'; return;
+    itemsEl.innerHTML = '';
+    emptyEl.classList.add('visible');
+    footerEl.style.display = 'none';
+    return;
   }
-  emptyEl.style.display = 'none'; footerEl.style.display = 'block';
+
+  emptyEl.classList.remove('visible');
+  footerEl.style.display = 'block';
+
   let total = 0, html = '';
   items.forEach(item => {
     total += item.price;
@@ -878,11 +904,21 @@ function updateDrawer() {
   document.getElementById('cartTotal').textContent = '$' + total + ' CAD';
 }
 
-function openCart()  { document.getElementById('cartDrawer').classList.add('open'); document.getElementById('cartOverlay').classList.add('open'); document.body.style.overflow = 'hidden'; }
-function closeCart() { document.getElementById('cartDrawer').classList.remove('open'); document.getElementById('cartOverlay').classList.remove('open'); document.body.style.overflow = ''; }
+function openCart()  {
+  document.getElementById('cartDrawer').classList.add('open');
+  document.getElementById('cartOverlay').classList.add('open');
+  document.body.style.overflow = 'hidden';
+}
+function closeCart() {
+  document.getElementById('cartDrawer').classList.remove('open');
+  document.getElementById('cartOverlay').classList.remove('open');
+  document.body.style.overflow = '';
+}
 
 function saveCartAndGo(e) {
-  e.preventDefault(); persistCart(); window.location.href = '/contact';
+  e.preventDefault();
+  persistCart();
+  window.location.href = '/contact';
 }
 
 function persistCart() {
@@ -899,6 +935,9 @@ function showToast(msg) {
   setTimeout(() => t.classList.remove('show'), 2600);
 }
 
+// ─── INIT ───
+updateDrawer();
+
 // ─── RESTORE STATE (back-navigation) ───
 try {
   const saved = sessionStorage.getItem('noyesCart');
@@ -906,9 +945,9 @@ try {
     const items = JSON.parse(saved);
     items.forEach(item => {
       cart[item.id] = item;
-      if (['essential', 'signature'].includes(item.id)) {
+      if (item.type === 'package') {
         const card = document.getElementById('card-' + item.id);
-        const btn  = document.getElementById('btn-' + item.id);
+        const btn  = document.getElementById('btn-'  + item.id);
         if (card) card.classList.add('in-cart');
         if (btn)  { btn.classList.add('in-cart-btn'); btn.textContent = '✓ Selected — click to remove'; }
       } else {
