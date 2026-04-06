@@ -373,7 +373,6 @@
     font-size: 0.7rem; color: var(--grey); letter-spacing: 0.1em;
     text-transform: uppercase; margin-left: 0.3rem;
   }
-  /* "Included in packages" badge — used for floor plans */
   .service-included-note {
     display: inline-flex; align-items: center; gap: 0.5rem;
     font-family: 'Barlow Condensed', sans-serif;
@@ -547,7 +546,6 @@
   window.dataLayer = window.dataLayer || [];
   function gtag(){dataLayer.push(arguments);}
   gtag('js', new Date());
-
   gtag('config', 'G-2BWXFZXX35');
 </script>
 <body>
@@ -563,6 +561,7 @@
   </div>
   <div class="cart-items" id="cartItems">
     <div class="cart-empty" id="cartEmpty">No services selected yet.</div>
+    <div id="cartList"></div>
   </div>
   <div class="cart-footer" id="cartFooter" style="display:none">
     <div class="cart-total-row">
@@ -612,8 +611,6 @@
 
 <!-- ══════════════════════════════════════
      SERVICE 01 — PHOTOGRAPHY
-     Price: From $200 CAD (included in both packages)
-     Cart ID: photography
 ══════════════════════════════════════ -->
 <section class="service-section" id="photography" data-num="01">
   <div class="service-inner fade-in-up">
@@ -638,7 +635,6 @@
         <div>
           <div class="service-price-tag">From $200 <small>CAD</small></div>
         </div>
-        <!-- photography maps to Essential package on the contact page -->
         <button class="btn-add-cart" id="btn-photography"
           onclick="addToCart('photography', 'Real Estate Photography', 200)">
           <svg width="14" height="14" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><path d="M12 5v14M5 12h14"/></svg>
@@ -651,8 +647,6 @@
 
 <!-- ══════════════════════════════════════
      SERVICE 02 — DRONE
-     Price: $150 CAD (matches pricing page addon)
-     Cart ID: drone
 ══════════════════════════════════════ -->
 <section class="service-section" id="drone" data-num="02">
   <div class="service-inner reverse fade-in-up">
@@ -661,7 +655,7 @@
     </div>
     <div class="service-content">
       <span class="service-badge">Service 02</span>
-      <h2 class="service-heading">Exterior & Drone <em>Photography</em>
+      <h2 class="service-heading">Exterior & Drone <em>Photography</em></h2>
       <div class="service-body">
         <p>Aerial perspective transforms a listing. Drone photography showcases lot size, neighbourhood context, proximity to amenities, and architectural details that ground-level shots simply cannot capture.</p>
         <p>Every flight is planned around optimal light conditions and weather windows to ensure the cleanest, most impactful shots possible.</p>
@@ -688,8 +682,6 @@
 
 <!-- ══════════════════════════════════════
      SERVICE 03 — VIDEO WALKTHROUGH
-     Price: $230 CAD (matches pricing page addon)
-     Cart ID: walkthrough
 ══════════════════════════════════════ -->
 <section class="service-section" id="video" data-num="03">
   <div class="service-inner fade-in-up">
@@ -726,8 +718,6 @@
 
 <!-- ══════════════════════════════════════
      SERVICE 04 — FLOOR PLANS
-     Included in both packages — no standalone price shown
-     No cart button
 ══════════════════════════════════════ -->
 <section class="service-section" id="floorplans" data-num="04">
   <div class="service-inner reverse fade-in-up">
@@ -757,8 +747,6 @@
 
 <!-- ══════════════════════════════════════
      SERVICE 05 — VIRTUAL STAGING
-     Price: $50 CAD (matches pricing page addon)
-     Cart ID: staging
 ══════════════════════════════════════ -->
 <section class="service-section" id="staging" data-num="05">
   <div class="service-inner fade-in-up">
@@ -952,13 +940,6 @@ document.querySelectorAll('.fade-in-up').forEach((el, i) => {
 });
 
 // ─── CART ───
-// IDs must match the canonical IDs used on pricing.html and contact.html:
-//   photography → triggers Essential package suggestion on contact page
-//   drone       → maps to addon 'drone'        ($140)
-//   walkthrough → maps to addon 'walkthrough'  ($230)
-//   staging     → maps to addon 'staging'      ($50)
-// Floor plans have no cart button — included in packages.
-
 let cart = {};
 
 function addToCart(id, name, price) {
@@ -997,46 +978,46 @@ function removeFromCart(id) {
 }
 
 function updateCartUI() {
-  const items     = Object.values(cart);
-  const countEl   = document.getElementById('cartCount');
+  const items = Object.values(cart);
+  const countEl = document.getElementById('cartCount');
   countEl.textContent = items.length;
 
-  const cartItemsEl  = document.getElementById('cartItems');
   const cartEmptyEl  = document.getElementById('cartEmpty');
   const cartFooterEl = document.getElementById('cartFooter');
+  const cartListEl   = document.getElementById('cartList');
 
   if (!items.length) {
     cartEmptyEl.style.display = 'block';
     cartFooterEl.style.display = 'none';
-    cartItemsEl.innerHTML = '';
-    cartItemsEl.appendChild(cartEmptyEl);
+    cartListEl.innerHTML = '';
     return;
   }
 
   cartEmptyEl.style.display = 'none';
   cartFooterEl.style.display = 'block';
 
-  let total = 0, html = '';
+  let total = 0;
+  cartListEl.innerHTML = '';
+
   items.forEach(item => {
     total += item.price;
-    html += `
-      <div class="cart-item">
-        <div>
-          <div class="cart-item-type">Service</div>
-          <div class="cart-item-name">${item.name}</div>
-          <div class="cart-item-price">$${item.price} CAD</div>
-        </div>
-        <button class="cart-item-remove" onclick="removeFromCart('${item.id}')" title="Remove">✕</button>
-      </div>`;
+    const div = document.createElement('div');
+    div.className = 'cart-item';
+    div.innerHTML = `
+      <div>
+        <div class="cart-item-type">Service</div>
+        <div class="cart-item-name">${item.name}</div>
+        <div class="cart-item-price">$${item.price} CAD</div>
+      </div>
+      <button class="cart-item-remove" onclick="removeFromCart('${item.id}')" title="Remove">✕</button>`;
+    cartListEl.appendChild(div);
   });
-  cartItemsEl.innerHTML = html;
 
   document.getElementById('cartTotal').textContent = '$' + total + ' CAD';
-  document.getElementById('cartNote').textContent  =
-    'Package pricing depends on property sqft — confirmed at booking.';
+  document.getElementById('cartNote').textContent = 'Package pricing depends on property sqft — confirmed at booking.';
 }
 
-function openCart()  {
+function openCart() {
   document.getElementById('cartDrawer').classList.add('open');
   document.getElementById('cartOverlay').classList.add('open');
   document.body.style.overflow = 'hidden';
@@ -1047,17 +1028,15 @@ function closeCart() {
   document.body.style.overflow = '';
 }
 
-// Save to sessionStorage in the format contact.html expects
 function saveCartToStorage() {
-  // Map services IDs → canonical addon IDs used on contact/pricing pages
   const idMap = {
-    photography: 'photography', // contact.html handles this → suggests Essential package
-    drone:       'drone',
+    photography: 'photography',
+    drone: 'drone',
     walkthrough: 'walkthrough',
-    staging:     'staging',
+    staging: 'staging',
   };
   const items = Object.values(cart).map(item => ({
-    id:   idMap[item.id] || item.id,
+    id: idMap[item.id] || item.id,
     name: item.name,
     price: item.price,
     type: item.id === 'photography' ? 'package-suggest' : 'addon',
